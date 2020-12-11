@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="include/header.jsp" %>
+<%@ include file="../include/header.jsp" %>
     
         <!-- Start Login Register Area -->
         <div class="htc__login__register bg__white ptb--130" style="background: rgba(0, 0, 0, 0) url(images/bg/5.jpg) no-repeat scroll center center / cover ;">
@@ -49,4 +49,4 @@
             </div>
         </div>
         <!-- End Login Register Area -->
-     <%@ include file="include/footer.jsp" %>
+     <%@ include file="../include/footer.jsp" %>
