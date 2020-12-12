@@ -27,6 +27,9 @@
                                     <span> Remember me</span>
                                     <span class="forget"><a href="#">Forget Pasword?</a></span>
                                 </div>
+                                <div class="tabs__checkbox">
+                                <span class="forget"><a href="<%=request.getContextPath()%>/member/registForm">회원가입</a></span>
+                                </div>
                                 <div class="htc__login__btn mt--30">
                                     <a href="#">Login</a>
                                 </div>

@@ -24,21 +24,8 @@
                                     <input type="email" placeholder="Email*">
                                     <input type="password" placeholder="Password*">
                                 </form>
-                                <div class="tabs__checkbox">
-                                    <input type="checkbox">
-                                    <span> Remember me</span>
-                                </div>
                                 <div class="htc__login__btn">
                                     <a href="#">register</a>
-                                </div>
-                                <div class="htc__social__connect">
-                                    <h2>Or Login With</h2>
-                                    <ul class="htc__soaial__list">
-                                        <li><a class="bg--twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
-                                        <li><a class="bg--instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
-                                        <li><a class="bg--facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
-                                        <li><a class="bg--googleplus" href="#"><i class="zmdi zmdi-google-plus"></i></a></li>
-                                    </ul>
                                 </div>
                             </div>
                             <!-- End Single Content -->

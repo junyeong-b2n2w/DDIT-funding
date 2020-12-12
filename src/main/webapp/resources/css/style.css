@@ -140,7 +140,7 @@
     display: block;
 }
 .product {
-    margin-top: 70px;
+    margin-top: 30px;
     overflow: hidden;
 }
 .product__inner {
@@ -2532,19 +2532,23 @@ select.select-color {
     padding-left: 10px;
 }
 .pro__dtl__prize {
-    display: flex;
+    display: block;
     margin-bottom: 26px;
     margin-top: 40px;
 }
 .pro__dtl__prize li {
-    color: #ff4136;
+    color: #4d4d4d;
     font-size: 30px;
 }
 .pro__dtl__prize li.old__prize {
     color: #4d4d4d;
-    font-size: 22px;
+    font-size: 15px;
     padding-right: 15px;
-    text-decoration: line-through;
+    text-decoration: none;
+}
+.pro__dtl__prize li>span {
+    font-size: 15px;
+    padding-right: 15px;
 }
 .pro__dtl__color {
     margin-bottom: 30px;
@@ -2976,7 +2980,6 @@ blockquote {
     border-left: medium none transparent;
     font-size: 16px;
     line-height: 27px;
-    margin: 26px 40px 26px 42px;
     padding: 0 0 0 19px;
     position: relative;
 }
