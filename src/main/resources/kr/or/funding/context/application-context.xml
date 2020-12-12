@@ -6,11 +6,17 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-	<bean id="memberDAO"
-		class="kr.or.funding.dao.MemberDAOImpl"
-		p:sqlSessionFactory-ref="sqlSession"/>
+	<bean id="memberDAO" class="kr.or.funding.dao.MemberDAOImpl"
+		p:sqlSessionFactory-ref="sqlSession" />
 
 	<bean id="memberService"
 		class="kr.or.funding.service.MemberServiceImpl"
-		p:memberDAO-ref="memberDAO"/>
+		p:memberDAO-ref="memberDAO" />
+
+	<bean id="fundingDAO" class="kr.or.funding.dao.FundingDAOImpl"
+		p:sqlSession-ref="sqlSession" />
+
+	<bean id="fundingService"
+		class="kr.or.funding.service.FundingServiceImpl"
+		p:fundingDAO-ref="fundingDAO" />
 </beans>

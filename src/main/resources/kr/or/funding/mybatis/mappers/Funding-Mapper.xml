@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Funding-Mapper">
+
+	<select id="selectFundingByFno" parameterType="int" resultType="funding">
+		select 
+		* 
+		from f_funding
+		where fno=#{fno}
+	</select>
+	
+	<select id="selectFundingList" resultType="funding">
+		select
+		* 
+		from f_funding
+		where fno is not null
+		order by regdate desc 
+	</select>
+	
+	<select id="selectFundingSequenceNextValue" resultType="int">
+		select funding_seq.nextVal
+		from dual
+	</select>
+	
+	
+	<update id="insertFunding" parameterType="funding">
+		insert into 
+		f_funding(fno,writer,title,content,price_goal,price_pre,startdate,enddate,fstatus,creater,furl,tag,regdate,category,project_img)
+		values(#{fno},#{writer},#{title},#{content},#{price_goal},#{price_pre},#{startdate},#{enddate},#{fstatus},#{creater},#{furl},#{tag},sysdate,#{category},#{project_img})
+	</update>	
+	
+	<update id="updateFunding" parameterType="funding">
+		update f_funding 
+		set 
+		title = #{title},content = #{content}
+		where fno=#{fno}
+	</update>
+	
+	<update id="deleteFunding" parameterType="int" >
+		delete 
+		from f_funding 
+		where fno=#{fno}		
+	</update>
+
+</mapper>
