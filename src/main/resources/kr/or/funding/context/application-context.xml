@@ -19,4 +19,21 @@
 	<bean id="fundingService"
 		class="kr.or.funding.service.FundingServiceImpl"
 		p:fundingDAO-ref="fundingDAO" />
+		
+		<!-- community -->	
+	<bean id="communityDAO" class="kr.or.funding.dao.CommunityDAOImpl"
+	p:sqlSession-ref="sqlSession" />	
+	
+	<bean id="communityService"
+		class="kr.or.funding.service.CommunityServiceImpl"
+		p:communityDAO-ref="communityDAO"/>
+		
+	<!--  reply -->
+	<bean id="replyDAO" class="kr.or.funding.dao.ReplyDAOImpl"
+	p:sqlSession-ref="sqlSession" />	
+	
+	<bean id="replyService"
+		class="kr.or.funding.service.ReplyServiceImpl" 
+		p:replyDAO-ref="replyDAO"/>
+		
 </beans>
