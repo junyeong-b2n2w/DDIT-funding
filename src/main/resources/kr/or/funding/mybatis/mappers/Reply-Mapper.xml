@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Reply-Mapper">
+
+	
+	<select id="selectReplyList" parameterType="int" resultType="reply">
+		select
+		* 
+		from f_reply
+		where rpno is not null
+		and cno = #{cno}
+		order by regdate desc 
+	</select>
+	
+	<select id="replyCount" parameterType="int" resultType="int">
+		select 
+		count(*) 
+		from f_reply
+		where rpno is not null
+		and cno = #{cno}
+	</select>
+	
+	<select id="selectReplySequenceNextValue" resultType="int">
+		select rpno_seq.nextVal
+		from dual
+	</select>
+	
+	
+	<update id="insertReply" parameterType="reply">
+		insert into 
+		f_reply
+		values(#{rpno},#{email}, #{cno}, sysdate, #{content})
+	</update>	
+	
+	<update id="updateReply" parameterType="reply">
+		update f_reply
+		set 
+		content = #{content}
+		where rpno=#{rpno}
+	</update>
+	
+	<update id="deleteReply" parameterType="int" >
+		delete 
+		from f_reply
+		where rpno=#{rpno}		
+	</update>
+	
+	
+
+</mapper>
