@@ -1,19 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../include/header.jsp"%>
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>funfun</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath() %>/resources/images/favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+   
+
+    <!-- All css files are included here. -->
+    <!-- Bootstrap fremwork main css -->
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bootstrap.min.css">
+   
+    <!-- This core.css file contents all plugings css file. -->
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/core.css">
+    <!-- Theme shortcodes/elements style -->
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/shortcode/shortcodes.css">
+    <!-- Theme main style -->
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/style.css">
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/responsive.css">
+    <!-- fonsaswame css -->
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/fa.all.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/owlcarousel/owl.carousel.min.css">
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/owlcarousel/owl.theme.default.min.css">
+    <!-- User style -->
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/custom.css">
+
+
+    
+</head>
+
+<body>
 	
-		<h6>주소입력</h6>
+		
 		
 		<form action="regist" method="post" name="addressForm">
-			<input type="hidden" name="email" value="test"><%-- ${loginUser.email } --%>
-			<input type="text" id="sample4_postcode" name="post" placeholder="우편번호">
-			<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-			<input type="text" id="sample4_roadAddress" name="addr1" placeholder="도로명주소">
-			<input type="text" id="sample4_jibunAddress" name="addr2" placeholder="지번주소">
-			<span id="guide" style="color:#999;display:none"></span>
-			<input type="text" id="sample4_detailAddress" name="deAddr" placeholder="상세주소">
-			<input type="text" id="sample4_extraAddress" name="reAddr" placeholder="참고항목">
-			<input type="button" value="저장" id="addressSubmit">
+		<div class="container">
+		<h1 class="mtb--20">주소 입력</h1>
+		<div class="col-5">
+			<input type="hidden" class="form-control" name="email" value="test"><%-- ${loginUser.email } --%>
+		
+		
+			<input type="text" class="form-control" id="sample4_postcode" name="post" placeholder="우편번호">
+		</div>
+		<div class="col-5">
+			<input type="button" class="btn btn-primary" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+			</div>
+			<input type="text" class="form-control" id="sample4_roadAddress" name="addr1" placeholder="도로명주소">
+			<input type="text" class="form-control" id="sample4_jibunAddress" name="addr2" placeholder="지번주소">
+			<span id="guide"  style="color:#999;display:none"></span>
+			<input type="text" class="form-control" id="sample4_detailAddress" name="de_Addr" placeholder="상세주소">
+			<input type="text" class="form-control" id="sample4_extraAddress" name="re_Addr" placeholder="참고항목">
+			<input type="button" class=" btn btn-primary" value="저장" id="addressSubmit">
+		
+		</div>
 		</form>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -97,4 +145,15 @@ window.onload=function(){
 	});
 }
 </script>
-<%@ include file="../include/footer.jsp"%>
+    <!-- jquery latest version -->
+    <script src="<%=request.getContextPath() %>/resources/js/vendor/jquery-1.12.0.min.js"></script>
+    <!-- Bootstrap framework js -->
+    <script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
+    
+    <script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script>
+    <!-- All js plugins included in this file. -->
+  
+   
+</body>
+
+</html>

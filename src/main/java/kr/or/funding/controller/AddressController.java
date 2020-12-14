@@ -27,7 +27,7 @@ public class AddressController {
 	}
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String addressRegist(AddressVO address, HttpServletResponse response) throws Exception{
+	public void addressRegist(AddressVO address, HttpServletResponse response) throws Exception{
 		String url = "address/main";
 		
 		service.regist(address);
@@ -37,31 +37,27 @@ public class AddressController {
 		
 		out.println("<script>");
 		out.println("alert('등록되었습니다.')");
+		out.println("window.close();");
 		out.println("</script>");
 		out.close();
 		
-		return url;
 	}
 	
 	@RequestMapping(value = "/main")
-	public ModelAndView main(ModelAndView mnv, String email) throws Exception{
-		String url = "address/main";
+	public void main(ModelAndView mnv, String email) throws Exception{
 		
 		List<AddressVO> addressList = service.list(email);
 		
-		mnv.addObject("addressList", addressList);
-		mnv.setViewName(url);
 		
-		return mnv;
+		mnv.addObject("addressList", addressList);
+		
 	}
 	
 	@RequestMapping(value = "/remove")
-	public String remove(int ano) throws Exception{
-		String url = "address/main";
+	public void remove(int ano) throws Exception{
 		
 		service.removeAddress(ano);
 		
-		return url;
 	}
 	
 	

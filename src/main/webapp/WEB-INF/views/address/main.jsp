@@ -4,29 +4,39 @@
 
 <%@ include file="../include/header.jsp"%>
 
-<h4>주소 메인</h4><br><br>
-
+<table class="table">
+	<tr>
+		<td>배송지</td><td>-</td>
+	</tr>
 	<c:forEach items="${addressList }" var="address">
-		<div>
-			<input type="button" data-ano="${address.ano }" value="주소 삭제"><br>			
+		<tr>
+			<td>
+			<div>
 			<input type="hidden" name="email" value="test"><%-- ${loginUser.email } --%>
-			우편번호  : ${address.post } <br>
-			도로명주소 : ${address.addr1 }<br>
-			지번주소 : ${address.addr2 }<br>
-			상세주소 : ${address.de_Addr }<br>
-			참고주소 : ${address.re_Addr }
-			<hr>
-		</div>
+			<p style="color:light-gray">${address.post }</p> 
+			<p>${address.addr1 }&nbsp;${address.addr2 }&nbsp;${address.re_Addr }</p>
+			<p>${address.de_Addr }</p>
+			</div>
+			</td>
+			<td><input type="button" data-ano="${address.ano }" value="X"><br></td>
+			</tr>
 	</c:forEach>
-
+</table>
 <script>
 window.onload=function(){
 	$('input[type="button"]').on('click', function () {
 		var ano = $(this).data('ano');
 		
-		alert(ano);
+		//alert(ano);
+		$.ajax({
+			url:"remove.do?ano="+ano,
+			success:function(e){
+				alert("삭제에 성공했습니다.");	
+			}
+			
+		})
 		
-ㄴ		
+		
 	});
 }
 </script>
