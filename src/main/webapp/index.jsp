@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <script>
-	location.href="common/loginForm.do";
+	location.href="<%=request.getContextPath()%>/index.do";
 </script>
 
 
