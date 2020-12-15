@@ -27,17 +27,17 @@ public class FundingController {
 	@Autowired
 	private FundingService service;
 	
-	/*
-	@RequestMapping(value="/detail", method=RequestMethod.GET)
-	public void detail() {}
+	
+//	@RequestMapping(value="/detail", method=RequestMethod.GET)
+//	public void detail() {}
 	
 	@RequestMapping(value="/agreements", method=RequestMethod.GET)
 	public void agreements() {}
 	
-	@RequestMapping(value="/registForm", method=RequestMethod.GET)
-	public void regist() {}
+//	@RequestMapping(value="/registForm", method=RequestMethod.GET)
+//	public void regist() {}
 	
-	*/
+	
 	
 	@RequestMapping("/list")
 	public String list(Model model) throws SQLException {
