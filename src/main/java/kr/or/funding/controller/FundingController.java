@@ -56,7 +56,7 @@ public class FundingController {
 	
 	@RequestMapping("/registForm")
 	public String registForm() {
-		return "funding/regist";
+		return "funding/registForm";
 	}
 	
 	@RequestMapping("/regist")
