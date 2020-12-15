@@ -1,7 +1,7 @@
 package kr.or.funding.dto;
 
 public class ReplyVO {
-	private String rpno    ;
+	private int rpno    ;
 	private String email   ;
 	private String cno     ;
 	private String regdate ;
@@ -13,10 +13,10 @@ public class ReplyVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getRpno() {
+	public int getRpno() {
 		return rpno;
 	}
-	public void setRpno(String rpno) {
+	public void setRpno(int rpno) {
 		this.rpno = rpno;
 	}
 	public String getEmail() {
