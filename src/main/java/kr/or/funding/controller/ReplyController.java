@@ -54,9 +54,8 @@ public class ReplyController {
 	@RequestMapping(value="/modify", method=RequestMethod.GET)
 	public ResponseEntity<String> modify (ReplyVO reply) throws Exception {
 		ResponseEntity<String> entity = null;
-		
 		try {
-			replyService.insert(reply);
+			replyService.modify(reply);
 			entity = new ResponseEntity<String>("성공",HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
