@@ -23,6 +23,8 @@ private ReplyDAO replyDAO;
 
 	@Override
 	public void insert(ReplyVO reply) throws SQLException {
+		int rpno = replyDAO.getRpno();
+		reply.setRpno(rpno);
 		replyDAO.insert(reply);
 	}
 
