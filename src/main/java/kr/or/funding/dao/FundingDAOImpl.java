@@ -45,4 +45,9 @@ public class FundingDAOImpl implements FundingDAO{
 		sqlSession.update("Funding-Mapper.deleteFunding", fno);
 	}
 
+	@Override
+	public void insertEmptyFunding(int fno) throws SQLException {
+		sqlSession.update("Funding-Mapper.insertEmptyFunding", fno);
+	}
+
 }

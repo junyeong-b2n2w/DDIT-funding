@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,17 +28,17 @@ public class FundingController {
 	@Autowired
 	private FundingService service;
 	
-	/*
-	@RequestMapping(value="/detail", method=RequestMethod.GET)
-	public void detail() {}
+	
+//	@RequestMapping(value="/detail", method=RequestMethod.GET)
+//	public void detail() {}
 	
 	@RequestMapping(value="/agreements", method=RequestMethod.GET)
 	public void agreements() {}
 	
-	@RequestMapping(value="/registForm", method=RequestMethod.GET)
-	public void regist() {}
+//	@RequestMapping(value="/registForm", method=RequestMethod.GET)
+//	public void regist() {}
 	
-	*/
+	
 	
 	@RequestMapping("/list")
 	public String list(Model model) throws SQLException {
@@ -55,8 +56,12 @@ public class FundingController {
 	}
 	
 	@RequestMapping("/registForm")
-	public String registForm() {
-		return "funding/regist";
+	public void registForm(HttpSession session, Model model) throws SQLException {
+	}
+	@RequestMapping("/beforeRegistForm")
+	public void beforeRegistForm(HttpSession session) throws SQLException {
+		FundingVO funding = service.emptyFunding();
+		session.setAttribute("funding", funding);
 	}
 	
 	@RequestMapping("/regist")

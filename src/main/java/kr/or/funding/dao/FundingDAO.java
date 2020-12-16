@@ -13,5 +13,5 @@ public interface FundingDAO {
 	void insertFunding(FundingVO funding) throws SQLException;
 	void updateFunding(FundingVO funding) throws SQLException;
 	void deleteFunding(int fno) throws SQLException;
-
+	void insertEmptyFunding(int fno) throws SQLException;
 }

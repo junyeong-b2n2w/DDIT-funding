@@ -11,4 +11,5 @@ public interface FundingService {
 	void write(FundingVO funding) throws SQLException;
 	void modify(FundingVO funding) throws SQLException;
 	void remove(int fno) throws SQLException;
+	FundingVO emptyFunding() throws SQLException;
 }
