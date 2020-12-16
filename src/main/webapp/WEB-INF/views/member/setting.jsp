@@ -28,7 +28,6 @@
 			<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
 				<ul class="product__deatils__tab" role="tablist">
 					<li role="presentation" class="active"><a href="#profile" role="tab" data-toggle="tab" aria-expanded="true">프로필</a></li>
-					<li role="presentation" class=""><a href="#account" role="tab" data-toggle="tab" aria-expanded="false">계정</a></li>
 					<li role="presentation" class=""><a href="#payment" role="tab" data-toggle="tab" aria-expanded="false">결제수단</a></li>
 					<li role="presentation" class=""><a href="#address" role="tab" data-toggle="tab" aria-expanded="false">배송지</a></li>
 					<li role="presentation" class=""><a href="#notice" role="tab" data-toggle="tab" aria-expanded="false">알림</a></li>
@@ -51,7 +50,7 @@
 							<div class="card">
 								<div class="card-header" id="cre_img">
 									<h2 class="mb-0">
-										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_img" aria-expanded="true" aria-controls="#creater_img">프로필 사진</button>
+										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_img" aria-expanded="true" aria-controls="#creater_img">프로필 사진 </button>
 									</h2>
 								</div>
 								<div id="creater_img" class="collapse" aria-labelledby="cre_img" data-parent="#aco_profile">
@@ -65,7 +64,7 @@
 							<div class="card">
 								<div class="card-header" id="cre_name">
 									<h2 class="mb-0">
-										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_name" aria-expanded="true" aria-controls="#creater_name">이름</button>
+										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_name" aria-expanded="true" aria-controls="#creater_name">이름: ${member.name}</button>
 									</h2>
 								</div>
 								<div id="creater_name" class="collapse" aria-labelledby="cre_name" data-parent="#aco_profile">
@@ -79,7 +78,7 @@
 							<div class="card">
 								<div class="card-header" id="cre_comment">
 									<h2 class="mb-0">
-										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_comment" aria-expanded="true" aria-controls="#creater_comment">소개</button>
+										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_comment" aria-expanded="true" aria-controls="#creater_comment">비밀번호</button>
 									</h2>
 								</div>
 								<div id="creater_comment" class="collapse" aria-labelledby="cre_comment" data-parent="#aco_profile">
@@ -92,7 +91,20 @@
 							<div class="card">
 								<div class="card-header" id="cre_site">
 									<h2 class="mb-0">
-										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_site" aria-expanded="true" aria-controls="#creater_site">웹사이트</button>
+										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_site" aria-expanded="true" aria-controls="#creater_site">포인트</button>
+									</h2>
+								</div>
+								<div id="creater_site" class="collapse" aria-labelledby="cre_site" data-parent="#aco_profile">
+									<div class="card-body">
+										http://www.funhading.com/<input class="form-control" type="text" placeholder="url">
+									</div>
+								</div>
+							</div>
+
+							<div class="card">
+								<div class="card-header" id="cre_site">
+									<h2 class="mb-0">
+										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_site" aria-expanded="true" aria-controls="#creater_site">회원구분</button>
 									</h2>
 								</div>
 								<div id="creater_site" class="collapse" aria-labelledby="cre_site" data-parent="#aco_profile">

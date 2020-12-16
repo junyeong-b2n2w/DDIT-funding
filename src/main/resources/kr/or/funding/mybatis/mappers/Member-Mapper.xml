@@ -4,11 +4,38 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Member-Mapper">
 	
-	<select id="login" parameterType="member" resultType="member">
+	<select id="login" parameterType="str" resultType="member">
 		select * 
 		from f_member 
 		where email=#{email}
-		and password = #{password} 
 	</select>
 	
+	<select id="selectMemberList" resultType="member">
+		select *
+		from f_member
+	</select>
+	
+	<select id="selectMemberById" resultType="member" parameterType="str">
+		select *
+		from f_member
+		where email = #{email}
+	</select>
+	
+	<update id="Searchpass" parameterType="member">
+		update f_member
+		set password = #{password}	
+		where email = #{email}
+	</update>
+	
+	<update id="regist" parameterType="member">
+		insert into 
+		f_member(EMAIL,
+				 PASSWORD,
+				 NAME
+				 ) 
+		values(#{email},
+			   #{password},
+			   #{name}
+			   )
+	</update>
 </mapper>

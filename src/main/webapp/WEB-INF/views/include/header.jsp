@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -75,8 +76,15 @@
                         <!-- End MAinmenu Ares -->
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
+                            
+                                 <li><a href="<%=request.getContextPath()%>/member/setting.do"><span class="ti-user"></span></a></li>
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                                <li><a href="<%=request.getContextPath() %>/common/loginForm"><i class="fas fa-user"></i> 로그인 </a></li>
+                                <c:if test="${empty loginUser}">
+                                <li><a href="<%=request.getContextPath() %>/common/loginForm.do"><i class="fas fa-user"></i> 로그인 </a></li>
+                                </c:if>
+                                <c:if test="${not empty loginUser }">
+                            	 <li><a href="<%=request.getContextPath()%>/common/logout.do"><span class="">logOut</span></a></li>
+                                </c:if>
                             </ul>
                         </div>
                     </div>
