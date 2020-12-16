@@ -25,8 +25,6 @@ public class FundingServiceImpl implements FundingService{
 
 	@Override
 	public void write(FundingVO funding) throws SQLException {
-		int fno = fundingDAO.selectFundingSequenceNextValue();
-		funding.setFno(fno);
 		fundingDAO.insertFunding(funding);
 	}
 
@@ -38,6 +36,13 @@ public class FundingServiceImpl implements FundingService{
 	@Override
 	public void remove(int fno) throws SQLException {
 		fundingDAO.deleteFunding(fno);
+	}
+	@Override
+	public FundingVO emptyFunding() throws SQLException {
+		int fno = fundingDAO.selectFundingSequenceNextValue();
+		fundingDAO.insertEmptyFunding(fno);
+		FundingVO funding = fundingDAO.selectFundingByFno(fno);
+		return funding; 
 	}
 
 }

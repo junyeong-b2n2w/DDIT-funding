@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,8 +56,12 @@ public class FundingController {
 	}
 	
 	@RequestMapping("/registForm")
-	public String registForm() {
-		return "funding/registForm";
+	public void registForm(HttpSession session, Model model) throws SQLException {
+	}
+	@RequestMapping("/beforeRegistForm")
+	public void beforeRegistForm(HttpSession session) throws SQLException {
+		FundingVO funding = service.emptyFunding();
+		session.setAttribute("funding", funding);
 	}
 	
 	@RequestMapping("/regist")

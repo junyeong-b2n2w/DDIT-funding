@@ -15,7 +15,7 @@
 					target="_blank" rel="noopener noreferrer">프로젝트 공개검토 기준</a></li>
 			</ul>
 		</div>
-		<form autocomplete="on" action="registForm">
+		<form autocomplete="on" action="beforeRegistForm">
 			<ul>
 				<li><div
 						class="_13KHfN73YmQgsYHxXvuh_J _3bQlo02zZkYjUBehiAWUDX ProjectStartAgreements__ServiceAgreementCheckbox-sc-1vrd6a2-4 iQcbCy">

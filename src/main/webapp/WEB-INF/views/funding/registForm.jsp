@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
-
+<script>alert("${funding.fno}")</script>
 <form action="regist.do">
 	<section class="htc__product__details pt--20 pb--50 bg__white">
 		<div class="container">
@@ -234,7 +234,6 @@
 										</div>
 									</div>
 								</div>
-
 								<div class="card">
 									<div class="card-header" id="fun_reward">
 										<h2 class="mb-0">
@@ -249,7 +248,8 @@
 										<div class="card-body">
 											<input type="text">원 이상 후원해주신 분들께 드리는 선물입니다.
 											<button type="button" class="btn btn-primary"
-												data-toggle="modal" data-target="#rewardModal">선물 추가</button>
+												data-toggle="modal" data-target="#rewardModal">선물
+												추가</button>
 											<input type="text">개 제한
 										</div>
 									</div>
@@ -259,7 +259,6 @@
 						</div>
 					</div>
 				</div>
-
 				<!-- 스토리 텔링 -->
 				<div class="tab-pane fade" id="nav-story" role="tabpanel"
 					aria-labelledby="nav-story-tab">
@@ -287,30 +286,19 @@
 										</div>
 									</div>
 								</div>
-
-
-
-
-
 							</div>
 							<!-- 아코디언 -->
-
-
-
-
 						</div>
-
-
 					</div>
-
 				</div>
 				<div class="tab-pane fade" id="nav-account" role="tabpanel"
 					aria-labelledby="nav-account-tab">계좌 설정</div>
 			</div>
-
 		</div>
-		<input name="writer" value="test" type="hidden"> <input
-			type="submit" value="등록" class="btn btn-danger">
+		<input name="writer" value="test" type="hidden"> 
+		<input name="fno" value="${funding.fno}" type="hidden"> 
+		
+		<input type="submit" value="등록" class="btn btn-danger">
 	</section>
 </form>
 
