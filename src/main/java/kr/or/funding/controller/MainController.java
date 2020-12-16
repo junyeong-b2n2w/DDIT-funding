@@ -10,10 +10,10 @@ public class MainController {
 	@RequestMapping(value="/index", method=RequestMethod.GET)
 	public void index() {}
 	
-	@RequestMapping(value="/common/loginForm", method=RequestMethod.GET)
+	/*@RequestMapping(value="/common/loginForm", method=RequestMethod.GET)
 	public String loginForm() {
 		String url = "common/loginForm";
 		return url;
 	}
-	
+	*/
 }

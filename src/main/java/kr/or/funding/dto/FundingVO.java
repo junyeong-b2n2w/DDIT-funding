@@ -19,6 +19,7 @@ public class FundingVO {
 	private String furl       ;
 	private String category;
 	private String project_img;
+	
 	public String getProject_img() {
 		return project_img;
 	}

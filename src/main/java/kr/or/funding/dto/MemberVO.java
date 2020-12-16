@@ -2,8 +2,40 @@ package kr.or.funding.dto;
 
 public class MemberVO {
 
-	String email;
-	String password;
+	private String email;
+	private String password;
+	private String name;
+	private String point;
+	private String picture;
+	private String dist;
+	
+	
+	public String getPoint() {
+		return point;
+	}
+	public void setPoint(String point) {
+		this.point = point;
+	}
+	public String getDist() {
+		return dist;
+	}
+	public void setDist(String dist) {
+		this.dist = dist;
+	}
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
 	public String getEmail() {
 		return email;
 	}
