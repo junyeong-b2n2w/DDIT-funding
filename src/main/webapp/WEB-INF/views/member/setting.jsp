@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- 상단 안내 -->
 <section>
@@ -134,26 +134,26 @@
 								</div>
 								<div id="account_pwd" class="collapse" aria-labelledby="#acc_pwd" data-parent="#aco_account">
 									<div class="card-body">
-										<div >
-											<div >
-												<div >현재 비밀번호</div>
+										<div>
+											<div>
+												<div>현재 비밀번호</div>
 												<div>
-													<span ><input class="form-control" type="password" inputmode="password" pattern="[a-zA-Z0-9!@#$%^*_|]{6,20}" placeholder="현재 비밀번호" autocomplete="off" autocapitalize="off" value=""></span>
+													<span><input class="form-control" type="password" inputmode="password" pattern="[a-zA-Z0-9!@#$%^*_|]{6,20}" placeholder="현재 비밀번호" autocomplete="off" autocapitalize="off" value=""></span>
 												</div>
-												<div >
+												<div>
 													비밀번호가 기억나지 않나요? <span ccolor="sub0180"><a href="/forgot-password">비밀번호 초기화</a></span>
 												</div>
 											</div>
-											<div >
+											<div>
 												<div>변경할 비밀번호</div>
 												<div>
-													<span ><input type="password" class="form-control" inputmode="password" pattern="[a-zA-Z0-9!@#$%^*_|]{6,20}" placeholder="변경할 비밀번호" autocomplete="off" autocapitalize="off" class="Input__InnerInput-j7moqy-1 bnACyJ" value=""></span>
+													<span><input type="password" class="form-control" inputmode="password" pattern="[a-zA-Z0-9!@#$%^*_|]{6,20}" placeholder="변경할 비밀번호" autocomplete="off" autocapitalize="off" class="Input__InnerInput-j7moqy-1 bnACyJ" value=""></span>
 												</div>
-												<div >
-													<span ><input type="password" class="form-control" inputmode="password" pattern="[a-zA-Z0-9!@#$%^*_|]{6,20}" placeholder="변경할 비밀번호 확인" autocomplete="off" autocapitalize="off" class="Input__InnerInput-j7moqy-1 bnACyJ" value=""></span>
+												<div>
+													<span><input type="password" class="form-control" inputmode="password" pattern="[a-zA-Z0-9!@#$%^*_|]{6,20}" placeholder="변경할 비밀번호 확인" autocomplete="off" autocapitalize="off" class="Input__InnerInput-j7moqy-1 bnACyJ" value=""></span>
 												</div>
 											</div>
-											<div >
+											<div>
 												<button class="btn btn-primary">
 													<span>저장</span>
 												</button>
@@ -188,7 +188,57 @@
 
 
 					<!-- Start Single Content -->
-					<div role="tabpanel" id="address" class="product__tab__content fade"></div>
+					<div role="tabpanel" id="address"  class="col-12 product__tab__content fade">
+					
+					<div>
+					<a href='javascript:window.open("<%=request.getContextPath() %>/address/registForm","주소추가","width=400,height=600")'  class="btn btn-info">주소 추가</a>
+					
+					</div>
+					
+					<div class="mx-auto" style="max-width:70%;">
+						<table class="table mt--20 ">
+							<tr>
+								<td>배송지</td>
+								<td>-</td>
+							</tr>
+							<c:forEach items="${addressList }" var="address">
+								<tr data-ano="${address.ano }">
+									<td>
+										<div>
+											<input type="hidden" name="email" value="${loginUser.email }">
+											
+											<p style="color: light-gray">${address.post }</p>
+											<p>${address.addr1 }&nbsp;${address.addr2 }&nbsp;${address.re_Addr }</p>
+											<p>${address.de_Addr }</p>
+										</div>
+									</td>
+									<td><input type="button" data-ano="${address.ano }" value="X"><br></td>
+								</tr>
+							</c:forEach>
+						</table>
+						</div>
+						<script>
+							window.onload = function() {
+
+								$('input[type="button"]').on('click',
+										function() {
+											var ano = $(this).data('ano');
+
+											//alert(ano);
+											$.ajax({
+												url : "<%=request.getContextPath()%>/address/remove?ano=" + ano,
+												success : function(e) {
+													alert("삭제에 성공했습니다.");
+													$('tr[data-ano="+ano+"]').remove();
+												}
+
+											})
+
+										});
+							}
+						</script>
+
+					</div>
 					<!-- End Single Content -->
 
 

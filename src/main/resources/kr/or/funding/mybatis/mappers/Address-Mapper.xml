@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Address-Mapper">
+
+	<select id="selectAddressSeqNext" resultType="int">
+		select address_seq.nextval as ano from dual
+	</select>
+	
+	<select id="selectAddress" resultType="kr.or.funding.dto.AddressVO">
+		select * from f_address where email = #{email}
+	</select>
+	
+	<update id="insertAddress">
+		insert into f_address values (#{ano},#{post},#{addr1},#{addr2}, #{de_Addr}, #{re_Addr}, #{email})
+	</update>
+	
+	<update id="deleteAddress">
+		delete from f_address where ano = #{ano}
+	</update>
+	
+</mapper>
+

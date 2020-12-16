@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Community-Mapper">
+
+	<select id="selectCommunityByCno" parameterType="int" resultType="community">
+		select 
+		* 
+		from f_community
+		where cno=#{cno}
+	</select>
+	
+	<select id="selectCommintyList" parameterType="int" resultType="community">
+		select
+		*  
+		from f_community
+		where cno is not null
+		AND fno = #{fno}
+		order by regdate desc 
+	</select>
+	
+	<select id="selectCommunitySequenceNextValue" resultType="int">
+		select cno_seq.nextVal
+		from dual
+	</select>
+	
+	
+	<update id="insertCommunity" parameterType="community">
+		insert into 
+		f_community
+		values(#{cno},#{fno},#{email},sysdate,#{title},#{content})
+	</update>	
+	
+	<update id="updateCommunity" parameterType="community">
+		update f_community
+		set 
+		title = #{title},content = #{content}
+		where cno=#{cno}
+	</update>
+	
+	<update id="deleteCommunity" parameterType="int" >
+		delete 
+		from f_community
+		where cno=#{cno}		
+	</update>
+
+</mapper>

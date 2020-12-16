@@ -36,4 +36,11 @@
 		class="kr.or.funding.service.ReplyServiceImpl" 
 		p:replyDAO-ref="replyDAO"/>
 		
+	<bean id="addressDAO"
+		class="kr.or.funding.dao.AddressDAOImpl"
+		p:sqlSession-ref="sqlSession"/>
+
+	<bean id="addressService"
+		class="kr.or.funding.service.AddressServiceImpl"
+		p:addressDAO-ref="addressDAO"/>
 </beans>
