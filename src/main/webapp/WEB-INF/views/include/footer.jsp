@@ -222,7 +222,6 @@
     <!-- Bootstrap framework js -->
     <script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
     
-    <script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script>
     <!-- All js plugins included in this file. -->
   
    

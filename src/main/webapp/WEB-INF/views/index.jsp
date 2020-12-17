@@ -2,35 +2,11 @@
 <%@ include file="include/header.jsp"%>
 
 <section class=" ptb--20 bg__white">
-	<div class="owl-carousel">
-		<div style="backgroud-color:red;">Your Content</div>
-		<div style="backgroud-color:yellow;">Your Content</div>
-		<div style="backgroud-color:tomato;">Your Content</div>
-		<div style="backgroud-color:green;">Your Content</div>
-		<div style="backgroud-color:blue;">Your Content</div>
-	</div>
+	<div class="container">
+
+	</div>		
 </section>
-<script>
-window.onload = function(){
-	$('.owl-carousel').owlCarousel({
-	    loop:true,
-	    margin:10,
-	    nav:true,
-	    responsive:{
-	        0:{
-	            items:1
-	        },
-	        600:{
-	            items:3
-	        },
-	        1000:{
-	            items:5
-	        }
-	    }
-	})
-	
-	};
-</script>
+
 <section class="htc__product__area shop__page ptb--20 bg__white">
 	<div class="container">
 		<div class="htc__product__container">
@@ -55,12 +31,17 @@ window.onload = function(){
 								</div>
 							</div>
 							<div class="product__details">
+								<p style="font-size: 0.8em; color: #DDDDDD;">
+									<a>카테고리</a> | <a>창작자</a>
+								</p>
 								<h2>
-									<a href="product-details.html">Simple Black Clock</a>
+									<a href="product-details.html">프로젝트 제목오오</a>
 								</h2>
+								<div class="progress" style="height: 2px; margin-bottom: 3px; margin-top: 5px;">
+									<div class="progress-bar bg-danger" role="progressbar" style="width: 125%;" aria-valuenow="124" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
 								<ul class="product__price">
-									<li class="old__price">$16.00</li>
-									<li class="new__price">$10.00</li>
+									<li class="new__price" style="font-size: 0.8em">1231% 달성</li>
 								</ul>
 							</div>
 						</div>
@@ -90,12 +71,15 @@ window.onload = function(){
 								</div>
 							</div>
 							<div class="product__details">
+								<p style="font-size: 0.8em; color: #DDDDDD;">
+									<a>카테고리</a> | <a>창작자</a>
+								</p>
 								<h2>
-									<a href="product-details.html">Simple Black Clock</a>
+									<a href="product-details.html">프로젝트 제목오오</a>
 								</h2>
+
 								<ul class="product__price">
-									<li class="old__price">$16.00</li>
-									<li class="new__price">$10.00</li>
+									<li class="new__price" style="font-size: 0.8em">1231% 달성</li>
 								</ul>
 							</div>
 						</div>

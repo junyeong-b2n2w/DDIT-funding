@@ -30,8 +30,6 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/responsive.css">
     <!-- fonsaswame css -->
     <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/fa.all.min.css">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/owlcarousel/owl.carousel.min.css">
-	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/owlcarousel/owl.theme.default.min.css">
     <!-- User style -->
     <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/custom.css">
 
@@ -55,7 +53,7 @@
                         <div class="col-md-2 col-lg-2 col-sm-3 col-xs-3">
                             <div class="logo">
                                 <a href="<%=request.getContextPath() %>/index">
-                                    <span>펀하딩</span>
+                                    <span style="font-size:2rem">펀하딩</span>
                                 </a>
                             </div>
                         </div>
@@ -63,12 +61,9 @@
                         <div class="col-md-8 col-lg-8 col-sm-6 col-xs-6">
                             <nav class="mainmenu__nav hidden-xs hidden-sm">
                                 <ul class="main__menu">
+                                    <li class="drop"><a href="<%=request.getContextPath() %>/funding/list">프로젝트 둘러보기</a></li>
                                     <li class="drop"><a href="<%=request.getContextPath() %>/funding/agreements">프로젝트 올리기</a></li>
-                                    <li class="drop"><a href="portfolio-card-box-2.html">portfolio</a>
-                                    </li>
-                                    <li class="drop"><a href="blog.html">Blog</a>
                                         
-                                    <li><a href="contact.html">contact</a></li>
                                 </ul>
                             </nav>
                                                   
@@ -77,14 +72,15 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
                             
-                                <li><a href="<%=request.getContextPath()%>/member/settings.do"><span class="ti-user"></span></a></li>
+                                
                                 
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
                                 <c:if test="${empty loginUser}">
                                 <li><a href="<%=request.getContextPath() %>/common/loginForm.do"><i class="fas fa-user"></i> 로그인 </a></li>
                                 </c:if>
                                 <c:if test="${not empty loginUser }">
-                            	 <li><a href="<%=request.getContextPath()%>/common/logout.do"><span class="">logOut</span></a></li>
+                                <li><a href="<%=request.getContextPath()%>/member/settings.do"><span class="ti-user"></span></a></li>
+                            	 <li><a href="<%=request.getContextPath()%>/common/logout.do"><span class="">로그아웃</span></a></li>
                                 </c:if>
                             </ul>
                         </div>
