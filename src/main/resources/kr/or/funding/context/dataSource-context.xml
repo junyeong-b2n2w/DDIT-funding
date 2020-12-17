@@ -39,8 +39,5 @@
 	<bean id="sqlSession"
 		class="org.mybatis.spring.SqlSessionTemplate"
 		c:sqlSessionFactory-ref="sqlSessionFactory"/>	
-	
-	<!-- wish -->
-	<bean id="wishListDAO" class="kr.or.funding.dao.WishListDAOImpl" p:sqlsession-ref="sqlSession"/>
-	<bean id="wishListService" class="kr.or.funding.service.WishListServiceImpl" p:wishDAO-ref="wishListDAO" p:fundingDAO-ref="fundingDAO"/>	
+
 </beans>

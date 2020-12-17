@@ -82,9 +82,6 @@ public class MemberController {
 		return url;
 	}
 	
-	@RequestMapping(value="/message", method=RequestMethod.GET)
-	public void message() {}
-	
 	@RequestMapping(value="/support", method=RequestMethod.GET)
 	public void support() {}
 
