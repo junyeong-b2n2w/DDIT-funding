@@ -7,11 +7,11 @@
                 <div class="row">
                     <div class="footer__container clearfix">
                          <!-- Start Single Footer Widget -->
-                        <div class="col-md-3 col-lg-3 col-sm-6">
+                        <div class="col-md-4 col-lg-4 col-sm-6">
                             <div class="ft__widget">
                                 <div class="ft__logo">
                                     <a href="index.html">
-                                        <img src="<%=request.getContextPath() %>/resources/images//logo/logo.png" alt="footer logo">
+                                       펀하딩
                                     </a>
                                 </div>
                                 <div class="footer-address">
@@ -21,7 +21,7 @@
                                                 <i class="zmdi zmdi-pin"></i>
                                             </div>
                                             <div class="address-text">
-                                                <p>194 Main Rd T, FS Rayed <br> VIC 3057, USA</p>
+                                                <p>대전광역시 중구 중앙로 76<br>영민빌딩 4층</p>
                                             </div>
                                         </li>
                                         <li>
@@ -29,7 +29,7 @@
                                                 <i class="zmdi zmdi-email"></i>
                                             </div>
                                             <div class="address-text">
-                                                <a href="#"> info@example.com</a>
+                                                <a href="#"> info@funhading.com</a>
                                             </div>
                                         </li>
                                         <li>
@@ -37,7 +37,7 @@
                                                 <i class="zmdi zmdi-phone-in-talk"></i>
                                             </div>
                                             <div class="address-text">
-                                                <p>+012 345 678 102 </p>
+                                                <p>042-222-8202</p>
                                             </div>
                                         </li>
                                     </ul>
@@ -51,36 +51,11 @@
                             </div>
                         </div>
                         <!-- End Single Footer Widget -->
+                       
+                        
+                       
                         <!-- Start Single Footer Widget -->
-                        <div class="col-md-3 col-lg-2 col-sm-6 smt-30 xmt-30">
-                            <div class="ft__widget">
-                                <h2 class="ft__title">Categories</h2>
-                                <ul class="footer-categories">
-                                    <li><a href="shop-sidebar.html">Men</a></li>
-                                    <li><a href="shop-sidebar.html">Women</a></li>
-                                    <li><a href="shop-sidebar.html">Accessories</a></li>
-                                    <li><a href="shop-sidebar.html">Shoes</a></li>
-                                    <li><a href="shop-sidebar.html">Dress</a></li>
-                                    <li><a href="shop-sidebar.html">Denim</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Start Single Footer Widget -->
-                        <div class="col-md-3 col-lg-2 col-sm-6 smt-30 xmt-30">
-                            <div class="ft__widget">
-                                <h2 class="ft__title">Infomation</h2>
-                                <ul class="footer-categories">
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li><a href="#">Returns & Exchanges</a></li>
-                                    <li><a href="#">Shipping & Delivery</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Start Single Footer Widget -->
-                        <div class="col-md-3 col-lg-3 col-lg-offset-1 col-sm-6 smt-30 xmt-30">
+                        <div class="col-md-4 col-lg-4 col-lg-offset-1 col-sm-6 smt-30 xmt-30">
                             <div class="ft__widget">
                                 <h2 class="ft__title">Newsletter</h2>
                                 <div class="newsletter__form">
