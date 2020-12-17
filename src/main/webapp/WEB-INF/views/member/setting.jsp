@@ -50,9 +50,10 @@
 							<div class="card">
 								<div class="card-header" id="cre_img">
 									<h2 class="mb-0">
-										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_img" aria-expanded="true" aria-controls="#creater_img">프로필 사진 </button>
+										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_img" aria-expanded="true" aria-controls="#creater_img">프로필 사진 : <img src="${member.picture }"></button>
 									</h2>
 								</div>
+								
 								<div id="creater_img" class="collapse" aria-labelledby="cre_img" data-parent="#aco_profile">
 									<div class="card-body">
 										<div style="width: 30px; height: 30px; background-color: black; border-radius: 50%; display: inline-block;"></div>
@@ -69,8 +70,9 @@
 								</div>
 								<div id="creater_name" class="collapse" aria-labelledby="cre_name" data-parent="#aco_profile">
 									<div class="card-body">
-
-										<input class="form-control" type="text" placeholder="프로젝트 제목">
+									<div>이름 수정</div>
+										<input class="form-control" type="text" placeholder="변경할 이름 작성" name="name">
+										<button type="button" id="nameBtn">수정</button>
 									</div>
 								</div>
 							</div>
@@ -78,12 +80,22 @@
 							<div class="card">
 								<div class="card-header" id="cre_comment">
 									<h2 class="mb-0">
-										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_comment" aria-expanded="true" aria-controls="#creater_comment">비밀번호</button>
+										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_comment" aria-expanded="true" aria-controls="#creater_comment">비밀번호: ${member.password}</button>
 									</h2>
 								</div>
 								<div id="creater_comment" class="collapse" aria-labelledby="cre_comment" data-parent="#aco_profile">
 									<div class="card-body">
-										<textarea class="form-control" placeholder="프로젝트 요약을 입력해주세요" rows="2" style="width: 100%;"></textarea>
+										<div>비밀번호 수정</div>
+										<div>
+											<div>
+												<span><input type="password" class="form-control" name="password" inputmode="password" pattern="[a-zA-Z0-9!@#$%^*_|]{6,20}" placeholder="변경할 비밀번호" autocomplete="off" autocapitalize="off" class="Input__InnerInput-j7moqy-1 bnACyJ" value=""></span>
+											</div>
+											<div>
+												<span><input type="password" class="form-control" name="passwordCheck" inputmode="password" pattern="[a-zA-Z0-9!@#$%^*_|]{6,20}" placeholder="변경할 비밀번호 확인" autocomplete="off" autocapitalize="off" class="Input__InnerInput-j7moqy-1 bnACyJ" value=""></span>
+												<span id="passcheck"></span>
+											</div>
+										</div>
+										<button type="button" id="passBtn">수정</button>
 									</div>
 								</div>
 							</div>
@@ -91,7 +103,7 @@
 							<div class="card">
 								<div class="card-header" id="cre_site">
 									<h2 class="mb-0">
-										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_site" aria-expanded="true" aria-controls="#creater_site">포인트</button>
+										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_site" aria-expanded="true" aria-controls="#creater_site">포인트: ${member.point}</button>
 									</h2>
 								</div>
 								<div id="creater_site" class="collapse" aria-labelledby="cre_site" data-parent="#aco_profile">
@@ -104,7 +116,7 @@
 							<div class="card">
 								<div class="card-header" id="cre_site">
 									<h2 class="mb-0">
-										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_site" aria-expanded="true" aria-controls="#creater_site">회원구분</button>
+										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_site" aria-expanded="true" aria-controls="#creater_site">회원구분 ${member.dist}</button>
 									</h2>
 								</div>
 								<div id="creater_site" class="collapse" aria-labelledby="cre_site" data-parent="#aco_profile">
@@ -229,9 +241,52 @@
 							</c:forEach>
 						</table>
 						</div>
+						<div class="aj"></div>
 						<script>
-							window.onload = function() {
-
+							window.onload = function() {				     			
+								$('#nameBtn').on('click',function(){
+									$.ajax({
+										url : "<%=request.getContextPath()%>/member/modify",
+										data: {name : $('input[name="name"]').val()},
+										type:"post",
+										success:function(req){
+											location.reload();
+										}
+									})
+								});
+								$('#passBtn').on('click',function(){
+									var password = $('input[name="password"]').val().trim();
+					     			var password_Check = $('input[name="passwordCheck"]').val().trim();
+					     			
+					     			
+					     			if(password != password_Check){
+					     				alert('비밀번호가 일지하지 않습니다.');
+					     				return;
+					     			}
+									$.ajax({
+										url : "<%=request.getContextPath()%>/member/modify",
+										data: {password : $('input[name="password"]').val()},
+										type:"post",
+										success:function(req){
+											location.reload();
+										}
+									})
+								});
+									
+								$('input[name="passwordCheck"]').on('keyup',function(){
+					     			var password = $('input[name="password"]').val().trim();
+					     			var password_Check = $('input[name="passwordCheck"]').val().trim();
+									
+					     			if(password_Check==password){
+					     			$('#passcheck').html("비밀번호가 일치합니다").css('color','green');
+						     			if(password_Check =="" || password_Check==null){
+						 					$('#passcheck').text("");
+						 				}
+					     			}else{
+					     				$('#passcheck').html("비밀번호가 일치하지 않습니다").css('color','red');
+					     			}
+					     		})
+					     		
 								$('input[type="button"]').on('click',
 										function() {
 											var ano = $(this).data('ano');

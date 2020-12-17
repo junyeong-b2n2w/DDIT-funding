@@ -1,9 +1,11 @@
 package kr.or.funding.controller;
 
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.funding.dto.AddressVO;
 import kr.or.funding.dto.MemberVO;
@@ -27,23 +30,44 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
-	/*@RequestMapping("/setting")
-	private void setting() {
-	}*/
+	@RequestMapping("/settingupdate")
+	public void settingUpdate(MemberVO member)throws SQLException {
+		
+		memberService.Searchpass(member);
+		
+	}
 	
 	
-	@RequestMapping("/setting")
+	@RequestMapping("/settings")
 	public String profile(Model model,HttpSession session)throws SQLException {
 		
 		String url= "member/setting";
 		String email = ((MemberVO) session.getAttribute("loginUser")).getEmail();
-		System.out.println("emflmsl : " + email);
+		
 		MemberVO member = new MemberVO();
 		 member =  memberService.selectMemberById(email);
 		
 		model.addAttribute("member",member);
 		return url;
 	}
+	
+	
+	@RequestMapping(value="/modify",method=RequestMethod.POST)
+	public void modify(String name,String password,HttpServletResponse response,HttpSession session)throws Exception {
+		
+		String email= ((MemberVO)session.getAttribute("loginUser")).getEmail();
+		MemberVO member = new MemberVO();
+		member.setEmail(email);
+		
+		if(name != null) {
+			member.setName(name);
+		}else if(password != null) {
+			member.setPassword(password);
+		}
+		
+		memberService.MemberUpdate(member);
+	}
+	
 
 	@RequestMapping(value="/registForm", method=RequestMethod.GET)
 	public String registForm() {

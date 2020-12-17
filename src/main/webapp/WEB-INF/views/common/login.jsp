@@ -29,7 +29,7 @@
                         <div class="htc__login__register__wrap">
                             <!-- Start Single Content -->
                             <div id="login" role="tabpanel" class="single__tabs__panel tab-pane fade active in">
-                                <form role="form"  action="<%=request.getContextPath() %>/common/login.do" class="login" method="post">
+                                <form role="form"  class="login">
                                     <input type="text" name="email" placeholder="User email*">
                                     <input type="password" name="password" placeholder="Password*">
                                 </form>
@@ -80,11 +80,30 @@
             }
         });
         function submit() {
-    		$('form[role="form"]').submit();
+    		$.ajax({
+    			url : "<%=request.getContextPath()%>/common/login",
+    			type: "post",
+    			data: {email : $('input[name="email"]').val(),
+    				   password : $('input[name="password"]').val()
+    				  },
+    			success : function(req) {
+    				if(req){
+    					
+    					alert(req)
+    				}else{
+						location.href= "<%=request.getContextPath()%>/mainForm.do"
+    				}
+				},
+				error : function(req){
+					alert(req);
+				}
+    			
+    		})
     	}
         function signup() {
     		location.href="<%=request.getContextPath()%>/common/registForm";
     	}
+        
         </script>
         <!-- End Login Register Area -->
      <%@ include file="../include/footer.jsp" %>
