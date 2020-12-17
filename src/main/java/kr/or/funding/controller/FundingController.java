@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.funding.command.RewardCommand;
 import kr.or.funding.dto.FundingVO;
+import kr.or.funding.dto.RewardItemVO;
+import kr.or.funding.dto.RewardVO;
 import kr.or.funding.service.FundingService;
 
 @Controller
@@ -65,8 +68,12 @@ public class FundingController {
 	}
 	
 	@RequestMapping("/regist")
-	public void regist(FundingVO funding, HttpServletResponse response) throws Exception{
-		
+	public void regist(FundingVO funding, HttpServletResponse response, RewardCommand rewardReq) throws Exception{
+		System.out.println(rewardReq.getItemcnt()[0]);
+		System.out.println(rewardReq.getRcount()[0]);
+		System.out.println(rewardReq.getRprice()[0]);
+		System.out.println(rewardReq.getOptions()[0]);
+		System.out.println(rewardReq.getRitem()[0]);
 		service.write(funding);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();

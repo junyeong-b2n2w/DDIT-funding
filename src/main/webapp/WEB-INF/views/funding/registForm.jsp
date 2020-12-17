@@ -246,12 +246,15 @@
 									<div id="funding_reward" class="collapse"
 										aria-labelledby="fun_reward" data-parent="#funding">
 										<div class="card-body">
-											<input type="text">원 이상 후원해주신 분들께 드리는 선물입니다.
+											<input type="text" id="rewardPrice">원 이상 후원해주신 분들께 드리는 선물입니다.
 											<button type="button" class="btn btn-primary"
-												data-toggle="modal" data-target="#rewardModal">선물
+												data-toggle="modal" data-target="#rewardItemModal" id="itemAddBtn">선물
 												추가</button>
-											<input type="text">개 제한
-										</div>
+											<div id="rewardItemList"></div>
+											<input type="text" id="rewardCount">개 제한
+											<input id="rewardRegist" class="btn btn-dark" type="button" value="선물등록">
+											<div id="rewardList"></div>
+										</div>  
 									</div>
 								</div>
 							</div>

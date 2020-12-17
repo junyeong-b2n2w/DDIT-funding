@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="modal" id="rewardModal">
+<div class="modal" id="rewardItemModal">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -13,17 +13,17 @@
       <!-- Modal body -->
       <div class="modal-body">
       		<div id="addItemLine">
-      			<div id="addItem"> + 아이템 추가하기</div>
+      			<div id="addItem"> + 아이템 추가하기</div>  
       		</div>
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">등록</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="rewardItemRegist">등록</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
 
-    </div>
+    </div>  
   </div>
 </div>
 
@@ -31,28 +31,96 @@
 	window.addEventListener("load", function() {
 		var cnt = 0
 		$("#addItem").on("click", function () {
-			var code = "";
+			var code = "<div class='rewardItems'>";
 			code += "<div>아이템 이름"
-			code += "<input type='text'></div>"
+			code += "<input type='text' name='mrewardItem'></div>"
 			code += "<div>옵션"
-			code += "<input type='radio' name='"+cnt+"option' value='없음' class='noOp' onchange='direct(this)'>"
+			code += "<input type='radio' name='"+cnt+"option' value='없음' class='noOp' onchange='direct(this)' checked>"
 			code += "없음"
-			code += "<input type='radio' name='"+cnt+"option' checked value='직접입력' onchange='direct(this)'>"
-			code += "<input type='text' placeholder='직접입력' name='direct'>"
-			code += "</div>"
-			$("#addItemLine").before(code)
+			code += "<input type='radio' name='"+cnt+"option' onchange='direct(this)'>"
+			code += "<input type='text' name='mitemOptions' value='없음' disabled>"
+			code += "<input type='button' onclick='deleteItem(this)' value='x'>"
+			code += "</div></div>"
+			$("#addItem").before(code)
 			cnt++;
+			
+		})
+		
+		$("#rewardItemRegist").on('click', function () {
+			$("#rewardItemList").empty()
+			var options = $("input[name='mitemOptions']")
+			var rewardItems = $("input[name='mrewardItem']")
+			var data = "<div style='border:1px solid red'><ul>";
+			var itemcnt = 0
+			$.each(options, function(i) {
+				itemcnt = i
+				data += "<li><span name='rewardItem'>" + rewardItems[i].value+ "</span><span name='itemOptions'>" + options[i].value + "</span></li>"
+			})
+			data += "<input type='hidden' class='itemcnt' value='"+(itemcnt+1)+"'>"
+			data += "</ul></div><br>"
+			$("#rewardItemList").append(data)
+			$("#itemAddBtn").text("선물 수정")
+		})
+		
+		$("#rewardRegist").on("click", function() {
+			var options = $("span[name='itemOptions']")
+			var ritem = $("span[name='rewardItem']")
+			var rprice = $("#rewardPrice").val()
+			var rcount = $("#rewardCount").val()
+			var itemcnt = $(".itemcnt").val()
+			var code = "<div style='border 2px orange'>"
+			code += "<input type='text' name='rprice' value='"+rprice+"'>"
+			code += "<input type='text' name='rcount' value='"+rcount+"'>"
+			code += "<input type='text' name='itemcnt' value='"+itemcnt+"'>"
+			$.each(options, function(i) {
+				code+="<input type='text' name='options' value='"+options.eq(i).text()+"'>"
+				code+="<input type='text' name='ritem' value='"+ritem.eq(i).text()+"'>"
+			})
+			code+="</div>"
+			$("#rewardList").append(code)
+			
+			var options = $("span[name='itemOptions']")
+			var ritem = $("span[name='rewardItem']")
+			var rprice = $("#rewardPrice").val("")
+			var rcount = $("#rewardCount").val("")
+			var itemcnt = $(".itemcnt").val("")
+			$("#rewardItemList").empty()
 		})
 		
 	})		
 	function direct(noOp) {
-			noOp = $(noOp)
-			if(noOp.val()=='없음'){
-				$(noOp).parents().children('input[name="direct"]').prop("disabled", true)
-				$(noOp).parents().children('input[name="direct"]').val("없음")
-			} else{
-				$(noOp).parents().children('input[name="direct"]').prop("disabled", false)
-				$(noOp).parents().children('input[name="direct"]').val("")
-			}
+		noOp = $(noOp)
+		if(noOp.val()=='없음'){
+			$(noOp).parents().children("input[name='mitemOptions']").val("없음")
+			$(noOp).parents().children("input[name='mitemOptions']").prop("disabled", true)
+		} else{
+			$(noOp).parents().children("input[name='mitemOptions']").val("")
+			$(noOp).parents().children("input[name='mitemOptions']").attr("placeholder", "색상선택, 각인 등")
+			$(noOp).parents().children("input[name='mitemOptions']").prop("disabled", false)
 		}
+	}
+	function deleteItem(item) {
+		var item = $(item)
+		var delChk = confirm("정말 지우시겠습니까?")
+		if(delChk){
+			item.parents(".rewardItems").remove();
+		}
+	}
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
