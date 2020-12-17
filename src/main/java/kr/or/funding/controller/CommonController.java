@@ -26,6 +26,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
@@ -69,18 +70,21 @@ public class CommonController {
 	
 	
 	@RequestMapping(value="/common/login", method=RequestMethod.POST)
-	public String login(String email, String password,HttpSession session) throws SQLException{
-		String url = "redirect:/mainForm.do";
+	@ResponseBody
+	public void login(String email, String password,HttpSession session, HttpServletResponse response) throws SQLException, IOException{
+		
 		try {
 			memberService.login(email, password, session);
+			
 		} catch (NotFoundIDException e) {
-			url="redirect:/";
-			session.setAttribute("msg", e.getMessage());
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.print(e.getMessage());
 		} catch (InvalidPasswordException e) {
-			url="redirect:/";
-			session.setAttribute("msg", e.getMessage());
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.print(e.getMessage());
 		}
-		return url;
 	}
 
 	
@@ -130,6 +134,7 @@ public class CommonController {
 			String name = (String) response_obj.get("name");
 			String password = "qkr1412";
 			String picture = (String) response_obj.get("profile_image");
+			
 			member.setName(name);
 			member.setEmail(email);
 			member.setPassword(password);
@@ -138,7 +143,9 @@ public class CommonController {
 			
 			
 			
+			memberService.NaverUpdate(member);
 			if(memberService.selectMemberById(email) == null  ) {
+			
 				memberService.regist(member);
 			}
 			

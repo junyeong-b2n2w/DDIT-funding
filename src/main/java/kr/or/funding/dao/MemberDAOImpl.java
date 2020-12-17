@@ -47,6 +47,20 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 
+	@Override
+	public void NaverUpdate(MemberVO member) throws SQLException {
+		sqlSession.selectOne("Member-Mapper.NaverUpdate",member);
+		
+	}
+
+
+	@Override
+	public void MemberUpdate(MemberVO member) throws SQLException {
+
+		sqlSession.selectOne("Member-Mapper.MemberUpdate",member);
+	}
+
+
 
 
 

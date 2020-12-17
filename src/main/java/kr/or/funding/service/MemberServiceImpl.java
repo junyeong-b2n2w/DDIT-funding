@@ -60,6 +60,18 @@ public class MemberServiceImpl implements MemberService {
 		  memberDAO.Searchpass(member);
 	}
 
+	@Override
+	public void NaverUpdate(MemberVO member) throws SQLException {
+
+		memberDAO.NaverUpdate(member);
+	}
+
+	@Override
+	public void MemberUpdate(MemberVO member) throws SQLException {
+		memberDAO.MemberUpdate(member);
+		
+	}
+
 	
 
 

@@ -13,6 +13,9 @@ import kr.or.funding.exception.NotFoundIDException;
 
 public interface MemberService {
 
+	//네이버 소셜로그인 정보 수정
+	void NaverUpdate(MemberVO member) throws SQLException;
+	
 	//로그인
 	void login(String email,String password,HttpSession session) throws SQLException,NotFoundIDException, InvalidPasswordException;
 	
@@ -24,4 +27,7 @@ public interface MemberService {
 	
 	//패스워드 찾기
 	void Searchpass(MemberVO member) throws SQLException;
+	
+	//회원수정
+	void MemberUpdate(MemberVO member)throws SQLException;
 }

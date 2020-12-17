@@ -27,15 +27,39 @@
 		where email = #{email}
 	</update>
 	
+	<update id="NaverUpdate" parameterType="member">
+		update f_member
+		set name=#{name} , email=#{email}, password=#{password}, picture=#{picture}
+		where email = #{email}
+	</update>
+	
 	<update id="regist" parameterType="member">
 		insert into 
 		f_member(EMAIL,
 				 PASSWORD,
-				 NAME
+				 NAME,
+				 Picture
 				 ) 
 		values(#{email},
 			   #{password},
-			   #{name}
+			   #{name},
+			   #{picture}
 			   )
 	</update>
+	
+	<update id="MemberUpdate" parameterType="member">
+		update f_member
+		<set>
+			<if test="password != null">
+				password=#{password},
+			</if>
+			<if test="name != null">
+				name=#{name}
+			</if>
+		</set>
+		
+		where email=#{email}
+	</update>
+	
+	
 </mapper>
