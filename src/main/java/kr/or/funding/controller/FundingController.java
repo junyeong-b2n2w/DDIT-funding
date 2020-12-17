@@ -3,6 +3,7 @@ package kr.or.funding.controller;
 import java.io.File;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
@@ -23,14 +24,18 @@ import kr.or.funding.dto.FundingVO;
 import kr.or.funding.dto.RewardItemVO;
 import kr.or.funding.dto.RewardVO;
 import kr.or.funding.service.FundingService;
+import kr.or.funding.service.RewardService;
 
 @Controller
 @RequestMapping(value="/funding")
 public class FundingController {
 	
 	@Autowired
-	private FundingService service;
-	
+	private FundingService fundingService;
+	@Autowired
+	private RewardService rewardService;
+	private RewardItemVO rItem;
+	private RewardVO reward;
 	
 //	@RequestMapping(value="/detail", method=RequestMethod.GET)
 //	public void detail() {}
@@ -46,7 +51,7 @@ public class FundingController {
 	@RequestMapping("/list")
 	public String list(Model model) throws SQLException {
 		String url = "funding/list";
-		model.addAttribute("fundingList",service.getFundingList());
+		model.addAttribute("fundingList",fundingService.getFundingList());
 		
 		return url;
 	}
@@ -54,27 +59,41 @@ public class FundingController {
 	@RequestMapping("/detail")
 	public String detail(int fno, Model model) throws SQLException{
 		String url = "funding/detail";
-		model.addAttribute("funding",service.getFunding(fno));
+		FundingVO funding = fundingService.getFunding(fno);
+		List<RewardVO> list = rewardService.getRewardList(fno);
+		funding.setRewardList(list);
+		model.addAttribute("funding",funding);
 		return url;
 	}
 	
 	@RequestMapping("/registForm")
 	public void registForm(HttpSession session, Model model) throws SQLException {
 	}
-	@RequestMapping("/beforeRegistForm")
-	public void beforeRegistForm(HttpSession session) throws SQLException {
-		FundingVO funding = service.emptyFunding();
-		session.setAttribute("funding", funding);
-	}
 	
 	@RequestMapping("/regist")
 	public void regist(FundingVO funding, HttpServletResponse response, RewardCommand rewardReq) throws Exception{
-		System.out.println(rewardReq.getItemcnt()[0]);
-		System.out.println(rewardReq.getRcount()[0]);
-		System.out.println(rewardReq.getRprice()[0]);
-		System.out.println(rewardReq.getOptions()[0]);
-		System.out.println(rewardReq.getRitem()[0]);
-		service.write(funding);
+		int fno = fundingService.write(funding);
+		int itemCnt = 0;
+		int itemCntChk = 0;
+		for(int i=0;i<rewardReq.getItemcnt().length;i++) {
+			reward = new RewardVO();
+			reward.setFno(fno);
+			reward.setItemcnt(rewardReq.getItemcnt()[i]);
+			reward.setRcount(rewardReq.getRcount()[i]);
+			reward.setRprice(rewardReq.getRprice()[i]);
+			int rno = rewardService.insertReward(reward);
+			itemCnt += rewardReq.getItemcnt()[i];
+			for(int j=itemCntChk;j<itemCnt;j++) {
+				rItem = new RewardItemVO();
+				rItem.setRno(rno);
+				rItem.setOptions(rewardReq.getOptions()[j]);
+				rItem.setRitem(rewardReq.getRitem()[j]);
+				rewardService.insertRewardItem(rItem);
+			}
+			itemCntChk = itemCnt;
+		}
+		
+		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
@@ -82,17 +101,18 @@ public class FundingController {
 		out.println("alert('등록이 정상적으로 완료 되었습니다')");
 		out.println("location.href='list.do'");
 		out.println("</script>");
+		
 	}
 	
 	@RequestMapping("/modifyForm")
 	public String modifyForm(int fno, Model model) throws SQLException {
-		model.addAttribute("funding",service.getFunding(fno));
+		model.addAttribute("funding",fundingService.getFunding(fno));
 		return "funding/modify";
 	}
 	
 	@RequestMapping("/modify")
 	public void modify(FundingVO funding, HttpServletResponse response) throws Exception {
-		service.modify(funding);
+		fundingService.modify(funding);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
@@ -104,7 +124,7 @@ public class FundingController {
 	
 	@RequestMapping("/remove")
 	public void remove(int fno, HttpServletResponse response) throws Exception {
-		service.remove(fno);
+		fundingService.remove(fno);
 		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();

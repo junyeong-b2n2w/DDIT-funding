@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
-<script>alert("${funding.fno}")</script>
 <form action="regist.do">
 	<section class="htc__product__details pt--20 pb--50 bg__white">
 		<div class="container">
@@ -299,7 +298,6 @@
 			</div>
 		</div>
 		<input name="writer" value="test" type="hidden"> 
-		<input name="fno" value="${funding.fno}" type="hidden"> 
 		
 		<input type="submit" value="등록" class="btn btn-danger">
 	</section>

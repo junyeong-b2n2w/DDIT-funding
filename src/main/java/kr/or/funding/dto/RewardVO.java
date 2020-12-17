@@ -1,5 +1,7 @@
 package kr.or.funding.dto;
 
+import java.util.List;
+
 public class RewardVO {
 	private int rno     ;
 	private int fno     ;
@@ -7,6 +9,7 @@ public class RewardVO {
 	private int rcount  ;
 	private int subcount;
 	private int itemcnt;
+	private List<RewardItemVO> rItemList;
 	
 	public int getRno() {
 		return rno;
@@ -43,5 +46,11 @@ public class RewardVO {
 	}
 	public void setItemcnt(int itemcnt) {
 		this.itemcnt = itemcnt;
+	}
+	public List<RewardItemVO> getrItemList() {
+		return rItemList;
+	}
+	public void setrItemList(List<RewardItemVO> rItemList) {
+		this.rItemList = rItemList;
 	}
 }

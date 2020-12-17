@@ -36,4 +36,12 @@
 		class="kr.or.funding.service.ReplyServiceImpl" 
 		p:replyDAO-ref="replyDAO"/>
 		
+	<!--  reward -->
+	<bean id="rewardDAO" class="kr.or.funding.dao.RewardDAOImpl"
+	p:sqlSession-ref="sqlSession" />	
+	
+	<bean id="rewardService"
+		class="kr.or.funding.service.RewardServiceImpl" 
+		p:rewardDAO-ref="rewardDAO"/>
+		
 </beans>

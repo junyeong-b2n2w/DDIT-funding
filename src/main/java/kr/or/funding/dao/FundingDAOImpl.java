@@ -31,8 +31,8 @@ public class FundingDAOImpl implements FundingDAO{
 	}
 
 	@Override
-	public void insertFunding(FundingVO funding) throws SQLException {
-		sqlSession.update("Funding-Mapper.insertFunding", funding);
+	public int insertFunding(FundingVO funding) throws SQLException {
+		return sqlSession.update("Funding-Mapper.insertFunding", funding); 
 	}
 
 	@Override

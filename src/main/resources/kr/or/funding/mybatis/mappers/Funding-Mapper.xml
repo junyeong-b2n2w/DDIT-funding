@@ -27,9 +27,11 @@
 	
 	
 	<update id="insertFunding" parameterType="funding">
-		update f_funding set 
-		writer = #{writer},title = #{title},content = #{content},price_goal=#{price_goal},startdate=#{startdate},enddate=#{enddate},fstatus='no_accept',creater=#{creater},furl=#{furl},tag=#{tag},regdate=sysdate,category=#{category},project_img=#{project_img}
-		where fno = #{fno}
+		insert into f_funding(fno,writer, title, content, price_goal, regdate, enddate,startdate, fstatus, tag, furl, creater, category, project_img) 
+		values(#{fno},#{writer}, #{title}, #{content}, #{price_goal}, sysdate, #{enddate}, #{startdate}, 'no_accept', #{tag}, #{furl}, #{creater}, #{category}, #{project_img})
+		<selectKey keyProperty="fno" resultType="int">
+			SELECT fno FROM f_funding WHERE fno = #{fno}
+		</selectKey>
 	</update>
 	
 	<update id="insertEmptyFunding" parameterType="int">

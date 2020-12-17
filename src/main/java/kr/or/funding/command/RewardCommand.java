@@ -1,23 +1,11 @@
 package kr.or.funding.command;
 
 public class RewardCommand {
-	private String[] itemcnt;
-	private String[] rprice;
-	private String[] rcount;
+	private int[] itemcnt;
+	private int[] rprice;
+	private int[] rcount;
 	private String[] options;
 	private String[] ritem;
-	public String[] getItemcnt() {
-		return itemcnt;
-	}
-	public void setItemcnt(String[] itemcnt) {
-		this.itemcnt = itemcnt;
-	}
-	public String[] getRprice() {
-		return rprice;
-	}
-	public void setRprice(String[] rprice) {
-		this.rprice = rprice;
-	}
 	public String[] getOptions() {
 		return options;
 	}
@@ -30,10 +18,23 @@ public class RewardCommand {
 	public void setRitem(String[] ritem) {
 		this.ritem = ritem;
 	}
-	public String[] getRcount() {
+	public int[] getItemcnt() {
+		return itemcnt;
+	}
+	public void setItemcnt(int[] itemcnt) {
+		this.itemcnt = itemcnt;
+	}
+	public int[] getRprice() {
+		return rprice;
+	}
+	public void setRprice(int[] rprice) {
+		this.rprice = rprice;
+	}
+	public int[] getRcount() {
 		return rcount;
 	}
-	public void setRcount(String[] rcount) {
+	public void setRcount(int[] rcount) {
 		this.rcount = rcount;
 	}
+	
 }
