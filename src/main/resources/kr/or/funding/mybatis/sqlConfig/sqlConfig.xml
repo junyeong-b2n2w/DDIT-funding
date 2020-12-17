@@ -11,5 +11,7 @@
 		<typeAlias alias="community" type="kr.or.funding.dto.CommunityVO"/>
 		<typeAlias alias="reply" type="kr.or.funding.dto.ReplyVO"/>
 		<typeAlias alias="address" type="kr.or.funding.dto.AddressVO"/>
+		<typeAlias alias="wishList" type="kr.or.funding.dto.WishListVO"/>
+		<typeAlias alias="message" type="kr.or.funding.dto.MessageVO"/>
 	</typeAliases>
 </configuration>

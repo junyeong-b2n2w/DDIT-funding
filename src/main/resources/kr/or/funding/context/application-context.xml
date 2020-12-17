@@ -43,4 +43,15 @@
 	<bean id="addressService"
 		class="kr.or.funding.service.AddressServiceImpl"
 		p:addressDAO-ref="addressDAO"/>
+		
+	<!-- message -->
+	<bean id="messageDAO" class="kr.or.funding.dao.MessageDAOImpl"
+	p:sqlSession-ref="sqlSession"/>
+	
+	<bean id="messageService" class="kr.or.funding.service.MessageServiceImpl"
+	p:messageDAO-ref="messageDAO"/>
+	
+	<!-- wish -->
+	<bean id="wishListDAO" class="kr.or.funding.dao.WishListDAOImpl" p:sqlsession-ref="sqlSession"/>
+	<bean id="wishListService" class="kr.or.funding.service.WishListServiceImpl" p:wishDAO-ref="wishListDAO" p:fundingDAO-ref="fundingDAO"/>
 </beans>

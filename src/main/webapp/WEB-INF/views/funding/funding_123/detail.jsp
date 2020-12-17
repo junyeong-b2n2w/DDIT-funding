@@ -73,8 +73,23 @@
 		<th colspan="2">
 		<input type="button" value="수정" onclick="location.href='modifyForm.do?fno=${funding.fno}'"/>
 		<input type="button" value="삭제" onclick="location.href='remove.do?fno=${funding.fno}'"/>
+		<input type="button" value="찜하기" onclick="wish()">
 		</th>
 	</tr>
 </table>
 </body>
+	<script>
+		function wish(){
+			xhttp = new XMLHttpRequest();
+			xhttp.open('GET','<%=request.getContextPath()%>/member/regishWish.do?fno=${funding.fno}', true) // 메소드, 이동할 주소, 비동기사용(true)
+			xhttp.send();
+			    
+			//응답
+			xhttp.onreadystatechange = function(){
+				if(this.readyState == 4 && this.status == 200){
+					alert(this.responseText)
+				}
+  			}
+		}
+	</script>
 </html>

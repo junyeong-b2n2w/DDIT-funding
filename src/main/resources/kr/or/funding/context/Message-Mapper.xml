@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Message-Mapper">
+
+	
+	<select id="selectSendList" parameterType="str" resultType="message">
+		select
+		* 
+		from f_message
+		where mno is not null
+		and sender = #{sender}
+		and delete_dist != 'sender'
+		order by regdate desc 
+	</select>
+	<select id="selectRecevieList" parameterType="str" resultType="message">
+		select
+		* 
+		from f_message
+		where mno is not null
+		and receiver = #{receiver}
+		and delete_dist != 'receiver'
+		order by regdate desc 
+	</select>
+	
+	<select id="selectMessageByMno" resultType="message" parameterType="int">
+		select *
+		from f_message
+		where mno = #{mno}
+	</select>
+	
+	<select id="messageSendAllCount" resultType="int" parameterType="str">
+		select
+		count(*) 
+		from f_message
+		where mno is not null
+		and sender = #{sender}
+		and delete_dist != 'sender'
+	</select>
+	<select id="messageReceiveAllCount" resultType="int" parameterType="str">
+		select
+		count(*) 
+		from f_message
+		where mno is not null
+		and receiver = #{receiver}
+		and delete_dist != 'receiver'
+	</select>
+	<select id="messageNoReadCount" parameterType="str" resultType="message">
+		select
+		count(*) 
+		from f_message
+		where mno is not null
+		and status = 'no_read'
+		and receiver = #{receiver}
+		and delete_dist != 'receiver'
+	</select>
+	
+	<select id="selectMessageSequenceNextValue" resultType="int">
+		select mno_seq.nextVal
+		from dual
+	</select>
+	
+	
+	<update id="insertMessage" parameterType="message">
+		insert into 
+		f_message
+		values(#{mno},#{receiver}, #{sender}, #{mcontent}, 'no_read', sysdate,'no')
+	</update>	
+	
+	<update id="deleteMessage" parameterType="message" >
+		update f_message
+		set delete_dist = #{delete_dist}
+		where mno = #{mno}		
+	</update>
+	
+	<update id="readMessage" parameterType="int">
+		update f_message
+		set status = 'read'
+		where mno = #{mno}
+		
+	</update>
+	
+
+</mapper>

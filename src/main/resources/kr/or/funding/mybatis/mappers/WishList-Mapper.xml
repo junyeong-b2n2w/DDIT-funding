@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="WishList-Mapper">
+
+	
+	<select id="selectWishList" parameterType="str" resultType="wishList">
+		select
+		* 
+		from f_wishlist
+		where wno is not null
+		and email = #{email}
+		order by wno desc 
+	</select>
+	
+	<select id="wishCount" parameterType="str" resultType="wishList">
+		select 
+		count(*) 
+		from f_wishlist
+		where wno is not null
+		and email = #{email}
+	</select>
+	
+	<select id="selectWishSequenceNextValue" resultType="int">
+		select wish_seq.nextVal
+		from dual
+	</select>
+	
+	
+	<update id="insertWish" parameterType="wishList">
+		insert into 
+		f_wishlist
+		values(#{wno}, #{email}, #{fno})
+	</update>	
+	
+	<update id="deleteWish" parameterType="int" >
+		delete 
+		from f_wishlist
+		where wno=#{wno}		
+	</update>
+	
+	
+
+</mapper>
