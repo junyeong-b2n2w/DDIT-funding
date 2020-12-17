@@ -51,6 +51,7 @@
 	<bean id="messageService" class="kr.or.funding.service.MessageServiceImpl"
 	p:messageDAO-ref="messageDAO"/>
 	
+	
 	<!-- wish -->
 	<bean id="wishListDAO" class="kr.or.funding.dao.WishListDAOImpl" p:sqlsession-ref="sqlSession"/>
 	<bean id="wishListService" class="kr.or.funding.service.WishListServiceImpl" p:wishDAO-ref="wishListDAO" p:fundingDAO-ref="fundingDAO"/>
