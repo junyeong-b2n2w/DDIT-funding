@@ -13,5 +13,7 @@
 		<typeAlias alias="address" type="kr.or.funding.dto.AddressVO"/>
 		<typeAlias alias="wishList" type="kr.or.funding.dto.WishListVO"/>
 		<typeAlias alias="message" type="kr.or.funding.dto.MessageVO"/>
+		<typeAlias alias="reward" type="kr.or.funding.dto.RewardVO"/>
+		<typeAlias alias="ritem" type="kr.or.funding.dto.RewardItemVO"/>
 	</typeAliases>
 </configuration>

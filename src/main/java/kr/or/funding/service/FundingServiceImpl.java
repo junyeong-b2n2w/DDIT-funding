@@ -5,6 +5,7 @@ import java.util.List;
 
 import kr.or.funding.dao.FundingDAO;
 import kr.or.funding.dto.FundingVO;
+import kr.or.funding.dto.RewardVO;
 
 public class FundingServiceImpl implements FundingService{
 
@@ -13,6 +14,12 @@ public class FundingServiceImpl implements FundingService{
 	public void setFundingDAO(FundingDAO fundingDAO) {
 		this.fundingDAO = fundingDAO;
 	}
+	
+	private RewardService rewardService;
+	
+	public void setRewardService(RewardService rewardService) {
+		this.rewardService = rewardService;
+	}
 	@Override
 	public List<FundingVO> getFundingList() throws SQLException {
 		return fundingDAO.selectFundingList();
@@ -20,12 +27,16 @@ public class FundingServiceImpl implements FundingService{
 
 	@Override
 	public FundingVO getFunding(int fno) throws SQLException {
-		return fundingDAO.selectFundingByFno(fno);
+		FundingVO funding = fundingDAO.selectFundingByFno(fno);
+		return funding;
 	}
 
 	@Override
-	public void write(FundingVO funding) throws SQLException {
+	public int write(FundingVO funding) throws SQLException {
+		int fno = fundingDAO.selectFundingSequenceNextValue();
+		funding.setFno(fno);
 		fundingDAO.insertFunding(funding);
+		return fno;
 	}
 
 	@Override
@@ -36,13 +47,6 @@ public class FundingServiceImpl implements FundingService{
 	@Override
 	public void remove(int fno) throws SQLException {
 		fundingDAO.deleteFunding(fno);
-	}
-	@Override
-	public FundingVO emptyFunding() throws SQLException {
-		int fno = fundingDAO.selectFundingSequenceNextValue();
-		fundingDAO.insertEmptyFunding(fno);
-		FundingVO funding = fundingDAO.selectFundingByFno(fno);
-		return funding; 
 	}
 
 }

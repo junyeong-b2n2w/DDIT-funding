@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<c:set value="${funding.rewardList}" var="rewardList"/>
 <section class="htc__product__details pt--20 pb--50 bg__white">
             <div class="container">
                 <div class="row">
@@ -21,17 +21,17 @@
                         <div class="htc__product__details__inner">
                             <div class="pro__detl__title">
                             <!-- 제목 -->
-                                <h2>부루마부루우루루 제목 </h2>
+                                <h2>${funding.title}</h2>
                             </div>
                             <!--판매자 정보 사진첨부하고 하셈~ -->
                             <div class="pro__details">
-                           		<p><i class="zmdi zmdi-circle"></i> 판매자 </p>
+                           		<p><i class="zmdi zmdi-circle"></i> ${funding.writer} </p>
                             </div>
                             
                             
                             <ul class="pro__dtl__prize">
                                 <li class="old__prize">모인금액</li>
-                                <li>15,929,000 <span>원 <span class="percent">101</span>%</span></li>
+                                <li>${funding.price_pre} <span>원 <span class="percent">101</span>%</span></li>
                             </ul>
                             
                             <ul class="pro__dtl__prize">
@@ -42,14 +42,14 @@
                             
                             <blockquote>
 	                           	<p><strong>펀딩 진행중</strong></p>
-								<p>	목표 금액인 1,000,000원이 모여야만 결제됩니다.<br>
+								<p>	목표 금액인 ${funding.price_goal }원이 모여야만 결제됩니다.<br>
 								결제는 2020년 12월 17일에 다함께 진행됩니다.</p>
 							</blockquote>
                             
                             
                              <ul class="pro__dtl__prize">
                                 <li class="old__prize">후원자</li>
-                                <li>132 <span>명</span></li>
+                                <li>${funding.fcount } <span>명</span></li>
                             </ul>
                             
                             
@@ -97,7 +97,7 @@
 					                        <div class="product__details__tab__content">
 					                        	<!--스토리탭 --> 
 					                            <div role="tabpanel" id="story" class="fade active in">
-					                                   story
+					                                  ${funding.content }
 					                            </div>
 					                            <!-- 스토리 끝 -->
 					                            
@@ -191,7 +191,7 @@
                         <!-- 창작자 소개 -->
                             <div class="" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
 						          	<p><strong>창작자 소개</strong></p>
-						          	<img class="ti-heart" /> <strong>김 아무개</strong>
+						          	<img class="ti-heart" /> <strong>${funding.creater }</strong>
 						          	<p>녕하세요. 현재 작품활동 및 미술교육을 하고있는 임여송입니다. 외할머니와 함께 살적에 종종 미술활동을 함께 하다보니 할머니께서 그림에 취미를 가지게 되었습니다. 이제는 혼자서 심심하실 때마다 그림을 그리십니다. 스케치북과 간단한 크레파
 						          	</p>
 						          	<hr>
@@ -207,39 +207,53 @@
 						         <strong style="font-size:1.5rem">1,000 + </strong>
 						         <p>선물을 선택하지 않고 밀어만 줍니다.</p>
 						        </div>
+						        <c:forEach items="${rewardList}" var="list">
+						        	<div class="mt--20" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
+						         <p style=" margin:0px 10px 10px 0px ;"><i class="ti-check" ></i> <span><%-- ${list.subcount} --%></span>명이 선택</p>
+						         <strong  style="font-size:1.5rem; margin-bottom:10px;">${list.rprice } + </strong>
+						         <p>선물 내용 ~</p>
+						         <ul style="list-style:disc; list-style-position: inside; ">
+						         
+						         	<c:forEach items="${list.rItemList}" var="iList">
+						         		<li>${iList.ritem}&nbsp;&nbsp;&nbsp;${iList.options }</li>
+						         	</c:forEach>
+						         	
+						         </ul>
+						        </div>
+						        </c:forEach>
                             <!-- 리워드 반복 -->
-                            	<div class="mt--20" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
-						         <p style=" margin:0px 10px 10px 0px ;"><i class="ti-check" ></i> <span>123</span>명이 선택</p>
-						         <strong  style="font-size:1.5rem; margin-bottom:10px;">5,000 + </strong>
-						         <p>선물 내용 ~</p>
-						         <ul style="list-style:disc; list-style-position: inside; ">
-						         	<li>선물 1</li>
-						         	<li>선물 2</li>
+<%--                             	<div class="mt--20" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; "> --%>
+<!-- 						         <p style=" margin:0px 10px 10px 0px ;"><i class="ti-check" ></i> <span>123</span>명이 선택</p> -->
+<!-- 						         <strong  style="font-size:1.5rem; margin-bottom:10px;">5,000 + </strong> -->
+<!-- 						         <p>선물 내용 ~</p> -->
+<!-- 						         <ul style="list-style:disc; list-style-position: inside; "> -->
+<!-- 						         	<li>선물 1</li> -->
+<!-- 						         	<li>선물 2</li> -->
 						         
-						         </ul>
-						        </div>
+<!-- 						         </ul> -->
+<!-- 						        </div> -->
 						        
-						        <div class="mt--20" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
-						         <p style=" margin:0px 10px 10px 0px ;"><i class="ti-check" ></i> <span>123</span>명이 선택</p>
-						         <strong  style="font-size:1.5rem; margin-bottom:10px;">5,000 + </strong>
-						         <p>선물 내용 ~</p>
-						         <ul style="list-style:disc; list-style-position: inside; ">
-						         	<li>선물 1</li>
-						         	<li>선물 2</li>
+<%-- 						        <div class="mt--20" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; "> --%>
+<!-- 						         <p style=" margin:0px 10px 10px 0px ;"><i class="ti-check" ></i> <span>123</span>명이 선택</p> -->
+<!-- 						         <strong  style="font-size:1.5rem; margin-bottom:10px;">5,000 + </strong> -->
+<!-- 						         <p>선물 내용 ~</p> -->
+<!-- 						         <ul style="list-style:disc; list-style-position: inside; "> -->
+<!-- 						         	<li>선물 1</li> -->
+<!-- 						         	<li>선물 2</li> -->
 						         
-						         </ul>
-						        </div>
+<!-- 						         </ul> -->
+<!-- 						        </div> -->
 						        
-						        <div class="mt--20" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
-						         <p style=" margin:0px 10px 10px 0px ;"><i class="ti-check" ></i> <span>123</span>명이 선택</p>
-						         <strong  style="font-size:1.5rem; margin-bottom:10px;">5,000 + </strong>
-						         <p>선물 내용 ~</p>
-						         <ul style="list-style:disc; list-style-position: inside; ">
-						         	<li>선물 1</li>
-						         	<li>선물 2</li>
+<%-- 						        <div class="mt--20" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; "> --%>
+<!-- 						         <p style=" margin:0px 10px 10px 0px ;"><i class="ti-check" ></i> <span>123</span>명이 선택</p> -->
+<!-- 						         <strong  style="font-size:1.5rem; margin-bottom:10px;">5,000 + </strong> -->
+<!-- 						         <p>선물 내용 ~</p> -->
+<!-- 						         <ul style="list-style:disc; list-style-position: inside; "> -->
+<!-- 						         	<li>선물 1</li> -->
+<!-- 						         	<li>선물 2</li> -->
 						         
-						         </ul>
-						        </div>
+<!-- 						         </ul> -->
+<!-- 						        </div> -->
                             
                         </div>
                     </div>

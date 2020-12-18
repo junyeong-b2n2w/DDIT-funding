@@ -1,6 +1,7 @@
 package kr.or.funding.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 public class FundingVO {
 	private int fno       ;
@@ -19,7 +20,9 @@ public class FundingVO {
 	private String furl       ;
 	private String category;
 	private String project_img;
-	
+
+	private List<RewardVO> rewardList;
+
 	public String getProject_img() {
 		return project_img;
 	}
@@ -115,6 +118,12 @@ public class FundingVO {
 	}
 	public void setCreater(String creater) {
 		this.creater = creater;
+	}
+	public List<RewardVO> getRewardList() {
+		return rewardList;
+	}
+	public void setRewardList(List<RewardVO> rewardList) {
+		this.rewardList = rewardList;
 	}
 	
 }

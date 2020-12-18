@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Reward-Mapper">
+	
+	<update id="insertReward" parameterType="reward">
+		INSERT INTO f_reward VALUES(#{rno},#{fno},#{rprice},#{rcount},0)
+		<selectKey keyProperty="rno" resultType="int">
+			SELECT rno FROM f_reward WHERE rno = #{rno}
+		</selectKey>
+	</update>
+	<update id="insertRewardItem" parameterType="ritem">
+		INSERT INTO f_reward_item VALUES(#{rino}, #{rno}, #{ritem},#{options})
+		<selectKey keyProperty="rino" resultType="int">
+			SELECT rino FROM f_reward_item WHERE rino = #{rino}
+		</selectKey>
+	</update>
+	<select id="selectRewardSequenceNextValue" resultType="int">
+		select reward_seq.nextVal
+		from dual
+	</select>
+	<select id="selectRewardItemSequenceNextValue" resultType="int">
+		select reward_item_seq.nextVal
+		from dual
+	</select>
+	
+	<select id="selectRewardListByFno" parameterType="int" resultType="reward">
+		select 	* 
+		from f_reward
+		where fno=#{fno}
+	</select>
+	<select id="selectRewardItemListByRno" parameterType="int" resultType="ritem">
+		select 	* 
+		from f_reward_item
+		where rno=#{rno}
+	</select>
+</mapper>
