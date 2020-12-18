@@ -43,9 +43,49 @@ public class FundingController {
 	@RequestMapping(value="/agreements", method=RequestMethod.GET)
 	public void agreements() {}
 	
-//	@RequestMapping(value="/registForm", method=RequestMethod.GET)
-//	public void regist() {}
+	@RequestMapping(value="/modifyForm", method=RequestMethod.GET)
+	public void mpdifyForm(int fno, Model model) throws SQLException {
+		FundingVO funding = fundingService.getFunding(fno);
+		List<RewardVO> list = rewardService.getRewardList(fno);
+		funding.setRewardList(list);
+		model.addAttribute("funding",funding);
+	}
 	
+	@RequestMapping(value="/modify",method=RequestMethod.POST)
+	public void modify(FundingVO funding, HttpServletResponse response, RewardCommand rewardReq) throws Exception{
+		fundingService.remove(funding.getFno());
+		
+		fundingService.modify(funding);
+		int itemCnt = 0;
+		int itemCntChk = 0;
+		for(int i=0;i<rewardReq.getItemcnt().length;i++) {
+			reward = new RewardVO();
+			reward.setFno(funding.getFno());
+			reward.setItemcnt(rewardReq.getItemcnt()[i]);
+			reward.setRcount(rewardReq.getRcount()[i]);
+			reward.setRprice(rewardReq.getRprice()[i]);
+			System.out.println(reward);
+			int rno = rewardService.insertReward(reward);
+			itemCnt += rewardReq.getItemcnt()[i];
+			for(int j=itemCntChk;j<itemCnt;j++) {
+				rItem = new RewardItemVO();
+				rItem.setRno(rno);
+				rItem.setOptions(rewardReq.getOptions()[j]);
+				rItem.setRitem(rewardReq.getRitem()[j]);
+				System.out.println(rItem + "<<<<<<<<");
+				rewardService.insertRewardItem(rItem);
+			}
+			itemCntChk = itemCnt;
+		}
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		out.println("<script>");
+		out.println("alert('수정이 정상적으로 완료 되었습니다')");
+		out.println("location.href='list.do'");
+		out.println("</script>");
+		
+	}
 	
 	
 	@RequestMapping("/list")
@@ -57,20 +97,18 @@ public class FundingController {
 	}
 	
 	@RequestMapping("/detail")
-	public String detail(int fno, Model model) throws SQLException{
-		String url = "funding/detail";
+	public void detail(int fno, Model model) throws SQLException{
 		FundingVO funding = fundingService.getFunding(fno);
 		List<RewardVO> list = rewardService.getRewardList(fno);
 		funding.setRewardList(list);
 		model.addAttribute("funding",funding);
-		return url;
 	}
 	
 	@RequestMapping("/registForm")
 	public void registForm(HttpSession session, Model model) throws SQLException {
 	}
 	
-	@RequestMapping("/regist")
+	@RequestMapping(value="/regist",method=RequestMethod.POST)
 	public void regist(FundingVO funding, HttpServletResponse response, RewardCommand rewardReq) throws Exception{
 		int fno = fundingService.write(funding);
 		int itemCnt = 0;
@@ -108,18 +146,6 @@ public class FundingController {
 	public String modifyForm(int fno, Model model) throws SQLException {
 		model.addAttribute("funding",fundingService.getFunding(fno));
 		return "funding/modify";
-	}
-	
-	@RequestMapping("/modify")
-	public void modify(FundingVO funding, HttpServletResponse response) throws Exception {
-		fundingService.modify(funding);
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		
-		out.println("<script>");
-		out.println("alert('수정이 정상적으로 완료 되었습니다')");
-		out.println("location.href='list.do'");
-		out.println("</script>");
 	}
 	
 	@RequestMapping("/remove")

@@ -29,4 +29,9 @@ public class RewardItemVO {
 	public void setOptions(String options) {
 		this.options = options;
 	}
+	@Override
+	public String toString() {
+		return "RewardItemVO [rino=" + rino + ", rno=" + rno + ", ritem=" + ritem + ", options=" + options + "]";
+	}
+	
 }

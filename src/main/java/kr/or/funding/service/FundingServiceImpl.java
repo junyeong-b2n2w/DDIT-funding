@@ -5,7 +5,6 @@ import java.util.List;
 
 import kr.or.funding.dao.FundingDAO;
 import kr.or.funding.dto.FundingVO;
-import kr.or.funding.dto.RewardVO;
 
 public class FundingServiceImpl implements FundingService{
 
@@ -15,11 +14,7 @@ public class FundingServiceImpl implements FundingService{
 		this.fundingDAO = fundingDAO;
 	}
 	
-	private RewardService rewardService;
 	
-	public void setRewardService(RewardService rewardService) {
-		this.rewardService = rewardService;
-	}
 	@Override
 	public List<FundingVO> getFundingList() throws SQLException {
 		return fundingDAO.selectFundingList();

@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
-<form action="regist.do" method="post">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set value="${funding.rewardList}" var="rewardList" />
+<form action="modify.do" method="post">
 	<section class="htc__product__details pt--20 pb--50 bg__white">
 		<div class="container">
 			<!-- 상단 메 -->
 			<nav>
+				<input type="hidden" name="fno" value="${funding.fno}">
 				<div class="nav nav-tabs text-center ptb--20" id="nav-tab"
 					role="tablist">
 					<a class="nav-item nav-link active" id="nav-summary-tab"
@@ -51,7 +54,7 @@
 										aria-labelledby="headdingTitle" data-parent="#projectSummary">
 										<div class="card-body">
 											<input class="form-control" type="text" name="title"
-												placeholder="프로젝트 제목">
+												value="${funding.title }" placeholder="프로젝트 제목">
 										</div>
 									</div>
 								</div>
@@ -72,7 +75,7 @@
 											<div
 												style="width: 300px; height: 300px; background-color: black; display: inline-block;"
 												id="pictureView"></div>
-											<input type="hidden" name="project_img">
+											<input type="hidden" name="project_img" value="${funding.project_img}">
 										</div>
 									</div>
 								</div>
@@ -94,13 +97,24 @@
 												name="category">
 												<option disabled value="프로젝트 카테고리를 정해주세요" selected>프로젝트
 													카테고리를 정해주세요</option>
-												<option value="baking-and-desserts">- 베이킹 · 디저트</option>
-												<option value="drinks">- 음료</option>
-												<option value="home-meal-replacement">- 간편식</option>
-												<option value="cookbooks">- 요리책</option>
-												<option value="pet-food">- 펫 푸드</option>
-												<option value="food-festivals-and-events">- 푸드 페스티벌
-													· 행사</option>
+												<option value="baking-and-desserts"
+													${funding.category eq 'baking-and-desserts' ? 'selected' : ''}>-
+													베이킹 · 디저트</option>
+												<option value="drinks"
+													${funding.category eq 'drinks' ? 'selected' : ''}>-
+													음료</option>
+												<option value="home-meal-replacement"
+													${funding.category eq 'home-meal-replacement' ? 'selected' : ''}>-
+													간편식</option>
+												<option value="cookbooks"
+													${funding.category eq 'cookbooks' ? 'selected' : ''}>-
+													요리책</option>
+												<option value="pet-food"
+													${funding.category eq 'pet-food' ? 'selected' : ''}>-
+													펫 푸드</option>
+												<option value="food-festivals-and-events"
+													${funding.category eq 'food-festivals-and-events' ? 'selected' : ''}>-
+													푸드 페스티벌 · 행사</option>
 											</select>
 										</div>
 									</div>
@@ -123,7 +137,8 @@
 													<span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
 												</div>
 												<input type="text" class="form-control" id="basic-url"
-													aria-describedby="basic-addon3" name="furl">
+													aria-describedby="basic-addon3" name="furl"
+													value="${funding.furl }">
 											</div>
 										</div>
 									</div>
@@ -141,7 +156,8 @@
 									<div id="summary_tag" class="collapse"
 										aria-labelledby="headding_tag" data-parent="#projectSummary">
 										<div class="card-body">
-											<input type="text" class="form-control" name="tag">
+											<input type="text" class="form-control" name="tag"
+												value="${funding.tag }">
 										</div>
 									</div>
 								</div>
@@ -160,7 +176,7 @@
 										<div class="card-body">
 
 											<input class="form-control" type="text" placeholder="창작자명"
-												name="creater">
+												value="${funding.creater }" name="creater">
 										</div>
 									</div>
 								</div>
@@ -193,7 +209,7 @@
 										aria-labelledby="#fun_goal" data-parent="#funding">
 										<div class="card-body">
 											<input class="form-control" type="text" placeholder="목표 금액"
-												name="price_goal">
+												name="price_goal" value="${funding.price_goal }">
 										</div>
 									</div>
 								</div>
@@ -211,7 +227,7 @@
 										aria-labelledby="fun_open_date" data-parent="#funding">
 										<div class="card-body">
 											<input class="form-control" type="date" placeholder=""
-												name="startdate">
+												name="startdate" value="${funding.startdate }">
 										</div>
 									</div>
 								</div>
@@ -229,7 +245,7 @@
 										aria-labelledby="fun_end_date" data-parent="#funding">
 										<div class="card-body">
 											<input class="form-control" type="date" placeholder=""
-												name="enddate">
+												name="enddate" value="${funding.enddate }">
 										</div>
 									</div>
 								</div>
@@ -245,15 +261,28 @@
 									<div id="funding_reward" class="collapse"
 										aria-labelledby="fun_reward" data-parent="#funding">
 										<div class="card-body">
-											<input type="text" id="rewardPrice">원 이상 후원해주신 분들께 드리는 선물입니다.
+											<input type="text" id="rewardPrice">원 이상 후원해주신 분들께
+											드리는 선물입니다.
 											<button type="button" class="btn btn-primary"
-												data-toggle="modal" data-target="#rewardItemModal" id="itemAddBtn">선물
-												추가</button>
+												data-toggle="modal" data-target="#rewardItemModal"
+												id="itemAddBtn">선물 추가</button>
 											<div id="rewardItemList"></div>
-											<input type="text" id="rewardCount">개 제한
-											<input id="rewardRegist" class="btn btn-dark" type="button" value="선물등록">
-											<div id="rewardList"></div>
-										</div>  
+											<input type="text" id="rewardCount">개 제한 <input
+												id="rewardRegist" class="btn btn-dark" type="button"
+												value="선물등록">
+											<div id="rewardList">
+												<c:forEach items="${rewardList}" var="list">
+													<input type='text' name='rprice' value='${list.rprice}'>
+													<input type='text' name='rcount' value='${list.rcount}'>
+													<input type='hidden' name='itemcnt' value='${list.itemcnt }'>
+															<c:forEach items="${list.rItemList}" var="iList">
+																<input type='text' name='options' value='${iList.options}'>
+																<input type='text' name='ritem' value='${iList.ritem }'>
+															</c:forEach>
+
+												</c:forEach>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -284,7 +313,7 @@
 										aria-labelledby="#sto_tell" data-parent="#storytelling">
 										<div class="card-body">
 											<textarea class="form-control" placeholder="스토리를 입력해주세요"
-												rows="2" style="width: 100%;" name="content"></textarea>
+												rows="2" style="width: 100%;" name="content">${funding.content }</textarea>
 										</div>
 									</div>
 								</div>
@@ -298,7 +327,6 @@
 			</div>
 		</div>
 		<input name="writer" value="${loginUser.email}" type="hidden"> 
-		
 		<input type="submit" value="등록" class="btn btn-danger">
 	</section>
 </form>
