@@ -50,12 +50,18 @@
 	<update id="MemberUpdate" parameterType="member">
 		update f_member
 		<set>
+			<if test="picture != null">
+				picture=#{picture},
+			</if>
+			
 			<if test="password != null">
 				password=#{password},
 			</if>
+			
 			<if test="name != null">
 				name=#{name}
 			</if>
+			
 		</set>
 		
 		where email=#{email}

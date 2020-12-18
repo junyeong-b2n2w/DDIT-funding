@@ -50,15 +50,22 @@
 							<div class="card">
 								<div class="card-header" id="cre_img">
 									<h2 class="mb-0">
-										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_img" aria-expanded="true" aria-controls="#creater_img">프로필 사진 : <img src="${member.picture }"></button>
+										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_img" 
+										aria-expanded="true" aria-controls="#creater_img">프로필 사진 :</button><img src="getPicture.do?picture=${member.picture }">
 									</h2>
 								</div>
-								
 								<div id="creater_img" class="collapse" aria-labelledby="cre_img" data-parent="#aco_profile">
+								<form role="imageForm" enctype="multipart/form-data">
 									<div class="card-body">
-										<div style="width: 30px; height: 30px; background-color: black; border-radius: 50%; display: inline-block;"></div>
-										<input type="file" style="display: inline-block;" class="form-control-file" id="">
+									
+									<input id="inputFile" name="picture" type="file" >
+									<input id="oldFile"	name="oldPicture" type="hidden" value="${member.picture }"/> 
+									<input name="checkUpload" type="hidden" value="0" />
+									<button type="button" id="profileImgBtn"> 수정 </button>
+									
+									
 									</div>
+								</form>										
 								</div>
 							</div>
 
@@ -243,7 +250,33 @@
 						</div>
 						<div class="aj"></div>
 						<script>
-							window.onload = function() {				     			
+							window.onload = function() {
+								
+								var imageURL = "getPicture.do?picture=${member.picture}";
+								$('div#pictureView').css({'background' :'url('+imageURL+')',
+														  'background-position':'center',
+														  'background-size':'cover',
+														  'background-repeat':'no-repeat'
+														});
+								
+				
+								$('#profileImgBtn').on('click',function(e){
+									
+									$.ajax({
+										url : "<%=request.getContextPath()%>/member/modify.do",
+										data: new FormData($("form[role='imageForm']")[0]),
+									    enctype: 'multipart/form-data',
+									    processData: false,
+									    contentType: false,
+									    cache: false,
+										type:"post",
+										success:function(req){
+											location.reload();
+										}
+									})
+								});
+								
+								
 								$('#nameBtn').on('click',function(){
 									$.ajax({
 										url : "<%=request.getContextPath()%>/member/modify",
@@ -322,8 +355,6 @@
 	</div>
 
 </section>
-
-
 
 
 

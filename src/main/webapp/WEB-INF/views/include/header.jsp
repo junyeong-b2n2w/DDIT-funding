@@ -77,8 +77,7 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
                             
-                                <li><a href="<%=request.getContextPath()%>/member/settings.do"><span class="ti-user"></span></a></li>
-                                
+                                <li><a href="<%=request.getContextPath()%>/member/menu.do"><span class="ti-user">:${loginUser.name }</span></a></li>
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
                                 <c:if test="${empty loginUser}">
                                 <li><a href="<%=request.getContextPath() %>/common/loginForm.do"><i class="fas fa-user"></i> 로그인 </a></li>
