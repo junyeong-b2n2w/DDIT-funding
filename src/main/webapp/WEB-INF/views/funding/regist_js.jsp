@@ -58,4 +58,39 @@
 			},
 		})
 	}
+	
+	window.addEventListener("load", function() {
+		$("#fundingRegistBtn").on("click", function() {
+			if($("#inputFile").val() == ""){
+				alert("사진을 등록해주세요.")
+				$('#nav-summary-tab').trigger('click');
+				$('#imgBtn').trigger('click');
+				$("#inputFile").click()
+				return;
+			}
+			
+			if($("input[name='title']").val() == ""){
+				alert("프로젝트 제목을 입력해주세요")
+				$('#nav-summary-tab').trigger('click');
+				$('#titleBtn').trigger('click');
+				$("input[name='title']").focus()
+				return
+			}
+			
+			if($("input[name='category']").val() == ""){
+				alert("카테고리를 선택해주세요.")
+				$('#nav-summary-tab').trigger('click');
+				$('#catrgoryBtn').trigger('click');
+				$("input[name='category']").focus()
+				return
+			}
+			if($("input[name='name']").val() == ""){
+				alert("이름은 필수입니다.")
+				return
+			}
+			
+			var form = $("form[role='form']")
+			form.submit()
+		})
+	})
 </script>

@@ -43,7 +43,7 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#summary_title"
-												aria-expanded="true" aria-controls="#summary_title">프로젝트
+												aria-expanded="true" aria-controls="#summary_title" id="titleBtn">프로젝트
 												제목</button>
 										</h2>
 									</div>
@@ -61,7 +61,7 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#summary_img"
-												aria-expanded="true" aria-controls="#summary_img">프로젝트
+												aria-expanded="true" aria-controls="#summary_img" id="imgBtn">프로젝트
 												대표 이미지</button>
 										</h2>
 									</div>
@@ -82,7 +82,7 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#summary_cate"
-												aria-expanded="true" aria-controls="#summary_cate">프로젝트
+												aria-expanded="true" aria-controls="#summary_cate" id="catrgoryBtn">프로젝트
 												카테고리</button>
 										</h2>
 									</div>
@@ -111,7 +111,7 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#summary_page"
-												aria-expanded="true" aria-controls="#summary_page">프로젝트
+												aria-expanded="true" aria-controls="#summary_page" id="urlBtn">프로젝트
 												URL</button>
 										</h2>
 									</div>
@@ -134,7 +134,7 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#summary_tag"
-												aria-expanded="true" aria-controls="#summary_tag">검색용
+												aria-expanded="true" aria-controls="#summary_tag" id="tagBtn">검색용
 												태그</button>
 										</h2>
 									</div>
@@ -151,7 +151,7 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#creater_name"
-												aria-expanded="true" aria-controls="#creater_name">창작자
+												aria-expanded="true" aria-controls="#creater_name" id="createrBtn">창작자
 												이름</button>
 										</h2>
 									</div>
@@ -299,7 +299,7 @@
 		</div>
 		<input name="writer" value="${loginUser.email}" type="hidden"> 
 		
-		<input type="submit" value="등록" class="btn btn-danger">
+		<input type="button" value="등록" class="btn btn-danger" id="fundingRegistBtn">
 	</section>
 </form>
 
