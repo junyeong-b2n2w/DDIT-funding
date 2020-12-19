@@ -283,7 +283,7 @@
 										aria-labelledby="#sto_tell" data-parent="#storytelling">
 										<div class="card-body">
 											<textarea class="form-control" placeholder="스토리를 입력해주세요"
-												rows="2" style="width: 100%;" name="content"></textarea>
+												rows="2" style="width: 100%;" name="content" id="content"></textarea>
 										</div>
 									</div>
 								</div>
@@ -305,4 +305,5 @@
 
 <%@ include file="reward_js.jsp"%>
 <%@ include file="regist_js.jsp"%>
+<%@ include file="../common/summernote.jsp" %>
 <%@ include file="../include/footer.jsp"%>

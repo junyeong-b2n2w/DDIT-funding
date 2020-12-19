@@ -51,7 +51,7 @@
 			$("#rewardItemList").empty()
 			var options = $("input[name='mitemOptions']")
 			var rewardItems = $("input[name='mrewardItem']")
-			var data = "<div style='border:1px solid red'><ul>";
+			var data = "<div class='card'><ul>";
 			var itemcnt = 0
 			var check = true
 			$.each(options, function(i) {
@@ -101,15 +101,17 @@
 				alert("선물개수를 입력해주세요.")
 				return
 			}
-			var code = "<div class='rewardRegistItemList'>"
-			code += "<input type='text' name='rprice' value='"+rprice+"'>"
-			code += "<input type='text' name='rcount' value='"+rcount+"'>"
-			code += "<input type='text' name='itemcnt' value='"+itemcnt+"'>"
+			var code = "<div class='rewards'>"
+			code += "<input type='button' onclick='deleteReward(this)' value='X'>"
+			code += "<input type='button' onclick='modifyReward(this)' value='수정'>"
+			code += "<input type='number' name='rprice' value='"+rprice+"' readonly  min='1000' step='1000' placeholder='천원 이상'>"
+			code += "<input type='number' name='rcount' value='"+rcount+"' readonly  min='5' step='5' placeholder='5개 이상등록'>"
+			code += "<input type='hidden' name='itemcnt' value='"+itemcnt+"' readonly>"
 			$.each(options, function(i) {
-				code+="<input type='text' name='options' value='"+options.eq(i).text()+"'>"
-				code+="<input type='text' name='ritem' value='"+ritem.eq(i).text()+"'>"
+				code+="<input type='text' name='options' value='"+options.eq(i).text()+"' readonly>"
+				code+="<input type='text' name='ritem' value='"+ritem.eq(i).text()+"' readonly><br>"
 			})
-			code+="</div>"
+			code+="</div><br><br>"
 			$("#rewardList").append(code)
 			
 			var options = $("span[name='itemOptions']")
@@ -139,6 +141,20 @@
 		if(delChk){
 			item.parents(".rewardItems").remove();
 		}
+	}
+	function deleteReward(reward){
+		var reward = $(reward)
+		var delChk = confirm("정말 지우시겠습니까?")
+		if(delChk){
+			reward.parents(".rewards").remove();
+		}
+	}
+	function modifyReward(reward) {
+		var reward = $(reward)
+		reward.parents(".rewards").find("input[name='rprice']").prop("disabled",false)
+		reward.parents(".rewards").find("input[name='rcount']").prop("disabled",false)
+		reward.parents(".rewards").find("input[name='options']").prop("disabled",false)
+		reward.parents(".rewards").find("input[name='ritem']").prop("disabled",false)
 	}
 </script>
 

@@ -8,6 +8,18 @@
 
 <script>
 	function preViewPicture(inputImage,target){
+		var fileFormat=
+			inputImage.value.substr(inputImage.value.lastIndexOf(".")+1).toUpperCase();
+		//이미지 확장자 jpg 확인
+		if(fileFormat!="JPG"&&fileFormat!="PNG"&&fileFormat!="JPEG"){
+			alert("이미지는 jpg,png,jpeg 형식만 가능합니다.");
+			return;
+		} 
+		//이미지 파일 용량 체크
+		if(inputImage.files[0].size>1024*1024*3){
+			alert("사진 용량은 3MB 이하만 가능합니다.");
+			return;
+		};
 		if (inputImage.files && inputImage.files[0]) {
 	        var reader = new FileReader();
 	        reader.onload = function (e) {
@@ -125,7 +137,7 @@
 				alert("마감일시를 설정해주세요.")
 				return
 			}
-			if($(".rewardRegistItemList").length == 0){
+			if($(".rewards").length == 0){
 				$('#nav-funding-tab').trigger('click');
 				$('#rewardBtn').trigger('click');
 				alert("리워드는 한개이상 필요합니다.")

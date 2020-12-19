@@ -46,7 +46,7 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#summary_title"
-												aria-expanded="true" aria-controls="#summary_title">프로젝트
+												aria-expanded="true" aria-controls="#summary_title" id="titleBtn">프로젝트
 												제목</button>
 										</h2>
 									</div>
@@ -64,7 +64,7 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#summary_img"
-												aria-expanded="true" aria-controls="#summary_img">프로젝트
+												aria-expanded="true" aria-controls="#summary_img" id="imgBtn">프로젝트
 												대표 이미지</button>
 										</h2>
 									</div>
@@ -125,7 +125,7 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#summary_page"
-												aria-expanded="true" aria-controls="#summary_page">프로젝트
+												aria-expanded="true" aria-controls="#summary_page" id="urlBtn">프로젝트
 												URL</button>
 										</h2>
 									</div>
@@ -149,7 +149,7 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#summary_tag"
-												aria-expanded="true" aria-controls="#summary_tag">검색용
+												aria-expanded="true" aria-controls="#summary_tag" id="tagBtn">검색용
 												태그</button>
 										</h2>
 									</div>
@@ -167,7 +167,7 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#creater_name"
-												aria-expanded="true" aria-controls="#creater_name">창작자
+												aria-expanded="true" aria-controls="#creater_name" id="createrBtn">창작자
 												이름</button>
 										</h2>
 									</div>
@@ -201,15 +201,14 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#funding_goal"
-												aria-expanded="true" aria-controls="#funding_goal">목표
+												aria-expanded="true" aria-controls="#funding_goal" id="priceGoalBtn">목표
 												금액</button>
 										</h2>
 									</div>
 									<div id="funding_goal" class="collapse"
 										aria-labelledby="#fun_goal" data-parent="#funding">
 										<div class="card-body">
-											<input class="form-control" type="text" placeholder="목표 금액"
-												name="price_goal" value="${funding.price_goal }">
+											<input class="form-control" type="number" placeholder="목표 금액" name="price_goal" min="1000000" step="100000" value="${funding.price_goal }">
 										</div>
 									</div>
 								</div>
@@ -219,7 +218,7 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#funding_open_date"
-												aria-expanded="true" aria-controls="#funding_open_date">프로젝트
+												aria-expanded="true" aria-controls="#funding_open_date" id="startDateBtn">프로젝트
 												공개 일시</button>
 										</h2>
 									</div>
@@ -237,7 +236,7 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#funding_end_date"
-												aria-expanded="true" aria-controls="#funding_end_date">프로젝트
+												aria-expanded="true" aria-controls="#funding_end_date" id="endDateBtn">프로젝트
 												마감 일시</button>
 										</h2>
 									</div>
@@ -254,32 +253,37 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#funding_reward"
-												aria-expanded="true" aria-controls="#funding_reward">선물
+												aria-expanded="true" aria-controls="#funding_reward" id="rewardBtn">선물
 												구성</button>
 										</h2>
 									</div>
 									<div id="funding_reward" class="collapse"
 										aria-labelledby="fun_reward" data-parent="#funding">
 										<div class="card-body">
-											<input type="text" id="rewardPrice">원 이상 후원해주신 분들께
+											<input type="text" id="rewardPrice"  min="1000" step="1000" placeholder="천원 이상">원 이상 후원해주신 분들께
 											드리는 선물입니다.
 											<button type="button" class="btn btn-primary"
-												data-toggle="modal" data-target="#rewardItemModal"
+												data-toggle="modal" data-target="#rewardItemModal"  id="itemAddBtn"
 												id="itemAddBtn">선물 추가</button>
 											<div id="rewardItemList"></div>
-											<input type="text" id="rewardCount">개 제한 <input
+											<input type="text" id="rewardCount" min="5" step="5" placeholder="5개 이상등록">개 제한 <input
 												id="rewardRegist" class="btn btn-dark" type="button"
 												value="선물등록">
 											<div id="rewardList">
 												<c:forEach items="${rewardList}" var="list">
-													<input type='text' name='rprice' value='${list.rprice}'>
-													<input type='text' name='rcount' value='${list.rcount}'>
-													<input type='hidden' name='itemcnt' value='${list.itemcnt }'>
+												<div class="rewards">
+													<input type='button' onclick='deleteReward(this)' value="X">
+													<input type='button' onclick='modifyReward(this)' value="수정">
+													<input type='number' min="1000" step="1000" placeholder="천원 이상" name='rprice' value='${list.rprice}' readonly>
+													<input type='number' min="5" step="5" placeholder="5개 이상등록" name='rcount' value='${list.rcount}' readonly>
+													<input type='hidden' name='itemcnt' value='${list.itemcnt }' readonly>
 															<c:forEach items="${list.rItemList}" var="iList">
-																<input type='text' name='options' value='${iList.options}'>
-																<input type='text' name='ritem' value='${iList.ritem }'>
+																<input type='text' name='options' value='${iList.options}' readonly>
+																<input type='text' name='ritem' value='${iList.ritem }' readonly>
+																<br>
 															</c:forEach>
-
+												</div>
+												<br><br>
 												</c:forEach>
 											</div>
 										</div>
@@ -305,7 +309,7 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#story_tell"
-												aria-expanded="true" aria-controls="#story_tell">프로젝트
+												aria-expanded="true" aria-controls="#story_tell" id="contentBtn">프로젝트
 												스토리</button>
 										</h2>
 									</div>
@@ -313,7 +317,7 @@
 										aria-labelledby="#sto_tell" data-parent="#storytelling">
 										<div class="card-body">
 											<textarea class="form-control" placeholder="스토리를 입력해주세요"
-												rows="2" style="width: 100%;" name="content">${funding.content }</textarea>
+												rows="2" style="width: 100%;" name="content" id="content">${funding.content }</textarea>
 										</div>
 									</div>
 								</div>
@@ -327,11 +331,11 @@
 			</div>
 		</div>
 		<input name="writer" value="${loginUser.email}" type="hidden"> 
-		<input type="submit" value="등록" class="btn btn-danger">
+		<input type="button" value="등록" class="btn btn-danger" id='fundingRegistBtn'>
 	</section>
 </form>
 
-
+<%@ include file="../common/summernote.jsp" %>
 <%@ include file="reward_js.jsp"%>
 <%@ include file="regist_js.jsp"%>
 <%@ include file="../include/footer.jsp"%>
