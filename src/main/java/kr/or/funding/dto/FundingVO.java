@@ -20,7 +20,14 @@ public class FundingVO {
 	private String furl       ;
 	private String category;
 	private String project_img;
+	private int percent;
 
+	public int getPercent() {
+		return percent;
+	}
+	public void setPercent(int percent) {
+		this.percent = percent;
+	}
 	private List<RewardVO> rewardList;
 
 	public String getProject_img() {

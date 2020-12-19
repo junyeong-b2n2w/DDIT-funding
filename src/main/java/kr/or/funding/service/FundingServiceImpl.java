@@ -3,9 +3,9 @@ package kr.or.funding.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import kr.or.funding.command.SearchCriteria;
 import kr.or.funding.dao.FundingDAO;
 import kr.or.funding.dto.FundingVO;
-import kr.or.funding.dto.RewardVO;
 
 public class FundingServiceImpl implements FundingService{
 
@@ -21,8 +21,8 @@ public class FundingServiceImpl implements FundingService{
 		this.rewardService = rewardService;
 	}
 	@Override
-	public List<FundingVO> getFundingList() throws SQLException {
-		return fundingDAO.selectFundingList();
+	public List<FundingVO> getFundingList(SearchCriteria cri ) throws SQLException {
+		return fundingDAO.selectFundingList(cri);
 	}
 
 	@Override
@@ -47,6 +47,11 @@ public class FundingServiceImpl implements FundingService{
 	@Override
 	public void remove(int fno) throws SQLException {
 		fundingDAO.deleteFunding(fno);
+	}
+	@Override
+	public int getFundingCnt(SearchCriteria cri) throws SQLException {
+		return fundingDAO.selectFundingListCnt(cri);
+		
 	}
 
 }

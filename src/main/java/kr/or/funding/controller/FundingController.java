@@ -14,12 +14,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.funding.command.RewardCommand;
+import kr.or.funding.command.SearchCriteria;
 import kr.or.funding.dto.FundingVO;
 import kr.or.funding.dto.RewardItemVO;
 import kr.or.funding.dto.RewardVO;
@@ -49,12 +52,39 @@ public class FundingController {
 	
 	
 	@RequestMapping("/list")
-	public String list(Model model) throws SQLException {
+	public String list(Model model, SearchCriteria cri) throws SQLException {
 		String url = "funding/list";
-		model.addAttribute("fundingList",fundingService.getFundingList());
+		List<FundingVO> fundingList = fundingService.getFundingList(cri);
+		model.addAttribute("fundingList",fundingList);
+		model.addAttribute("cri",cri);
+		System.out.println(fundingList);
 		
 		return url;
 	}
+	
+	@RequestMapping("/items")
+	@ResponseBody
+	public ResponseEntity<List<FundingVO>> items(Model model, SearchCriteria cri) throws SQLException {
+		
+		ResponseEntity<List<FundingVO>> entity = null;
+		
+		List<FundingVO> fundingList = fundingService.getFundingList(cri);
+		
+		int totalCnt = fundingService.getFundingCnt(cri);
+		
+		if((cri.getPage() - 1)* cri.getPerPageNum() > totalCnt) {
+			return entity= new ResponseEntity<List<FundingVO>>(HttpStatus.OK);
+		}else {
+			return entity= new ResponseEntity<List<FundingVO>>(fundingList,HttpStatus.OK);
+		}
+		
+		
+		
+		
+	}
+	
+	
+	
 	
 	@RequestMapping("/detail")
 	public String detail(int fno, Model model) throws SQLException{
