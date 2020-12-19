@@ -43,5 +43,8 @@ public class FundingServiceImpl implements FundingService{
 	public void remove(int fno) throws SQLException {
 		fundingDAO.deleteFunding(fno);
 	}
+	
+	
+	
 
 }
