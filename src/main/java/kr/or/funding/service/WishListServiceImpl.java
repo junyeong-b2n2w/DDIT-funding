@@ -37,11 +37,11 @@ public class WishListServiceImpl implements WishListService {
 		return 1;
 	}
 
-	@Override
-	public void remove(int wno) throws SQLException {
-		wishDAO.delete(wno);
-	}
 
+	@Override
+	public void remove(WishListVO wish) throws SQLException {
+		wishDAO.delete(wish);
+	}
 	@Override
 	public Map<String, Object> selectWishList(String email) throws SQLException {
 		List<WishListVO> wishList = wishDAO.wishList(email);

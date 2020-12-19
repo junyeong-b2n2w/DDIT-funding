@@ -91,7 +91,7 @@
     					
     					alert(req)
     				}else{
-						location.href= "<%=request.getContextPath()%>/mainForm.do"
+						location.href= "<%=request.getContextPath()%>/index"
     				}
 				},
 				error : function(req){

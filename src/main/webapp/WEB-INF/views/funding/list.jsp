@@ -60,12 +60,12 @@
 					<div class="product foo" data-sr-id="1" style="visibility: visible; -webkit-transform: translateY(0) scale(1); opacity: 1; transform: translateY(0) scale(1); opacity: 1; -webkit-transition: -webkit-transform 0.8s cubic-bezier(0.6, 0.2, 0.1, 1) 0s, opacity 0.8s cubic-bezier(0.6, 0.2, 0.1, 1) 0s; transition: transform 0.8s cubic-bezier(0.6, 0.2, 0.1, 1) 0s, opacity 0.8s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;">
 						<div class="product__inner">
 							<div class="pro__thumb">
-								<a href="#"> <img src="<%=request.getContextPath()%>/resources/images//product/1.png" alt="product images">
+								<a href="#"> <img src="<%=request.getContextPath()%>/member/getPicture?picture=${funding.project_img}" style="width:270px;height:270px;" alt="product images">
 								</a>
 							</div>
 							<div class="product__hover__info">
 								<ul class="product__action">
-									<li><a title="Wishlist" href="#"><i class="far fa-heart"></i></a></li>
+									<li><a title="Wishlist" href="javascript:registWish(${funding.fno})"><i class="far fa-heart f${funding.fno}"></i></a></li>
 								</ul>
 							</div>
 						</div>
@@ -82,7 +82,34 @@
 							<ul class="product__price">
 								<li class="new__price" style="font-size: 0.8em"><span style="font-size: 0.9em; color: #333"> <fmt:formatNumber type="number" maxFractionDigits="3" value="${funding.price_pre }" />
 
-								</span> ${funding.percent }% 달성</li>
+								</span> ${funding.percent }% 달성  
+								
+								<c:if test="${funding.fstatus eq 'ing' or funding.fstatus eq 'success' }" >
+								<span> <jsp:useBean id="now" class="java.util.Date"/>
+								 <fmt:formatDate value="${now }" pattern="yyyy-MM-dd" var="now2"/>
+								<fmt:parseDate var="startDate" value="${now2 }" pattern="yyyy-MM-dd" />
+						       <fmt:parseNumber value="${startDate.time / (1000*60*60*24)}" integerOnly="true" var="start" scope="request" />
+						       <fmt:parseDate var="endDate" value="${funding.enddate}" pattern="yyyy-MM-dd" />
+						       <fmt:parseNumber value="${endDate.time / (1000*60*60*24)}" integerOnly="true" var="end" scope="request" />
+						      <i class="far fa-clock"></i> ${end - start} 일 남음</span>
+								</c:if>
+								
+								<c:if test="${funding.fstatus eq 'fail' }" >
+									<span><i class="far fa-times-circle"></i> 펀딩 실패 </span>
+								</c:if>
+								<c:if test="${funding.fstatus eq 'soon' }" >
+									<span> <jsp:useBean id="now3" class="java.util.Date"/>
+									<fmt:formatDate value="${now3 }" pattern="yyyy-MM-dd" var="now4"/>
+									<fmt:parseDate var="startDate" value="${now4 }" pattern="yyyy-MM-dd" />
+							       <fmt:parseNumber value="${startDate.time / (1000*60*60*24)}" integerOnly="true" var="start" scope="request" />
+							       <fmt:parseDate var="endDate" value="${funding.startdate}" pattern="yyyy-MM-dd" />
+							       <fmt:parseNumber value="${endDate.time / (1000*60*60*24)}" integerOnly="true" var="end" scope="request" />
+							      <i class="far fa-calendar-alt"></i> 공개까지 ${end - start} 일 남음</span>								
+
+								</c:if>
+								
+								</li>
+								
 							</ul>
 						</div>
 					</div>
@@ -105,21 +132,21 @@
 				<div class="product foo" data-sr-id="1" style="visibility: visible; -webkit-transform: translateY(0) scale(1); opacity: 1; transform: translateY(0) scale(1); opacity: 1; -webkit-transition: -webkit-transform 0.8s cubic-bezier(0.6, 0.2, 0.1, 1) 0s, opacity 0.8s cubic-bezier(0.6, 0.2, 0.1, 1) 0s; transition: transform 0.8s cubic-bezier(0.6, 0.2, 0.1, 1) 0s, opacity 0.8s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;">
 					<div class="product__inner">
 						<div class="pro__thumb">
-							<a href="#"> <img src="<%=request.getContextPath()%>/resources/images//product/1.png" alt="product images">
+							<a href="#"> <img src="<%=request.getContextPath()%>/member/getPicture?picture={{project_img}}" style="width:270px;height:270px;" alt="product images">
 							</a>
 						</div>
 						<div class="product__hover__info">
 							<ul class="product__action">
-								<li><a title="Wishlist" href="#"><i class="far fa-heart"></i></a></li>
+								<li><a title="Wishlist" href="javascript:registWish({{fno}})"><i class="far fa-heart f{{fno}}	"></i></a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="product__details">
 						<p style="font-size: 0.8em; color: #DDDDDD;">
-							<a href="<%=request.getContextPath()%>/funding/list?category=${funding.category}">{{category }}</a> | <a>{{writer }}</a>
+							<a href="<%=request.getContextPath()%>/funding/list?category={{category}}">{{category }}</a> | <a>{{writer }}</a>
 						</p>
 						<h2>
-							<a href="<%=request.getContextPath()%>/funding/detail?fno=${funding.fno}">{{title }}</a>
+							<a href="<%=request.getContextPath()%>/funding/detail?fno={{fno}}">{{title }}</a>
 						</h2>
 						<div class="progress" style="height: 2px; margin-bottom: 3px; margin-top: 5px;">
 							<div class="progress-bar bg-danger" role="progressbar" style="width: {{percent }}%;" aria-valuenow="{{percent }} " aria-valuemin="0" aria-valuemax="100"></div>
@@ -128,7 +155,12 @@
 							<li class="new__price" style="font-size: 0.8em"> <span style="font-size:0.9em ;color:#333">
 							{{commas price_pre }}
 
-							</span> {{percent }}% 달성</li>
+							</span> {{percent }}% 달성
+
+							{{{dateFunction startdate enddate fstatus}}}
+</li>
+
+							
 						</ul>
 					</div>
 				</div>
@@ -158,6 +190,20 @@
 	Handlebars.registerHelper({
 		"commas":function numberWithCommas(x) {
 		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		},
+		"dateFunction":function dateFunction(date1, date2, status){
+			if(status == 'ing' || status == 'success'){
+				now = new Date();
+				remain = Math.floor( ( date2 - now.getTime() ) / 1000/ 60 / 60 / 24 );
+				return	 '<i class="far fa-clock"></i> '+remain+' 일 남음</span>'
+			}else if(status == 'soon'){
+				now = new Date();
+				remain = Math.floor( ( date1 - now.getTime() ) / 1000/ 60 / 60 / 24 );
+				return	 '<i class="far fa-calendar-alt"></i> 공개까지 '+remain+' 일 남음</span>'
+				
+			}else if(status == 'fail'){
+				return '<span><i class="far fa-times-circle"></i> 펀딩 실패 </span>';
+			}
 		}
 	})
 

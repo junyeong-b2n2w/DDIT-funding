@@ -10,8 +10,8 @@
                         <div class="product__details__container">
                             <div class="product__big__images">
                                 <div class="portfolio-full-image tab-content">
-                                    <div role="tabpanel" class="tab-pane fade in active product-video-position" id="img-tab-1">
-                                        <img src="<%=request.getContextPath() %>/resources/images/product-details/big-img/10.jpg" alt="full-image">
+                                    <div role="tabpanel" class="tab-pane fade in active product-video-position mx-auto" id="img-tab-1">
+                                        <img src="<%=request.getContextPath()%>/member/getPicture?picture=${funding.project_img}" style="width:590px; height:590px;" alt="full-image">
                                     </div>
                                 </div>
                             </div>
@@ -55,8 +55,8 @@
                             
                             
                             <ul class="pro__dtl__btn">
-                                <li class="buy__now__btn"><a href="#">후원하기</a></li>
-                                <li><a href="#"><span class="ti-heart"></span></a></li>
+                                <li class="buy__now__btn"><a href="#rewardFocus">후원하기</a></li>
+                                <li><a href="javascript:registWish(${funding.fno})"><span class="far fa-heart f${funding.fno}"></span></a></li>
                                 <li><a href="#"><span class="ti-sharethis"></span></a></li>
                             </ul>
                         </div>
@@ -203,7 +203,7 @@
 						        </div>
                             
                             <!-- 선물선택 기본 -->
-                             	<div class="mt--20 selectReward" onclick="select(this,1000);" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
+                             	<div class="mt--20 selectReward" id="rewardFocus" onclick="select(this,1000);" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
 						         <strong style="font-size:1.5rem">1,000 + </strong>
 						         <p>선물을 선택하지 않고 밀어만 줍니다.</p>
 						        </div>

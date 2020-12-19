@@ -88,11 +88,10 @@ public class CommonController {
 	}
 
 	
-	@RequestMapping(value="/mainForm",method=RequestMethod.GET)
-	public String index() {
-		
-		return "common/main";
-	}
+
+	@RequestMapping(value="/index", method=RequestMethod.GET)
+	public void index() {}
+	
 	
 	@RequestMapping(value="/common/logout",method=RequestMethod.GET)
 	public String logout(HttpSession session) {
@@ -106,7 +105,7 @@ public class CommonController {
 	//네이버 로그인 성공시 callback호출 메소드
 		@RequestMapping(value = "/main", method = { RequestMethod.GET, RequestMethod.POST })
 		public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws SQLException,IOException, ParseException {
-			String url = "redirect:/mainForm.do";
+			String url = "redirect:/index.do";
 			MemberVO member = new MemberVO();
 			
 			OAuth2AccessToken oauthToken;

@@ -11,8 +11,8 @@ public interface WishListService {
 	int regist(WishListVO wish) throws SQLException;
 	
 	//삭제
-	void remove(int wno) throws SQLException;
-	
+		void remove(WishListVO wish) throws SQLException;
+		
 	//리스트 
 	Map<String, Object> selectWishList(String email) throws SQLException;
 }

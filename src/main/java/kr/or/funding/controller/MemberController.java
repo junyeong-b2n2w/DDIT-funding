@@ -131,7 +131,7 @@ public class MemberController {
 		request.setAttribute("addressList", addressList);
 	}
 	
-	@Resource(name="profile")
+	@Resource(name="summernote")
 	private String picturePath;
 	  
 	
@@ -199,25 +199,28 @@ public class MemberController {
 		}
 		return fileName;
 	}
-	
 //	---------------------------wishList
-	@RequestMapping(value="/regishWish",method=RequestMethod.GET)
+	@RequestMapping(value="/registWish",method=RequestMethod.GET)
 	@ResponseBody
 	public void registWish(HttpSession session, HttpServletResponse response, int fno) throws Exception {
 		WishListVO wish = new WishListVO();
 		MemberVO member =  (MemberVO) session.getAttribute("loginUser");
-		wish.setEmail(member.getEmail());
-		wish.setFno(fno);
-		
-		int count = wishService.regist(wish);
 		
 		response.setContentType("text/html;charset=utf8");
 		PrintWriter out = response.getWriter();
-		
-		if(count == 0) {
-			out.println("이미 등록되어있습니다.");
+		if(member != null) {
+			wish.setEmail(member.getEmail());
+			wish.setFno(fno);
+			int count = wishService.regist(wish);
+			
+			
+			if(count == 0) {
+				out.println("이미 등록되어있습니다.");
+			}else {
+			}
+			
 		}else {
-			out.println("추가 완료");
+			out.println("로그인은 필수입니다");
 		}
 		out.close();
 	}
@@ -237,18 +240,25 @@ public class MemberController {
 	
 	@RequestMapping(value="/removeWish", method=RequestMethod.GET)
 	@ResponseBody
-	public void removeWish (int wno, HttpServletResponse response) throws Exception {
-		wishService.remove(wno);
+	public void removeWish (HttpSession session, int fno, HttpServletResponse response) throws Exception {
+		WishListVO wish = new WishListVO();
+		MemberVO member =  (MemberVO) session.getAttribute("loginUser");
+		 
+		 
+		 response.setContentType("text/html;charset=utf-8");
+		 PrintWriter out = response.getWriter();
+		 if(member != null) {
+			 wish.setEmail(member.getEmail());
+			 wish.setFno(fno);
+			 wishService.remove(wish);
+			 
+			 
+		 }else {
+			 out.println("로그인을 해주세요");
+		 }
 		
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		
-		out.println("<script>");
-		out.println("location.reload()");
-		out.println("</script>");
 		out.close();
 	}
-	
 	
 //	------------범----
 	@RequestMapping(value="/buy",method=RequestMethod.POST)

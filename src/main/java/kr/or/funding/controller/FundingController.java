@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -212,7 +213,8 @@ public class FundingController {
 		entity = new ResponseEntity<>(result,status);
 		return entity;
 	}
-	
+	@Resource(name="summernote")
+	private String imgPath;
 	private String savePicture(String oldPicture, MultipartFile multi) throws Exception{
 		String fileName= null;
 		
@@ -220,7 +222,7 @@ public class FundingController {
 		if(!(multi==null || multi.isEmpty() || multi.getSize() > 1024*1024*5)) {
 			
 			//파일 저장 폴더 설정
-			String uploadPath = "c:/dm/test";
+			String uploadPath = imgPath;
 			fileName = UUID.randomUUID().toString().replace("-","")+".jpg";
 			File storeFile = new File(uploadPath,fileName);
 			
@@ -239,7 +241,7 @@ public class FundingController {
 		return fileName;
 	}
 	
-	private String imgPath = "c:/dm/summernote";
+	
 	
 	@RequestMapping("/uploadImg")
 	public ResponseEntity<String> uploadImg(HttpServletRequest request, MultipartFile file) throws Exception{

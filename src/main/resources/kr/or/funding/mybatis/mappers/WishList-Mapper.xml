@@ -35,12 +35,12 @@
 		values(#{wno}, #{email}, #{fno})
 	</update>	
 	
-	<update id="deleteWish" parameterType="int" >
+	<update id="deleteWish" parameterType="wishList" >
 		delete 
 		from f_wishlist
-		where wno=#{wno}		
+		where email=#{email}
+		and fno = #{fno}		
 	</update>
-	
 	
 
 </mapper>

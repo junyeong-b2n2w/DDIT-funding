@@ -200,8 +200,77 @@
 <script src="<%=request.getContextPath()%>/resources/summernote/summernote.min.js"></script>
     
     
-    <!-- All js plugins included in this file. -->
-  
+
+<script>
+	function registWish(fno){
+		const str = '.f' + fno;
+		const test = document.querySelector(str);
+		console.log(fno);
+		console.log(test);
+		const check = test.getAttribute("class");
+		console.log(check);
+		console.log("fas fa-heart f" + fno)
+		
+		if(check == "fas fa-heart f" + fno){
+			//요청
+		 	xhttp = new XMLHttpRequest();
+			xhttp.open('get', '<%=request.getContextPath()%>/member/removeWish.do?fno='+fno, true)
+			xhttp.send()
+			  
+			//응답
+			xhttp.onreadystatechange = function(req) {
+			    if(this.readyState == 4 && this.status == 200){
+		    		test.setAttribute("class","far fa-heart f"+fno);	
+			    }
+			}
+		}else{
+			//요청
+		 	xhttp = new XMLHttpRequest();
+			xhttp.open('get', '<%=request.getContextPath()%>/member/registWish.do?fno='+fno, true)
+			xhttp.send()
+			  
+			//응답
+			xhttp.onreadystatechange = function(req) {
+			    if(this.readyState == 4 && this.status == 200){
+	    			test.setAttribute("class","fas fa-heart f"+fno);	
+			    }
+			}
+		}
+	}
+	function registWish2(fno){
+		const str = '.f' + fno;
+		const test = document.querySelector(str);
+		const check = test.getAttribute("class");
+		console.log(check);
+		console.log("fas fa-heart f" + fno)
+		
+		if(check == "fas fa-heart f" + fno){
+			//요청
+		 	xhttp = new XMLHttpRequest();
+			xhttp.open('get', '<%=request.getContextPath()%>/member/removeWish.do?fno='+fno, true)
+			xhttp.send()
+			  
+			//응답
+			xhttp.onreadystatechange = function(req) {
+			    if(this.readyState == 4 && this.status == 200){
+			    	location.reload();
+			    }
+			}
+		}else{
+			//요청
+		 	xhttp = new XMLHttpRequest();
+			xhttp.open('get', '<%=request.getContextPath()%>/member/registWish.do?fno='+fno, true)
+			xhttp.send()
+			  
+			//응답
+			xhttp.onreadystatechange = function(req) {
+			    if(this.readyState == 4 && this.status == 200){
+	    			test.setAttribute("class","fas fa-heart f"+fno);	
+			    }
+			}
+		}
+	}
+</script>  
    
 </body>
 

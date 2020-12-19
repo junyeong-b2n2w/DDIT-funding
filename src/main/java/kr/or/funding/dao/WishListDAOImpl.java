@@ -33,8 +33,8 @@ public class WishListDAOImpl implements WishListDAO {
 	}
 
 	@Override
-	public void delete(int wno) throws SQLException {
-		sqlsession.update("WishList-Mapper.deleteWish",wno);
+	public void delete(WishListVO wish) throws SQLException {
+		sqlsession.update("WishList-Mapper.deleteWish",wish);
 	}
 
 	@Override

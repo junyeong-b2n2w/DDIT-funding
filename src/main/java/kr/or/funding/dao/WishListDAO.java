@@ -17,7 +17,7 @@ public interface WishListDAO {
 	void insert (WishListVO wish) throws SQLException;
 	
 	// 삭제
-	void delete (int wno) throws SQLException;
+	void delete (WishListVO wish) throws SQLException;
 	
 	// wno 가져오기
 	int getWno() throws SQLException;

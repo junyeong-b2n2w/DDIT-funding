@@ -12,6 +12,11 @@
 	<bean id="profile" class="java.lang.String">
 		<constructor-arg value="${profile.img}"/>
 		</bean>
+		
+	<bean id="summernote" class="java.lang.String">
+		<constructor-arg value="${summernote.img}"/>
+		</bean>
+	
 	
 	<bean id="memberService"
 		class="kr.or.funding.service.MemberServiceImpl"

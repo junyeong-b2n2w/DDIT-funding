@@ -3,7 +3,7 @@
 <%@ include file="../include/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set value="${funding.rewardList}" var="rewardList" />
-<form action="modify.do" method="post">
+<form action="modify.do" role="fundingForm" method="post">
 	<section class="htc__product__details pt--20 pb--50 bg__white">
 		<div class="container">
 			<!-- 상단 메 -->
@@ -72,9 +72,15 @@
 										aria-labelledby="headdingImage" data-parent="#projectSummary">
 										<div class="card-body">
 											<label for="inputFile" class="btn btn-primary">사진선택</label>
-											<div
-												style="width: 300px; height: 300px; background-color: black; display: inline-block;"
-												id="pictureView"></div>
+											<div id="pictureView" 
+												style="width: 300px; height: 300px; background-color: black; display: inline-block;
+											
+												background-image:url('<%=request.getContextPath()%>/member/getPicture?picture=${funding.project_img}');
+					  background-position:center;
+					  background-size:cover;
+					  background-repeat:no-repeat;
+												
+												"></div>
 											<input type="hidden" name="project_img" value="${funding.project_img}">
 										</div>
 									</div>
