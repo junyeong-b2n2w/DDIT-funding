@@ -31,6 +31,8 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/fa.all.min.css">
 <!-- User style -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/custom.css">
+<link href="<%=request.getContextPath()%>/resources/summernote/summernote.min.css" 
+  		rel="stylesheet" />
 
 
 

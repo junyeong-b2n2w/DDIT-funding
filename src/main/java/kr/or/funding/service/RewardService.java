@@ -10,4 +10,6 @@ public interface RewardService {
 	int insertReward(RewardVO reward) throws SQLException;
 	int insertRewardItem(RewardItemVO rItem) throws SQLException;
 	List<RewardVO> getRewardList(int fno) throws SQLException;
+	void modifyReward(RewardVO reward) throws SQLException;
+	void modifyRewardItem(RewardItemVO ritem) throws SQLException;
 }

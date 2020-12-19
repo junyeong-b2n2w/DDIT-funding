@@ -16,4 +16,6 @@ public interface RewardDAO {
 
 //	--범
 	void updateSubCount(int rno) throws SQLException;
+	void updateReward(RewardVO reward) throws SQLException;
+	void updateRewardItem(RewardItemVO ritem) throws SQLException;
 }

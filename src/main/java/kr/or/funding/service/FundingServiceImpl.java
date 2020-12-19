@@ -15,11 +15,7 @@ public class FundingServiceImpl implements FundingService{
 		this.fundingDAO = fundingDAO;
 	}
 	
-	private RewardService rewardService;
 	
-	public void setRewardService(RewardService rewardService) {
-		this.rewardService = rewardService;
-	}
 	@Override
 	public List<FundingVO> getFundingList(SearchCriteria cri ) throws SQLException {
 		return fundingDAO.selectFundingList(cri);
@@ -64,5 +60,8 @@ public class FundingServiceImpl implements FundingService{
 	public void failFunding(int fno) throws SQLException {
 		fundingDAO.failFunding(fno);
 	}
+	
+	
+	
 
 }

@@ -5,7 +5,7 @@
 <mapper namespace="Reward-Mapper">
 	
 	<update id="insertReward" parameterType="reward">
-		INSERT INTO f_reward VALUES(#{rno},#{fno},#{rprice},#{rcount},0)
+		INSERT INTO f_reward VALUES(#{rno},#{fno},#{rprice},#{rcount},0,#{itemcnt})
 		<selectKey keyProperty="rno" resultType="int">
 			SELECT rno FROM f_reward WHERE rno = #{rno}
 		</selectKey>
@@ -35,4 +35,19 @@
 		from f_reward_item
 		where rno=#{rno}
 	</select>
+	<update id="updateReward" parameterType="reward">
+		UPDATE f_reward SET rprice=${rprice}, rcount=${rcount}
+		WHERE rno = ${rno}
+	</update>
+	<update id="updateRewardItem" parameterType="ritem">
+		UPDATE f_reward_item SET options=${options}, ritem=${ritem}
+		WHERE rino = ${rino}
+	</update>
+	
+	<!-- 범 -->
+	<update id="updateSubCount" parameterType="int">
+		update f_reward
+		set subcount = subcount + 1
+		where rno = #{rno}
+	</update>
 </mapper>

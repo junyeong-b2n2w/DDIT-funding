@@ -104,17 +104,9 @@
 		</selectKey>
 	</update>
 	
-	<update id="insertEmptyFunding" parameterType="int">
-		insert into
-		f_funding(fno)
-		values(#{fno})
-	</update>
-	
 	<update id="updateFunding" parameterType="funding">
-		update f_funding 
-		set 
-		title = #{title},content = #{content}
-		where fno=#{fno}
+		insert into f_funding(fno,writer, title, content, price_goal, regdate, enddate,startdate, fstatus, tag, furl, creater, category, project_img) 
+		values(#{fno},#{writer}, #{title}, #{content}, #{price_goal}, sysdate, #{enddate}, #{startdate}, 'no_accept', #{tag}, #{furl}, #{creater}, #{category}, #{project_img})
 	</update>
 	
 	<update id="deleteFunding" parameterType="int" >

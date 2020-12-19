@@ -53,4 +53,10 @@ public class RewardVO {
 	public void setrItemList(List<RewardItemVO> rItemList) {
 		this.rItemList = rItemList;
 	}
+	@Override
+	public String toString() {
+		return "RewardVO [rno=" + rno + ", fno=" + fno + ", rprice=" + rprice + ", rcount=" + rcount + ", subcount="
+				+ subcount + ", itemcnt=" + itemcnt + ", rItemList=" + rItemList + "]";
+	}
+	
 }

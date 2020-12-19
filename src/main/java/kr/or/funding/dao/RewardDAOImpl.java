@@ -42,6 +42,14 @@ public class RewardDAOImpl implements RewardDAO{
 	public List<RewardItemVO> selectRewardItemListByRno(int rno) throws SQLException {
 		return sqlSession.selectList("Reward-Mapper.selectRewardItemListByRno", rno);
 	}
+	@Override
+	public void updateReward(RewardVO reward) throws SQLException {
+		sqlSession.update("Reward-Mapper.updateReward", reward);
+	}
+	@Override
+	public void updateRewardItem(RewardItemVO ritem) throws SQLException {
+		sqlSession.update("Reward-Mapper.updateRewardItem", ritem);
+	}
 
 	
 	

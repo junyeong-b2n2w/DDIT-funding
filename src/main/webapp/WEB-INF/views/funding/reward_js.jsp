@@ -19,7 +19,8 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" id="rewardItemRegist">등록</button>
+      	<button type="button" class="btn btn-primary" id="rewardItemRegist">등록</button>
+        <button type="button" data-dismiss="modal" id="rewardItemRegistBtn" style="display: none;">등록</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
 
@@ -50,15 +51,32 @@
 			$("#rewardItemList").empty()
 			var options = $("input[name='mitemOptions']")
 			var rewardItems = $("input[name='mrewardItem']")
-			var data = "<div style='border:1px solid red'><ul>";
+			var data = "<div class='card'><ul>";
 			var itemcnt = 0
+			var check = true
 			$.each(options, function(i) {
 				itemcnt = i
+				if(rewardItems[i].value == ""){
+					$(rewardItems[i]).focus()
+					alert("리워드 이름을 입력해주세요")
+					check = false
+					return false
+				}
+				if(options[i].value == ""){
+					$(options[i]).focus()
+					alert("옵션내용을 입력해주세요")
+					check = false
+					return false
+				}
 				data += "<li><span name='rewardItem'>" + rewardItems[i].value+ "</span><span name='itemOptions'>" + options[i].value + "</span></li>"
 			})
+			if(!check){
+				return
+			}
 			data += "<input type='hidden' class='itemcnt' value='"+(itemcnt+1)+"'>"
 			data += "</ul></div><br>"
 			$("#rewardItemList").append(data)
+			$("#rewardItemRegistBtn").trigger("click")
 			$("#itemAddBtn").text("선물 수정")
 		})
 		
@@ -68,15 +86,32 @@
 			var rprice = $("#rewardPrice").val()
 			var rcount = $("#rewardCount").val()
 			var itemcnt = $(".itemcnt").val()
-			var code = "<div style='border 2px orange'>"
-			code += "<input type='text' name='rprice' value='"+rprice+"'>"
-			code += "<input type='text' name='rcount' value='"+rcount+"'>"
-			code += "<input type='text' name='itemcnt' value='"+itemcnt+"'>"
+			if(rprice == ""){
+				$("#rewardPrice").focus()
+				alert("선물가격을 입력해주세요.")
+				return
+			}
+			if(options.length==0){
+				alert("선물내용을 등록해주세요.")
+				$("#itemAddBtn").trigger("click")
+				return
+			}
+			if(rcount == ""){
+				$("#rewardCount").focus()
+				alert("선물개수를 입력해주세요.")
+				return
+			}
+			var code = "<div class='rewards'>"
+			code += "<input type='button' onclick='deleteReward(this)' value='X'>"
+			code += "<input type='button' onclick='modifyReward(this)' value='수정'>"
+			code += "<input type='number' name='rprice' value='"+rprice+"' readonly  min='1000' step='1000' placeholder='천원 이상'>"
+			code += "<input type='number' name='rcount' value='"+rcount+"' readonly  min='5' step='5' placeholder='5개 이상등록'>"
+			code += "<input type='hidden' name='itemcnt' value='"+itemcnt+"' readonly>"
 			$.each(options, function(i) {
-				code+="<input type='text' name='options' value='"+options.eq(i).text()+"'>"
-				code+="<input type='text' name='ritem' value='"+ritem.eq(i).text()+"'>"
+				code+="<input type='text' name='options' value='"+options.eq(i).text()+"' readonly>"
+				code+="<input type='text' name='ritem' value='"+ritem.eq(i).text()+"' readonly><br>"
 			})
-			code+="</div>"
+			code+="</div><br><br>"
 			$("#rewardList").append(code)
 			
 			var options = $("span[name='itemOptions']")
@@ -84,6 +119,7 @@
 			var rprice = $("#rewardPrice").val("")
 			var rcount = $("#rewardCount").val("")
 			var itemcnt = $(".itemcnt").val("")
+			$('.rewardItems').remove()
 			$("#rewardItemList").empty()
 		})
 		
@@ -105,6 +141,20 @@
 		if(delChk){
 			item.parents(".rewardItems").remove();
 		}
+	}
+	function deleteReward(reward){
+		var reward = $(reward)
+		var delChk = confirm("정말 지우시겠습니까?")
+		if(delChk){
+			reward.parents(".rewards").remove();
+		}
+	}
+	function modifyReward(reward) {
+		var reward = $(reward)
+		reward.parents(".rewards").find("input[name='rprice']").prop("disabled",false)
+		reward.parents(".rewards").find("input[name='rcount']").prop("disabled",false)
+		reward.parents(".rewards").find("input[name='options']").prop("disabled",false)
+		reward.parents(".rewards").find("input[name='ritem']").prop("disabled",false)
 	}
 </script>
 

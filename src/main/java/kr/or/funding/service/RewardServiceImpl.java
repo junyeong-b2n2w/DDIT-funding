@@ -36,12 +36,20 @@ public class RewardServiceImpl implements RewardService{
 		List<RewardVO> list = rewardDAO.selectRewardListByFno(fno);
 		List<RewardItemVO> iList = null;
 		for(int i=0; i<list.size(); i++) {
-			System.out.println(list.get(i).getRno()+"><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 			iList = rewardDAO.selectRewardItemListByRno(list.get(i).getRno());
-			System.out.println(iList+"><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 			list.get(i).setrItemList(iList);
 		}
 		return list;
+	}
+
+	@Override
+	public void modifyReward(RewardVO reward) throws SQLException {
+		rewardDAO.updateReward(reward);
+	}
+
+	@Override
+	public void modifyRewardItem(RewardItemVO ritem) throws SQLException {
+		rewardDAO.updateRewardItem(ritem);
 	}
 
 }
