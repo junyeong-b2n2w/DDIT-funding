@@ -19,7 +19,8 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" id="rewardItemRegist">등록</button>
+      	<button type="button" class="btn btn-primary" id="rewardItemRegist">등록</button>
+        <button type="button" data-dismiss="modal" id="rewardItemRegistBtn" style="display: none;">등록</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
 
@@ -52,13 +53,30 @@
 			var rewardItems = $("input[name='mrewardItem']")
 			var data = "<div style='border:1px solid red'><ul>";
 			var itemcnt = 0
+			var check = true
 			$.each(options, function(i) {
 				itemcnt = i
+				if(rewardItems[i].value == ""){
+					$(rewardItems[i]).focus()
+					alert("리워드 이름을 입력해주세요")
+					check = false
+					return false
+				}
+				if(options[i].value == ""){
+					$(options[i]).focus()
+					alert("옵션내용을 입력해주세요")
+					check = false
+					return false
+				}
 				data += "<li><span name='rewardItem'>" + rewardItems[i].value+ "</span><span name='itemOptions'>" + options[i].value + "</span></li>"
 			})
+			if(!check){
+				return
+			}
 			data += "<input type='hidden' class='itemcnt' value='"+(itemcnt+1)+"'>"
 			data += "</ul></div><br>"
 			$("#rewardItemList").append(data)
+			$("#rewardItemRegistBtn").trigger("click")
 			$("#itemAddBtn").text("선물 수정")
 		})
 		
@@ -68,7 +86,22 @@
 			var rprice = $("#rewardPrice").val()
 			var rcount = $("#rewardCount").val()
 			var itemcnt = $(".itemcnt").val()
-			var code = "<div style='border 2px orange'>"
+			if(rprice == ""){
+				$("#rewardPrice").focus()
+				alert("선물가격을 입력해주세요.")
+				return
+			}
+			if(options.length==0){
+				alert("선물내용을 등록해주세요.")
+				$("#itemAddBtn").trigger("click")
+				return
+			}
+			if(rcount == ""){
+				$("#rewardCount").focus()
+				alert("선물개수를 입력해주세요.")
+				return
+			}
+			var code = "<div class='rewardRegistItemList'>"
 			code += "<input type='text' name='rprice' value='"+rprice+"'>"
 			code += "<input type='text' name='rcount' value='"+rcount+"'>"
 			code += "<input type='text' name='itemcnt' value='"+itemcnt+"'>"
@@ -84,6 +117,7 @@
 			var rprice = $("#rewardPrice").val("")
 			var rcount = $("#rewardCount").val("")
 			var itemcnt = $(".itemcnt").val("")
+			$('.rewardItems').remove()
 			$("#rewardItemList").empty()
 		})
 		

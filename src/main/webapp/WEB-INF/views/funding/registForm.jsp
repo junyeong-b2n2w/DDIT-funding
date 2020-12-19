@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
-<form action="regist.do" method="post">
+<form action="regist.do" method="post" role="fundingForm">
 	<section class="htc__product__details pt--20 pb--50 bg__white">
 		<div class="container">
 			<!-- 상단 메 -->
@@ -92,7 +92,7 @@
 											<select
 												class="_13KHfN73YmQgsYHxXvuh_J _3_IGkn3uaje0g2ZA6Tx9wd _3vQWHh2J_erdzly2Ip3e87"
 												name="category">
-												<option disabled value="프로젝트 카테고리를 정해주세요" selected>프로젝트
+												<option value="" selected>프로젝트
 													카테고리를 정해주세요</option>
 												<option value="baking-and-desserts">- 베이킹 · 디저트</option>
 												<option value="drinks">- 음료</option>
@@ -185,15 +185,14 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#funding_goal"
-												aria-expanded="true" aria-controls="#funding_goal">목표
+												aria-expanded="true" aria-controls="#funding_goal" id="priceGoalBtn">목표
 												금액</button>
 										</h2>
 									</div>
 									<div id="funding_goal" class="collapse"
 										aria-labelledby="#fun_goal" data-parent="#funding">
 										<div class="card-body">
-											<input class="form-control" type="text" placeholder="목표 금액"
-												name="price_goal">
+											<input class="form-control" type="number" placeholder="목표 금액" name="price_goal" min="1000000" step="100000">
 										</div>
 									</div>
 								</div>
@@ -203,7 +202,7 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#funding_open_date"
-												aria-expanded="true" aria-controls="#funding_open_date">프로젝트
+												aria-expanded="true" aria-controls="#funding_open_date" id="startDateBtn">프로젝트
 												공개 일시</button>
 										</h2>
 									</div>
@@ -221,7 +220,7 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#funding_end_date"
-												aria-expanded="true" aria-controls="#funding_end_date">프로젝트
+												aria-expanded="true" aria-controls="#funding_end_date" id="endDateBtn">프로젝트
 												마감 일시</button>
 										</h2>
 									</div>
@@ -238,19 +237,19 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#funding_reward"
-												aria-expanded="true" aria-controls="#funding_reward">선물
+												aria-expanded="true" aria-controls="#funding_reward" id="rewardBtn">선물
 												구성</button>
 										</h2>
 									</div>
 									<div id="funding_reward" class="collapse"
 										aria-labelledby="fun_reward" data-parent="#funding">
 										<div class="card-body">
-											<input type="text" id="rewardPrice">원 이상 후원해주신 분들께 드리는 선물입니다.
+											<input type="number" id="rewardPrice" min="1000" step="1000" placeholder="천원 이상">원 이상 후원해주신 분들께 드리는 선물입니다.
 											<button type="button" class="btn btn-primary"
 												data-toggle="modal" data-target="#rewardItemModal" id="itemAddBtn">선물
 												추가</button>
 											<div id="rewardItemList"></div>
-											<input type="text" id="rewardCount">개 제한
+											<input type="number" id="rewardCount" min="5" step="5" placeholder="5개 이상등록">개 제한
 											<input id="rewardRegist" class="btn btn-dark" type="button" value="선물등록">
 											<div id="rewardList"></div>
 										</div>  
@@ -276,7 +275,7 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#story_tell"
-												aria-expanded="true" aria-controls="#story_tell">프로젝트
+												aria-expanded="true" aria-controls="#story_tell" id="contentBtn">프로젝트
 												스토리</button>
 										</h2>
 									</div>
