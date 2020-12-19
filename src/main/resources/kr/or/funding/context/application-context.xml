@@ -6,17 +6,18 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<bean id="memberDAO" class="kr.or.funding.dao.MemberDAOImpl"
+		p:sqlSessionFactory-ref="sqlSession" />
 	
 	<bean id="profile" class="java.lang.String">
 		<constructor-arg value="${profile.img}"/>
-	</bean>
+		</bean>
 	
-	<bean id="memberDAO" class="kr.or.funding.dao.MemberDAOImpl"
-		p:sqlSessionFactory-ref="sqlSession" />
-
 	<bean id="memberService"
 		class="kr.or.funding.service.MemberServiceImpl"
-		p:memberDAO-ref="memberDAO" />
+		p:memberDAO-ref="memberDAO"
+		p:funding-ref="fundingDAO"
+		p:rewardDAO-ref="rewardDAO" />
 
 	<bean id="fundingDAO" class="kr.or.funding.dao.FundingDAOImpl"
 		p:sqlSession-ref="sqlSession" />

@@ -203,13 +203,13 @@
 						        </div>
                             
                             <!-- 선물선택 기본 -->
-                             	<div class="mt--20" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
+                             	<div class="mt--20 selectReward" onclick="select(this,1000);" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
 						         <strong style="font-size:1.5rem">1,000 + </strong>
 						         <p>선물을 선택하지 않고 밀어만 줍니다.</p>
 						        </div>
 						        <c:forEach items="${rewardList}" var="list">
-						        	<div class="mt--20" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
-						         <p style=" margin:0px 10px 10px 0px ;"><i class="ti-check" ></i> <span><%-- ${list.subcount} --%></span>명이 선택</p>
+						        	<div class="mt--20 selectReward" onclick="select(this,${list.rprice},${list.rno});" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
+						         <p style=" margin:0px 10px 10px 0px ;">${list.rcount-list.subcount } 개 남음</p> 
 						         <strong  style="font-size:1.5rem; margin-bottom:10px;">${list.rprice } + </strong>
 						         <p>선물 내용 ~</p>
 						         <ul style="list-style:disc; list-style-position: inside; ">
@@ -221,6 +221,13 @@
 						         </ul>
 						        </div>
 						        </c:forEach>
+						        
+						        <!-- 구매를 위한 form -->
+						        <form role=form>
+						        		<input type="hidden" name="rno" value="0">
+						        		<input type="hidden" name="fno" value="${funding.fno }">
+					        	</form>
+						        
                             <!-- 리워드 반복 -->
 <%--                             	<div class="mt--20" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; "> --%>
 <!-- 						         <p style=" margin:0px 10px 10px 0px ;"><i class="ti-check" ></i> <span>123</span>명이 선택</p> -->
@@ -261,5 +268,67 @@
             </div>
         </section>
 
+<script>
+	function select(frame, pr, rno) {
+		const list = document.querySelectorAll('.selectReward');
+		const del = document.querySelector('input[name="price"]');
+		const sub = document.querySelector('input[value="구매"]');
+		const del2 = document.querySelector('.message');
+		
+		if(del != null){
+			del.parentNode.removeChild(del);
+			del2.parentNode.removeChild(del2);
+			sub.parentNode.removeChild(sub);
+		}
+
+		for(let i=0; i<list.length; i++){
+			list[i].style.border="";
+		}
+		
+		const price = document.createElement("input");
+		price.setAttribute("name","price");
+		price.setAttribute("type","text");
+		price.setAttribute("value","0");
+		
+		const al = document.createElement("p");
+		al.innerText = "더 후원하기";
+		al.setAttribute("class","message");
+		
+		const buy = document.createElement("input");
+		buy.setAttribute("type","submit");
+		buy.setAttribute("value","구매");
+		buy.setAttribute("onclick","buy(" +pr+ "," + rno + ")");
+		
+		
+		
+		frame.append(al);
+		frame.append(price);
+		frame.append(buy);
+		price.focus();
+		
+		frame.style.border="5px solid #c78c8c";
+	}
+	
+	function buy(pr, rno){
+		const pr2 = document.querySelector('input[name="price"]').value;
+		const lastPrice = parseInt(pr) + parseInt(pr2);
+		
+		const rprice = document.createElement("input");
+		rprice.setAttribute("type","hidden");
+		rprice.setAttribute("value",lastPrice);
+		rprice.setAttribute("name","sprice");
+		
+		console.log(rno);
+		document.querySelector('input[name="rno"]').value = rno;
+		
+		
+		const form = document.querySelector('form[role="form"]');
+		form.append(rprice);
+		form.setAttribute("method","post");
+		form.setAttribute("action","<%=request.getContextPath() %>/member/buy.do");
+		form.submit();
+// 		console.log(form);
+	}
+</script>
 
 <%@ include file="../include/footer.jsp" %>

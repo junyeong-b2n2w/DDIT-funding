@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -25,10 +26,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.funding.command.MemberModifyCommand;
 import kr.or.funding.dto.AddressVO;
 import kr.or.funding.dto.MemberVO;
+import kr.or.funding.dto.SaleLogVO;
+import kr.or.funding.dto.WishListVO;
 import kr.or.funding.service.AddressService;
 import kr.or.funding.service.MemberService;
 import kr.or.funding.service.WishListService;
@@ -113,12 +117,6 @@ public class MemberController {
 		return url;
 	}
 	
-	@RequestMapping(value="/support", method=RequestMethod.GET)
-	public void support() {}
-
-	@RequestMapping(value="/like", method=RequestMethod.GET)
-	public void like() {}
-	
 	@RequestMapping(value="/project", method=RequestMethod.GET)
 	public void project() {}
 	
@@ -200,5 +198,91 @@ public class MemberController {
 			}
 		}
 		return fileName;
+	}
+	
+//	---------------------------wishList
+	@RequestMapping(value="/regishWish",method=RequestMethod.GET)
+	@ResponseBody
+	public void registWish(HttpSession session, HttpServletResponse response, int fno) throws Exception {
+		WishListVO wish = new WishListVO();
+		MemberVO member =  (MemberVO) session.getAttribute("loginUser");
+		wish.setEmail(member.getEmail());
+		wish.setFno(fno);
+		
+		int count = wishService.regist(wish);
+		
+		response.setContentType("text/html;charset=utf8");
+		PrintWriter out = response.getWriter();
+		
+		if(count == 0) {
+			out.println("이미 등록되어있습니다.");
+		}else {
+			out.println("추가 완료");
+		}
+		out.close();
+	}
+	
+	@RequestMapping(value="/wishList",method=RequestMethod.GET)
+	public ModelAndView wishList(ModelAndView mnv, HttpSession session) throws Exception {
+		String url ="member/wishList";
+		MemberVO member = (MemberVO) session.getAttribute("loginUser");
+		Map<String, Object> wishMap = wishService.selectWishList(member.getEmail());
+		
+		mnv.addObject("wishList", wishMap.get("wishList"));
+		mnv.addObject("fundingList", wishMap.get("fundingList"));
+		mnv.setViewName(url);
+		
+		return mnv;
+	}
+	
+	@RequestMapping(value="/removeWish", method=RequestMethod.GET)
+	@ResponseBody
+	public void removeWish (int wno, HttpServletResponse response) throws Exception {
+		wishService.remove(wno);
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		out.println("<script>");
+		out.println("location.reload()");
+		out.println("</script>");
+		out.close();
+	}
+	
+	
+//	------------범----
+	@RequestMapping(value="/buy",method=RequestMethod.POST)
+	public ModelAndView buyFunding (SaleLogVO sale, HttpSession session, ModelAndView mnv) throws Exception {
+		
+		String url ="member/buy";
+		sale.setEmail(((MemberVO) session.getAttribute("loginUser")).getEmail());
+		if(sale.getRno() < 1) {
+			sale.setRno(0);
+		}
+		memberService.buyFunding(sale);
+		mnv.setViewName(url);
+		
+		return mnv;
+	}
+	
+	@RequestMapping(value="/support", method=RequestMethod.GET)
+	public ModelAndView support(ModelAndView mnv, HttpSession session) throws Exception {
+		String url = "member/support";
+		
+		String email = ((MemberVO) session.getAttribute("loginUser")).getEmail();
+		
+		Map<String, Object> dataMap = memberService.support(email);
+		
+		mnv.addObject("dataMap", dataMap);
+		mnv.setViewName(url);
+		return mnv;
+		
+	}
+	
+	@RequestMapping(value="/cancel", method=RequestMethod.GET)
+	@ResponseBody
+	public void cancel(int sno, HttpServletResponse response) throws Exception {
+		memberService.cancelFunding(sno);
+		response.setContentType("text/html;charset=utf-8");
 	}
 }

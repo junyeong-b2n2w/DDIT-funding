@@ -16,4 +16,10 @@ public interface FundingDAO {
 	void deleteFunding(int fno) throws SQLException;
 	void insertEmptyFunding(int fno) throws SQLException;
 	int selectFundingListCnt(SearchCriteria cri) throws SQLException;
+	
+	
+//	범
+	void updatePrice(FundingVO funding) throws SQLException;
+	void successFunding(int fno) throws SQLException;
+	void failFunding(int fno) throws SQLException;
 }

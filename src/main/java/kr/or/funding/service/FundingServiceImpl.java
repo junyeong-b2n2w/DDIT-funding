@@ -54,4 +54,15 @@ public class FundingServiceImpl implements FundingService{
 		
 	}
 
+	
+//	--범
+	@Override
+	public void successFunding(int fno) throws SQLException {
+		fundingDAO.successFunding(fno);
+	}
+	@Override
+	public void failFunding(int fno) throws SQLException {
+		fundingDAO.failFunding(fno);
+	}
+
 }

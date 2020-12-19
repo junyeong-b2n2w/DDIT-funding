@@ -59,5 +59,21 @@ public class FundingDAOImpl implements FundingDAO{
 	public int selectFundingListCnt(SearchCriteria cri) throws SQLException {
 		return sqlSession.selectOne("Funding-Mapper.selectFundingCount", cri);
 	}
+	
+//	범
+	@Override
+	public void updatePrice(FundingVO funding) throws SQLException {
+		sqlSession.update("Funding-Mapper.updatePrice", funding);
+	}
+
+	@Override
+	public void successFunding(int fno) throws SQLException {
+		sqlSession.update("Funding-Mapper.successFunding", fno);
+	}
+
+	@Override
+	public void failFunding(int fno) throws SQLException {
+		sqlSession.update("Funding-Mapper.failFunding", fno);
+	}
 
 }

@@ -13,4 +13,7 @@ public interface RewardDAO {
 	int selectRewardItemSequenceNextValue() throws SQLException;
 	List<RewardVO> selectRewardListByFno(int fno) throws SQLException;
 	List<RewardItemVO> selectRewardItemListByRno(int rno) throws SQLException;
+
+//	--범
+	void updateSubCount(int rno) throws SQLException;
 }

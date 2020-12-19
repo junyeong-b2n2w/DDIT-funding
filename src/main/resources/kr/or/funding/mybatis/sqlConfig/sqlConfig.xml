@@ -15,5 +15,6 @@
 		<typeAlias alias="message" type="kr.or.funding.dto.MessageVO"/>
 		<typeAlias alias="reward" type="kr.or.funding.dto.RewardVO"/>
 		<typeAlias alias="ritem" type="kr.or.funding.dto.RewardItemVO"/>
+		<typeAlias alias="saleLog" type="kr.or.funding.dto.SaleLogVO"/>
 	</typeAliases>
 </configuration>

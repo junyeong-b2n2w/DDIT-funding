@@ -43,4 +43,11 @@ public class RewardDAOImpl implements RewardDAO{
 		return sqlSession.selectList("Reward-Mapper.selectRewardItemListByRno", rno);
 	}
 
+	
+	
+//	--범
+	@Override
+	public void updateSubCount(int rno) throws SQLException {
+		sqlSession.update("Reward-Mapper.updateSubCount", rno);
+	}
 }

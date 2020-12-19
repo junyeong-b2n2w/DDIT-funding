@@ -13,4 +13,9 @@ public interface FundingService {
 	void modify(FundingVO funding) throws SQLException;
 	void remove(int fno) throws SQLException;
 	int getFundingCnt(SearchCriteria cri) throws SQLException;
+	
+	
+//	--범
+	void successFunding(int fno) throws SQLException;
+	void failFunding(int fno) throws SQLException;
 }

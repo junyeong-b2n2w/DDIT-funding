@@ -53,7 +53,7 @@
                         <div class="col-md-2 col-lg-2 col-sm-3 col-xs-3">
                             <div class="logo">
                                 <a href="<%=request.getContextPath() %>/index">
-                                    <span>펀하딩</span>
+                                    <h1><span style="color:red;">펀</span><span style="color:yellow;">하</span><span style="color:blue;">딩</span></h1>
                                 </a>
                             </div>
                         </div>
@@ -92,7 +92,6 @@
             <!-- End Mainmenu Area -->
         </header>
         <!-- End Header Style -->
-        <div class="body__overlay"></div>
 
         <div class="offset__wrapper">
             <!-- Start Search Popap -->

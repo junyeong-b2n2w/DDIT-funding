@@ -122,5 +122,36 @@
 		from f_funding 
 		where fno=#{fno}		
 	</update>
+	
+	<!-- 범 -->
+	<update id="updatePrice" parameterType="funding">
+		update f_funding
+		set price_pre = price_pre + #{price_pre}
+		where fno = #{fno}
+	</update>
+	
+	<update id="successFunding" parameterType="int">
+		DECLARE BEGIN
+			update f_funding
+			set fstatus = 'success'
+			where fno = #{fno};
+			
+			update f_salelog
+			set sstatus = 'success'
+			where fno = #{fno};
+		END;
+	</update>
+	
+	<update id="failFunding" parameterType="int">
+		DECLARE BEGIN
+			update f_funding
+			set fstatus = 'fail'
+			where fno = #{fno};
+			
+			update f_salelog
+			set sstatus = 'fail'
+			where fno = #{fno};
+		END;
+	</update>
 
 </mapper>

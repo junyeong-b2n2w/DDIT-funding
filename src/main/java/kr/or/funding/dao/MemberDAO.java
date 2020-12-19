@@ -3,9 +3,8 @@ package kr.or.funding.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator;
-
 import kr.or.funding.dto.MemberVO;
+import kr.or.funding.dto.SaleLogVO;
 
 
 public interface MemberDAO {
@@ -26,4 +25,17 @@ public interface MemberDAO {
 	
 	//회원 정보 수정
 	void MemberUpdate(MemberVO member)throws SQLException;
+	
+//	---범
+	//구매하기
+	void insertSaleLog(SaleLogVO sale) throws SQLException;
+	
+	//sale log 가져오기 
+	List<SaleLogVO> saleList(String email) throws SQLException;
+	
+	//sno값
+	int getSno() throws SQLException;
+	
+	//취소하기
+	void cancelFunding(int sno) throws SQLException;
 }

@@ -2,10 +2,12 @@ package kr.or.funding.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import kr.or.funding.dto.MemberVO;
+import kr.or.funding.dto.SaleLogVO;
 import kr.or.funding.exception.InvalidPasswordException;
 import kr.or.funding.exception.NotFoundIDException;
 
@@ -30,4 +32,14 @@ public interface MemberService {
 	
 	//회원수정
 	void MemberUpdate(MemberVO member)throws SQLException;
+	
+//	--범 
+	// 구매
+	void buyFunding(SaleLogVO sale) throws SQLException;
+	
+	// 내역보기
+	Map<String, Object> support(String email) throws SQLException;
+	
+	//펀딩 취소
+	void cancelFunding (int sno) throws SQLException;
 }

@@ -67,5 +67,26 @@
 		where email=#{email}
 	</update>
 	
+	<!-- 범 -->
+	<update id="insertSaleLog" parameterType="saleLog">
+		insert into f_salelog values (#{sno},#{email},#{rno},#{fno},#{sprice},'후원 진행중')
+	</update>
+	
+	<select id="selectSaleLogSequenceNextValue" resultType="int">
+		select sno_seq.nextVal
+		from dual
+	</select>
+	
+	<select id="selectSaleLog" parameterType="str" resultType="saleLog">
+		select *
+		from f_salelog
+		where email = #{email}
+	</select>
+	
+	<update id="cancelFunding" parameterType="int">
+		update f_salelog
+		set sstatus = 'fail'
+		where sno = #{sno}
+	</update>
 	
 </mapper>
