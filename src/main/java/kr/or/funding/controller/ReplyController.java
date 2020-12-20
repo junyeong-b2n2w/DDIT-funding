@@ -1,12 +1,16 @@
 package kr.or.funding.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.funding.dto.ReplyVO;
@@ -38,43 +42,32 @@ public class ReplyController {
 	}
 	
 	@RequestMapping(value="/regist", method=RequestMethod.GET)
-	public ResponseEntity<String> regist (ReplyVO reply) throws Exception {
-		ResponseEntity<String> entity = null;
-		
-		try {
+	@ResponseBody
+	public void regist (HttpServletResponse response,ReplyVO reply) throws Exception {
 			replyService.insert(reply);
-			entity = new ResponseEntity<String>("성공",HttpStatus.OK);
-		} catch (Exception e) {
-			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		return entity;
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.print(reply.getContent());
 	}
 	
 	@RequestMapping(value="/modify", method=RequestMethod.GET)
-	public ResponseEntity<String> modify (ReplyVO reply) throws Exception {
-		ResponseEntity<String> entity = null;
-		try {
+	@ResponseBody
+	public void modify (HttpServletResponse response,ReplyVO reply) throws Exception {
 			replyService.modify(reply);
-			entity = new ResponseEntity<String>("성공",HttpStatus.OK);
-		} catch (Exception e) {
-			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		return entity;
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.print(reply.getContent());
 	}
 	
 	@RequestMapping(value="/remove", method=RequestMethod.GET)
-	public ResponseEntity<String> remove (int rpno) throws Exception {
-		ResponseEntity<String> entity = null;
-		
-		try {
+	@ResponseBody
+	public void remove (HttpServletResponse response,int rpno,ReplyVO reply) throws Exception {
 			replyService.remove(rpno);
-			entity = new ResponseEntity<String>("성공",HttpStatus.OK);
-		} catch (Exception e) {
-			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		return entity;
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.print(reply.getContent());
 	}
 }
+
+
+

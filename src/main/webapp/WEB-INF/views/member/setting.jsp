@@ -37,104 +37,99 @@
 
 
 		<div class="row" style="font-size: 1rem">
-			<div class="col-md-12">
+         <div class="col-md-12">
 
 
-				<div class="product__details__tab__content">
-					<!-- Start Single Content -->
-					<div role="tabpanel" id="profile" class="product__tab__content fade in active">
+            <div class="product__details__tab__content">
+               <!-- Start Single Content -->
+               <div role="tabpanel" id="profile" class="product__tab__content fade in active">
 
 
-						<div class="accordion" id="aco_profile">
+                  <div class="accordion" id="aco_profile">
 
-							<div class="card">
-								<div class="card-header" id="cre_img">
-									<h2 class="mb-0">
-										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_img" 
-										aria-expanded="true" aria-controls="#creater_img">프로필 사진 :</button><img src="getPicture.do?picture=${member.picture }">
-									</h2>
-								</div>
-								<div id="creater_img" class="collapse" aria-labelledby="cre_img" data-parent="#aco_profile">
-								<form role="imageForm" enctype="multipart/form-data">
-									<div class="card-body">
-									
-									<input id="inputFile" name="picture" type="file" >
-									<input id="oldFile"	name="oldPicture" type="hidden" value="${member.picture }"/> 
-									<input name="checkUpload" type="hidden" value="0" />
-									<button type="button" id="profileImgBtn"> 수정 </button>
-									
-									
-									</div>
-								</form>										
-								</div>
-							</div>
+                     <div class="card">
+                        <div class="card-header" id="cre_img">
+                           <h2 class="mb-0">
+                              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_img" 
+                              aria-expanded="true" aria-controls="#creater_img">프로필 사진 :</button><img style="width: 100px; height: 100px;" src="getPicture.do?picture=${member.picture }">
+                           </h2>
+                        </div>
+                        <div id="creater_img" class="collapse" aria-labelledby="cre_img" data-parent="#aco_profile">
+                        <form role="imageForm" enctype="multipart/form-data">
+                           <div class="card-body">
+                           
+                           <label for="#inputFile" class="btn btn-warning">
+                           파일 선택
+                           </label>
+                           <input id="inputFile" style="display: none;" name="picture" type="file" >
+                           <input id="oldFile"   name="oldPicture" type="hidden" value="${member.picture }"/> 
+                           <input name="checkUpload" type="hidden" value="0" />
+                           <button type="button" class="btn btn-danger"id="profileImgBtn"> 수정 </button>
+                           
+                           
+                           </div>
+                        </form>                              
+                        </div>
+                     </div>
 
-							<div class="card">
-								<div class="card-header" id="cre_name">
-									<h2 class="mb-0">
-										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_name" aria-expanded="true" aria-controls="#creater_name">이름: ${member.name}</button>
-									</h2>
-								</div>
-								<div id="creater_name" class="collapse" aria-labelledby="cre_name" data-parent="#aco_profile">
-									<div class="card-body">
-									<div>이름 수정</div>
-										<input class="form-control" type="text" placeholder="변경할 이름 작성" name="name">
-										<button type="button" id="nameBtn">수정</button>
-									</div>
-								</div>
-							</div>
+                     <div class="card">
+                        <div class="card-header" id="cre_name">
+                           <h2 class="mb-0">
+                              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_name" aria-expanded="true" aria-controls="#creater_name">이름: ${member.name}</button>
+                           </h2>
+                        </div>
+                        <div id="creater_name" class="collapse" aria-labelledby="cre_name" data-parent="#aco_profile">
+                           <div class="card-body">
+                           <div>이름 수정</div>
+                              <input class="form-control" type="text" placeholder="변경할 이름 작성" name="name">
+                              <button type="button" class="btn btn-danger" class="btn btn-primary" id="nameBtn">수정</button>
+                           </div>
+                        </div>
+                     </div>
 
-							<div class="card">
-								<div class="card-header" id="cre_comment">
-									<h2 class="mb-0">
-										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_comment" aria-expanded="true" aria-controls="#creater_comment">비밀번호: ${member.password}</button>
-									</h2>
-								</div>
-								<div id="creater_comment" class="collapse" aria-labelledby="cre_comment" data-parent="#aco_profile">
-									<div class="card-body">
-										<div>비밀번호 수정</div>
-										<div>
-											<div>
-												<span><input type="password" class="form-control" name="password" inputmode="password" pattern="[a-zA-Z0-9!@#$%^*_|]{6,20}" placeholder="변경할 비밀번호" autocomplete="off" autocapitalize="off" class="Input__InnerInput-j7moqy-1 bnACyJ" value=""></span>
-											</div>
-											<div>
-												<span><input type="password" class="form-control" name="passwordCheck" inputmode="password" pattern="[a-zA-Z0-9!@#$%^*_|]{6,20}" placeholder="변경할 비밀번호 확인" autocomplete="off" autocapitalize="off" class="Input__InnerInput-j7moqy-1 bnACyJ" value=""></span>
-												<span id="passcheck"></span>
-											</div>
-										</div>
-										<button type="button" id="passBtn">수정</button>
-									</div>
-								</div>
-							</div>
+                     <div class="card">
+                        <div class="card-header" id="cre_comment">
+                           <h2 class="mb-0">
+                              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_comment" aria-expanded="true" aria-controls="#creater_comment">비밀번호: ${member.password}</button>
+                           </h2>
+                        </div>
+                        <div id="creater_comment" class="collapse" aria-labelledby="cre_comment" data-parent="#aco_profile">
+                           <div class="card-body">
+                              <div>비밀번호 수정</div>
+                              <div>
+                                 <div>
+                                    <span><input type="password" class="form-control" name="password" inputmode="password" pattern="[a-zA-Z0-9!@#$%^*_|]{6,20}" placeholder="변경할 비밀번호" autocomplete="off" autocapitalize="off" class="Input__InnerInput-j7moqy-1 bnACyJ" value=""></span>
+                                 </div>
+                                 <div>
+                                    <span><input type="password" class="form-control" name="passwordCheck" inputmode="password" pattern="[a-zA-Z0-9!@#$%^*_|]{6,20}" placeholder="변경할 비밀번호 확인" autocomplete="off" autocapitalize="off" class="Input__InnerInput-j7moqy-1 bnACyJ" value=""></span>
+                                    <span id="passcheck"></span>
+                                 </div>
+                              </div>
+                              <button type="button" id="passBtn" class="btn btn-danger">수정</button>
+                           </div>
+                        </div>
+                     </div>
 
-							<div class="card">
-								<div class="card-header" id="cre_site">
-									<h2 class="mb-0">
-										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_site" aria-expanded="true" aria-controls="#creater_site">포인트: ${member.point}</button>
-									</h2>
-								</div>
-								<div id="creater_site" class="collapse" aria-labelledby="cre_site" data-parent="#aco_profile">
-									<div class="card-body">
-										http://www.funhading.com/<input class="form-control" type="text" placeholder="url">
-									</div>
-								</div>
-							</div>
+                     <div class="card">
+                        <div class="card-header" id="cre_site">
+                           <h2 class="mb-0">
+                              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_site" aria-expanded="true" aria-controls="#creater_site">포인트: ${member.point}</button>
+                           </h2>
+                        </div>
+                        
+                     </div>
 
-							<div class="card">
-								<div class="card-header" id="cre_site">
-									<h2 class="mb-0">
-										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_site" aria-expanded="true" aria-controls="#creater_site">회원구분 ${member.dist}</button>
-									</h2>
-								</div>
-								<div id="creater_site" class="collapse" aria-labelledby="cre_site" data-parent="#aco_profile">
-									<div class="card-body">
-										http://www.funhading.com/<input class="form-control" type="text" placeholder="url">
-									</div>
-								</div>
-							</div>
+                     <div class="card">
+                        <div class="card-header" id="cre_site">
+                           <h2 class="mb-0">
+                              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_site" aria-expanded="true" aria-controls="#creater_site">회원구분 ${member.dist}</button>
+                           </h2>
+                        </div>
+                        
+                     </div>
 
-						</div>
-						<!-- 아코디언 -->
+                  </div>
+                  <!-- 아코디언 -->
 
 
 					</div>
