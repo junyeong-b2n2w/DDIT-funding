@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import kr.or.funding.dto.FundingVO;
 import kr.or.funding.dto.MemberVO;
 import kr.or.funding.dto.SaleLogVO;
 import kr.or.funding.exception.InvalidPasswordException;
@@ -42,4 +43,7 @@ public interface MemberService {
 	
 	//펀딩 취소
 	void cancelFunding (int sno) throws SQLException;
+	
+	//내가 올린 펀딩
+	List<FundingVO> selectMyProject (String email) throws SQLException;
 }

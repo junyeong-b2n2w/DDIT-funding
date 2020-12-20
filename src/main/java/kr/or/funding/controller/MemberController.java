@@ -30,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.funding.command.MemberModifyCommand;
 import kr.or.funding.dto.AddressVO;
+import kr.or.funding.dto.FundingVO;
 import kr.or.funding.dto.MemberVO;
 import kr.or.funding.dto.SaleLogVO;
 import kr.or.funding.dto.WishListVO;
@@ -118,7 +119,17 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/project", method=RequestMethod.GET)
-	public void project() {}
+	public ModelAndView project(ModelAndView mnv, HttpSession session) throws Exception {
+		String url = "member/project";
+		
+		String email = ((MemberVO) session.getAttribute("loginUser")).getEmail();
+		
+		List<FundingVO> fundingList = memberService.selectMyProject(email);
+		
+		mnv.setViewName(url);
+		mnv.addObject("fundingList", fundingList);
+		return mnv;
+	}
 	
 	@RequestMapping(value="/setting", method=RequestMethod.GET)
 	public void setting(HttpServletRequest request,HttpSession session) throws SQLException{

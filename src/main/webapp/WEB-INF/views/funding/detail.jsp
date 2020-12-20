@@ -227,7 +227,7 @@
 						          	<div style="font-color:#333333;">
 						          	<p>마지막 로그인 <strong> 한 시간 전 </strong></p>
 						          	<p>진행한 프로젝트 <strong class="plr--10">1</strong> 밀어준 프로젝트 <strong class="plr--10">1</strong> </p>
-						          	<button class="btn text-center mt--10" style="width:100%; padding:5px;" href="#"> <i class="ti-email"></i>&nbsp;&nbsp;창작자에게 문의 하기</button>
+						        	<button class="btn text-center mt--10" style="width:100%; padding:5px;" onclick="javascript:OpenWindow('<%=request.getContextPath() %>/member/messageSend.do?receiver=${funding.writer}','메시지',800,600)"> <i class="ti-email"></i>&nbsp;&nbsp;창작자에게 문의 하기</button>	
 						          	</div>
 						        </div>
                             

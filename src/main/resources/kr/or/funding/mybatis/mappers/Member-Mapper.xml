@@ -89,4 +89,10 @@
 		where sno = #{sno}
 	</update>
 	
+	<select id="selectMyProject" parameterType="str" resultType="funding">
+		select *
+		from f_funding
+		where writer = #{writer}
+	</select>
+	
 </mapper>

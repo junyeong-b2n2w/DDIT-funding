@@ -171,6 +171,12 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.cancelFunding(sno);
 	}
 	
+	@Override
+	public List<FundingVO> selectMyProject(String email) throws SQLException {
+		List<FundingVO> fundingList = memberDAO.selectMyProject(email);
+		return fundingList;
+	}
+	
 
 
 

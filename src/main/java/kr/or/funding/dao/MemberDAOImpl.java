@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.funding.dto.FundingVO;
 import kr.or.funding.dto.MemberVO;
 import kr.or.funding.dto.SaleLogVO;
 
@@ -84,6 +85,12 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public void cancelFunding(int sno) throws SQLException {
 		sqlSession.update("Member-Mapper.cancelFunding",sno);
+	}
+	
+	@Override
+	public List<FundingVO> selectMyProject(String email) throws SQLException {
+		List<FundingVO> fundingList = sqlSession.selectList("Member-Mapper.selectMyProject",email);
+		return fundingList;
 	}
 
 

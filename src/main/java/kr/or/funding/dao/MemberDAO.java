@@ -3,6 +3,7 @@ package kr.or.funding.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import kr.or.funding.dto.FundingVO;
 import kr.or.funding.dto.MemberVO;
 import kr.or.funding.dto.SaleLogVO;
 
@@ -32,6 +33,9 @@ public interface MemberDAO {
 	
 	//sale log 가져오기 
 	List<SaleLogVO> saleList(String email) throws SQLException;
+	
+	//내가 올린 펀딩
+	List<FundingVO> selectMyProject (String email) throws SQLException;
 	
 	//sno값
 	int getSno() throws SQLException;

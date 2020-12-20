@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- 상단 안내 -->
 <section>
@@ -32,12 +32,14 @@
 		<div class="" style="min-height: 500px; padding: 50px;">
 
 			<table class="table">
+				<c:forEach var="funding" items="${fundingList}">
 				<tr>
 					<td style="width:30%"><img src="<%=request.getContextPath()%>/resources/images/product/sm-img/4.png" /></td>
-					<td style="width:50%"><div class="col-8">최준영의 프로젝트 </div></td>
+					<td style="width:50%"><div class="col-8"><a href="<%=request.getContextPath()%>/funding/detail.do?fno=${funding.fno}">${funding.title }</a></div></td>
 					<td style="width:20%"><button>수정</button>
 						<button>삭제</button></td>
 				</tr>
+				</c:forEach>
 			</table>
 
 		</div>
