@@ -6,14 +6,14 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
+        <h4 class="modal-title">리워드 아이템 추가하기</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
       		<div id="addItemLine">
-      			<div id="addItem"> + 아이템 추가하기</div>  
+      			<div id="addItem" class="btn btn-sm btn-warning mt--20"> + 아이템 추가하기</div>  
       		</div>
       </div>
 
@@ -21,7 +21,7 @@
       <div class="modal-footer">
       	<button type="button" class="btn btn-primary" id="rewardItemRegist">등록</button>
         <button type="button" data-dismiss="modal" id="rewardItemRegistBtn" style="display: none;">등록</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
       </div>
 
     </div>  
@@ -33,14 +33,14 @@
 		var cnt = 0
 		$("#addItem").on("click", function () {
 			var code = "<div class='rewardItems'>";
-			code += "<div class='input-group mb-3'><div class='input-group-prepend'><span class='input-group-text'>아이템 이름</span></div>"
+			code += "<div class='input-group mb-3'><div class='input-group-prepend'> <i class='fas fa-gifts'></i> <span class='input-group-text'>아이템 이름</span></div>"
 			code += "<input type='text' name='mrewardItem' class='form-control'></div>"
 			code += "<div>"
 			code += "옵션 : 없음<input type='radio' name='"+cnt+"option' value='없음' class='noOp' onchange='direct(this)' checked>"
 			code += ""
 			code += "직접입력<input type='radio' name='"+cnt+"option' onchange='direct(this)'>"
-			code += "<input type='text' name='mitemOptions' value='없음' disabled class='mb-3'>"
-			code += "<input type='button' onclick='deleteItem(this)' value='삭제x'>"
+			code += "<input type='text' name='mitemOptions' value='없음' disabled style='margin:5px 0px;'>"
+			code += "<input type='button' class='btn btn-sm btn-danger mb--20' onclick='deleteItem(this)' value='삭제x'>"
 			code += "</div></div>"
 			$("#addItem").before(code)
 			cnt++;
@@ -50,7 +50,7 @@
 			$("#rewardItemList").empty()
 			var options = $("input[name='mitemOptions']")
 			var rewardItems = $("input[name='mrewardItem']")
-			var data = "<table border='1'><tr class='row'><th class='col-sm-4'>아이템 이름</th><th class='col-sm-8'>옵션</th>	</tr>";
+			var data = "<table class='table table-bordered' border='1'><tr class='row'><th class='col-sm-4'>아이템 이름</th><th class='col-sm-8'>옵션</th>	</tr>";
 			var itemcnt = 0
 			var check = true
 			$.each(options, function(i) {

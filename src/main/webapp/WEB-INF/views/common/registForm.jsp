@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <ul class="login__register__menu" role="tablist">
-                            <li role="presentation" class="register active"><a href="#register" role="tab" data-toggle="tab">Register</a></li>
+                            <li role="presentation" class="register active"><a href="#register" role="tab" data-toggle="tab">회원가입</a></li>
                         </ul>
                     </div>
                 </div>
@@ -23,42 +23,30 @@
                                     <input type="text" name="name" placeholder="Name">
                                      <input type="hidden" name="picture" placeholder="Name">
                                     <input type="email" id="email" name="email" placeholder="EX)cypi123@naver.com" >
-                                    <button type="button" id="check">중복 확인</button>
+                                    <div class="htc__login__btn"><a id="check">중복 확인</a> <a id="auth">이메일 인증받기</a></div>
                                     <span id="email_regular"></span>
-	                       			<button type="button" id="auth" name="submits">이메일 인증받기 (이메일 보내기)</button>
 	                       			
-	                       			<input type="text" id= "checkEmail" name="email_injeung" placeholder=" 인증번호를 입력하세요.">
-                        			<button id="injeung" type="button" name="submits">인증</button>
+	                       			<input type="text" id= "checkEmail" name="email_injeung" placeholder=" 인증번호를 입력하세요." style="    margin-bottom: 20px;
+    margin-top: 20px;">
+                        			<div class="htc__login__btn"><a id="injeung">인증</a> </div>
                         			
-                                    <input type="password" id="password" name="password" placeholder="Password(영대소문자 ,숫자,특수문자 하나이상)">
+                                    <input type="password" id="password" name="password" placeholder="Password(영대소문자 ,숫자,특수문자 하나이상)" style="    margin-bottom: 20px;
+    margin-top: 20px;">
                                     <span id="password_regular"></span>
                                     
-                                    <input type="password" id="password_Check" placeholder="Password_Check">
+                                    <input type="password" id="password_Check" placeholder="Password_Check" style="    margin-bottom: 20px;
+    margin-top: 20px;">
                                     <span id="passwordCheck_regular"></span>
                                 </form>
                                 
-                                <div class="tabs__checkbox">
-                                    <input type="checkbox">
-                                    <span> Remember me</span>
-                                </div>
+                                
                                 
                                 <div class="htc__login__btn">
-                                    <a onclick="submit_go();">regist</a>
+                                    <a onclick="submit_go();">회원가입</a> <a onclick="back();">로그인창으로</a>
                                 </div>
                                 <br>
-                                <div class="htc__login__btn">
-                                    <a onclick="back();">login</a>
-                                </div>
+                                   
                                 
-                                <div class="htc__social__connect">
-                                    <h2>Or Login With</h2>
-                                    <ul class="htc__soaial__list">
-                                        <li><a class="bg--twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
-                                        <li><a class="bg--instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
-                                        <li><a class="bg--facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
-                                        <li><a class="bg--googleplus" href="#"><i class="zmdi zmdi-google-plus"></i></a></li>
-                                    </ul>
-                                </div>
                             </div>
                             <!-- End Single Content -->
                         </div>

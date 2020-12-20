@@ -28,9 +28,7 @@
 			<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
 				<ul class="product__deatils__tab" role="tablist">
 					<li role="presentation" class="active"><a href="#profile" role="tab" data-toggle="tab" aria-expanded="true">프로필</a></li>
-					<li role="presentation" class=""><a href="#payment" role="tab" data-toggle="tab" aria-expanded="false">결제수단</a></li>
 					<li role="presentation" class=""><a href="#address" role="tab" data-toggle="tab" aria-expanded="false">배송지</a></li>
-					<li role="presentation" class=""><a href="#notice" role="tab" data-toggle="tab" aria-expanded="false">알림</a></li>
 				</ul>
 			</div>
 		</div>
@@ -58,13 +56,13 @@
                         <form role="imageForm" enctype="multipart/form-data">
                            <div class="card-body">
                            
-                           <label for="#inputFile" class="btn btn-warning">
+                           <label for="inputFile" class="btn btn-warning">
                            파일 선택
                            </label>
-                           <input id="inputFile" style="display: none;" name="picture" type="file" >
+                           <input id="inputFile" style="display:none" name="picture" type="file" >
                            <input id="oldFile"   name="oldPicture" type="hidden" value="${member.picture }"/> 
                            <input name="checkUpload" type="hidden" value="0" />
-                           <button type="button" class="btn btn-danger"id="profileImgBtn"> 수정 </button>
+                           <button type="button" class="btn btn-danger" id="profileImgBtn"> 수정 </button>
                            
                            
                            </div>

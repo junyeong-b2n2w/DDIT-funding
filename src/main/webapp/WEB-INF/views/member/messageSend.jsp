@@ -14,7 +14,7 @@
 <title>메시지</title>
 </head>
 <body>
-	<form action="messageSend.do" method="post">
+	<form action="messageSend.do" method="post" style="padding:50px;">
 		받는사람  <input type="text" name="receiver" value="${param.receiver }" class="form-control" readonly="readonly">
 		내용 
 		<textarea rows="10" cols="10" name="mcontent" class="form-control"></textarea> <br>

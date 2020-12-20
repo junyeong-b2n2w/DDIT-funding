@@ -17,10 +17,6 @@
 						및 선물 구성</a> <a class="nav-item nav-link" id="nav-stroy-tab"
 						style="margin: 20px 30px" data-toggle="tab" href="#nav-story"
 						role="tab" aria-controls="nav-stroy" aria-selected="false">스토리텔링</a>
-					<a class="nav-item nav-link" id="nav-account-tab"
-						style="margin: 20px 30px" data-toggle="tab" href="#nav-account"
-						role="tab" aria-controls="nav-account" aria-selected="false">계좌
-						설정</a>
 				</div>
 			</nav>
 
@@ -28,8 +24,8 @@
 			<div class="tab-content" id="nav-tabContent">
 				<!-- 프로젝트 개요  -->
 
-				<div class="tab-pane fade container active in" id="nav-summary"
-					role="tabpanel" aria-labelledby="nav-summary-tab">
+				<div class="tab-pane fade active in" id="nav-summary"
+					role="tabpanel" aria-labelledby="nav-summary-tab"  >
 
 					<div class="mtb--20"
 						style="background-color: #eeeeee; padding: 50px">
@@ -90,7 +86,7 @@
 										aria-labelledby="headding_cate" data-parent="#projectSummary">
 										<div class="card-body">
 											<select
-												class="_13KHfN73YmQgsYHxXvuh_J _3_IGkn3uaje0g2ZA6Tx9wd _3vQWHh2J_erdzly2Ip3e87"
+												class="form-control"
 												name="category">
 												<option value="" selected>프로젝트 카테고리를 정해주세요</option>
 												<option value="베이킹·디저트">베이킹·디저트</option>
@@ -223,16 +219,29 @@
 									<div id="funding_reward" class="collapse"
 										aria-labelledby="fun_reward" data-parent="#funding">
 										<div class="card-body">
-											<input type="number" id="rewardPrice" min="1000" step="1000"
-												placeholder="천원 이상">원 이상 후원해주신 분들께 드리는 선물입니다. <br>
-											<button type="button" class="btn btn-warning col-sm-12"
+											<div class="row " style="margin:10px 0px">
+											<div class="col-2">
+											<input type="number" id="rewardPrice" min="1000" step="1000" class="form-control"
+												placeholder="천원 이상"></div> 
+											<div class="col-8 "><div style="margin-top:7px;">원 이상 후원해주신 분들께 드리는 선물입니다. </div></div>
+											</div>
+											<button type="button" class="btn btn-warning col-sm-12 mtb--10"
 												data-toggle="modal" data-target="#rewardItemModal"
 												id="itemAddBtn">선물 추가</button>
 											<div id="rewardItemList"></div>
+											
+											<div class="row " style="margin:10px 0px">
+											<div class="col-1">
 											<input type="number" id="rewardCount" min="5" step="5"
-												placeholder="5개 이상등록">개 제한 <input id="rewardRegist"
+												placeholder="5개 이상등록" class="form-control">
+												</div> 
+												<div class="col-7"><div  style="margin-top:7px;">개 제한</div></div> 
+												<div class="col-2">
+												<input id="rewardRegist"
 												class="btn btn-primary" type="button" value="선물등록"
-												style="float: right;">
+												>
+												</div>
+											</div>
 											<div id="rewardList">
 											</div>
 										</div>
@@ -280,9 +289,10 @@
 			</div>
 		</div>
 		<input name="writer" value="${loginUser.email}" type="hidden">
-
-		<input type="button" value="등록" class="btn btn-danger col-sm-12" style="height: 50px"
+		<div class="container">
+		<input type="button" value="등록" class="btn btn-danger col-sm-12" style="height: 50px;"
 			id="fundingRegistBtn">
+		</div>
 		</div>
 	</section>
 </form>

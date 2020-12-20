@@ -74,6 +74,12 @@ public class MemberController {
 		MemberVO member = new MemberVO();
 		 member =  memberService.selectMemberById(email);
 		
+
+		
+		List<AddressVO> addressList = addressService.list(email); 
+		System.out.println(addressList);
+		model.addAttribute("addressList", addressList);
+		 
 		model.addAttribute("member",member);
 		return url;
 	}
@@ -131,16 +137,7 @@ public class MemberController {
 		return mnv;
 	}
 	
-	@RequestMapping(value="/setting", method=RequestMethod.GET)
-	public void setting(HttpServletRequest request,HttpSession session) throws SQLException{
-		
-		
-		String email =  ((MemberVO) session.getAttribute("loginUser")).getEmail();
-		
-		List<AddressVO> addressList = addressService.list(email); 
-		System.out.println(addressList);
-		request.setAttribute("addressList", addressList);
-	}
+
 	
 	@Resource(name="summernote")
 	private String picturePath;

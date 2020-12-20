@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- 상단 안내 -->
 <section>
@@ -52,10 +52,42 @@
 									<a href="<%=request.getContextPath() %>/funding/detail.do?fno=${funding.fno}">${funding.title}</a>
 								</h2>
 								<div class="progress" style="height: 2px; margin-bottom: 3px; margin-top: 5px;">
-									<div class="progress-bar bg-danger" role="progressbar" style="width: 125%;" aria-valuenow="124" aria-valuemin="0" aria-valuemax="100"></div>
+									<div class="progress-bar bg-danger" role="progressbar" style="background-color: #ff4136; width: ${funding.percent }%;" aria-valuenow="${funding.percent }" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<ul class="product__price">
-									<li class="new__price" style="font-size: 0.8em">${funding.percent }% 달성</li>
+									<li class="new__price" style="font-size: 0.8em"><span style="font-size: 0.9em; color: #333"> <fmt:formatNumber type="number" maxFractionDigits="3" value="${funding.price_pre }" />
+
+								</span> ${funding.percent }% 달성  
+								
+									<c:if test="${ funding.fstatus eq 'success' }" >
+										<i class="far fa-thumbs-up"></i>펀딩 성공</span>
+									</c:if>
+								
+								<c:if test="${funding.fstatus eq 'ing'}" >
+								<span> <jsp:useBean id="now" class="java.util.Date"/>
+								 <fmt:formatDate value="${now }" pattern="yyyy-MM-dd" var="now2"/>
+								<fmt:parseDate var="startDate" value="${now2 }" pattern="yyyy-MM-dd" />
+						       <fmt:parseNumber value="${startDate.time / (1000*60*60*24)}" integerOnly="true" var="start" scope="request" />
+						       <fmt:parseDate var="endDate" value="${funding.enddate}" pattern="yyyy-MM-dd" />
+						       <fmt:parseNumber value="${endDate.time / (1000*60*60*24)}" integerOnly="true" var="end" scope="request" />
+						      <i class="far fa-clock"></i> ${end - start} 일 남음</span>
+								</c:if>
+								
+								<c:if test="${funding.fstatus eq 'fail' }" >
+									<span><i class="far fa-times-circle"></i> 펀딩 실패 </span>
+								</c:if>
+								<c:if test="${funding.fstatus eq 'soon' }" >
+									<span> <jsp:useBean id="now3" class="java.util.Date"/>
+									<fmt:formatDate value="${now3 }" pattern="yyyy-MM-dd" var="now4"/>
+									<fmt:parseDate var="startDate" value="${now4 }" pattern="yyyy-MM-dd" />
+							       <fmt:parseNumber value="${startDate.time / (1000*60*60*24)}" integerOnly="true" var="start" scope="request" />
+							       <fmt:parseDate var="endDate" value="${funding.startdate}" pattern="yyyy-MM-dd" />
+							       <fmt:parseNumber value="${endDate.time / (1000*60*60*24)}" integerOnly="true" var="end" scope="request" />
+							      <i class="far fa-calendar-alt"></i> 공개까지 ${end - start} 일 남음</span>								
+
+								</c:if>
+								
+								</li>
 								</ul>
 							</div>
 						</div>

@@ -6,9 +6,9 @@
 <mapper namespace="Funding-Mapper">
 
 	<select id="selectFundingByFno" parameterType="int" resultType="funding">
-		select 
-		* 
-		from f_funding
+		select * from 
+				(select F_FUNDING.*, ( PRICE_PRE/ PRICE_GOAL ) *100 percent, 
+					TAG || title || WRITER || CONTENT alltext from F_FUNDING)
 		where fno=#{fno}
 	</select>
 	

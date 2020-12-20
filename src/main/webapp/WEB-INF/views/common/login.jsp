@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <ul class="login__register__menu" role="tablist">
-                            <li role="presentation" class="login active"><a href="#login" role="tab" data-toggle="tab">Login</a></li>
+                            <li role="presentation" class="login active"><a href="#login" role="tab" data-toggle="tab">로그인</a></li>
                         </ul>
                     </div>
                 </div>
@@ -39,12 +39,10 @@
                                     <span class="forget"><a href="<%=request.getContextPath()%>/common/findpassForm.do">Forget Pasword?</a></span>
                                 </div>
                                 <div class="htc__login__btn mt--30">
-                                  <a onclick="submit();">Login</a>
+                                  <a onclick="submit();">Login</a> <a onclick="signup();">Sign Up</a>
                                 </div>
-                                <div class="htc__login__btn mt--30">
-                                  <a onclick="signup();">Sign Up</a>
-                                </div>
-                                <br><br>
+                                  
+                                <br>
                             </div>
                             <!-- End Single Content -->
                             <!-- Start Single Content -->
@@ -57,8 +55,8 @@
 						</div>
 						 <div id="naver_id_login" style="text-align:center">
 						    <a href="${facebook_url}"><button
-                                    class="btn btn-primary btn-round" style="width: 39%; height:50px;">
-                                    <i class="fa fa-facebook" aria-hidden="true"></i>Facebook Login
+                                    class="btn btn-primary btn-round" style="width: 39%; height:50px; font-size:1.3rem">
+                                    <i class="fab fa-facebook-square"></i>  Facebook Login
                                 </button></a> 
                        </div>
                     </div>

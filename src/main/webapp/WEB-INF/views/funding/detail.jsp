@@ -284,9 +284,7 @@
                         <!-- 창작자 소개 -->
                             <div class="" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
 						          	<p><strong>창작자 소개</strong></p>
-						          	<img class="ti-heart" /> <strong>${funding.creater }</strong>
-						          	<p>녕하세요. 현재 작품활동 및 미술교육을 하고있는 임여송입니다. 외할머니와 함께 살적에 종종 미술활동을 함께 하다보니 할머니께서 그림에 취미를 가지게 되었습니다. 이제는 혼자서 심심하실 때마다 그림을 그리십니다. 스케치북과 간단한 크레파
-						          	</p>
+						          	<i class="fas fa-portrait"></i> <strong>${funding.creater }</strong>
 						          	<hr>
 						          	<div style="font-color:#333333;">
 						          	<p>마지막 로그인 <strong> 한 시간 전 </strong></p>
