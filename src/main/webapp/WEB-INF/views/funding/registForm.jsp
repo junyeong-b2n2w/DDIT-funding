@@ -43,8 +43,8 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#summary_title"
-												aria-expanded="true" aria-controls="#summary_title" id="titleBtn">프로젝트
-												제목</button>
+												aria-expanded="true" aria-controls="#summary_title"
+												id="titleBtn">프로젝트 제목</button>
 										</h2>
 									</div>
 									<div id="summary_title" class="collapse"
@@ -61,18 +61,18 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#summary_img"
-												aria-expanded="true" aria-controls="#summary_img" id="imgBtn">프로젝트
-												대표 이미지</button>
+												aria-expanded="true" aria-controls="#summary_img"
+												id="imgBtn">프로젝트 대표 이미지</button>
 										</h2>
 									</div>
 									<div id="summary_img" class="collapse"
 										aria-labelledby="headdingImage" data-parent="#projectSummary">
 										<div class="card-body">
-											<label for="inputFile" class="btn btn-primary">사진선택</label>
 											<div
 												style="width: 300px; height: 300px; background-color: black; display: inline-block;"
 												id="pictureView"></div>
-											<input type="hidden" name="project_img">
+											<label for="inputFile" class="btn btn-primary">사진선택</label> <input
+												type="hidden" name="project_img">
 										</div>
 									</div>
 								</div>
@@ -82,8 +82,8 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#summary_cate"
-												aria-expanded="true" aria-controls="#summary_cate" id="catrgoryBtn">프로젝트
-												카테고리</button>
+												aria-expanded="true" aria-controls="#summary_cate"
+												id="catrgoryBtn">프로젝트 카테고리</button>
 										</h2>
 									</div>
 									<div id="summary_cate" class="collapse"
@@ -92,8 +92,7 @@
 											<select
 												class="_13KHfN73YmQgsYHxXvuh_J _3_IGkn3uaje0g2ZA6Tx9wd _3vQWHh2J_erdzly2Ip3e87"
 												name="category">
-												<option value="" selected>프로젝트
-													카테고리를 정해주세요</option>
+												<option value="" selected>프로젝트 카테고리를 정해주세요</option>
 												<option value="베이킹·디저트">베이킹·디저트</option>
 												<option value="음료">음료</option>
 												<option value="간편식">간편식</option>
@@ -105,42 +104,22 @@
 									</div>
 								</div>
 
-								<div class="card">
-									<div class="card-header" id="headding_page">
-										<h2 class="mb-0">
-											<button class="btn btn-link" type="button"
-												data-toggle="collapse" data-target="#summary_page"
-												aria-expanded="true" aria-controls="#summary_page" id="urlBtn">프로젝트
-												URL</button>
-										</h2>
-									</div>
-									<div id="summary_page" class="collapse"
-										aria-labelledby="headding_page" data-parent="#projectSummary">
-										<div class="card-body">
-											<div class="input-group mb-3">
-												<div class="input-group-prepend">
-													<span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
-												</div>
-												<input type="text" class="form-control" id="basic-url"
-													aria-describedby="basic-addon3" name="furl">
-											</div>
-										</div>
-									</div>
-								</div>
-
+								<input type="hidden" id="basic-url"
+									aria-describedby="basic-addon3" name="furl" value="empty">
 								<div class="card">
 									<div class="card-header" id="headding_tag">
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#summary_tag"
-												aria-expanded="true" aria-controls="#summary_tag" id="tagBtn">검색용
-												태그</button>
+												aria-expanded="true" aria-controls="#summary_tag"
+												id="tagBtn">검색용 태그</button>
 										</h2>
 									</div>
 									<div id="summary_tag" class="collapse"
 										aria-labelledby="headding_tag" data-parent="#projectSummary">
 										<div class="card-body">
-											<input type="text" class="form-control" name="tag">
+											<input type="text" class="form-control" name="tag"
+												placeholder="태그는 #으로 구분해주세요">
 										</div>
 									</div>
 								</div>
@@ -150,8 +129,8 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#creater_name"
-												aria-expanded="true" aria-controls="#creater_name" id="createrBtn">창작자
-												이름</button>
+												aria-expanded="true" aria-controls="#creater_name"
+												id="createrBtn">창작자 이름</button>
 										</h2>
 									</div>
 									<div id="creater_name" class="collapse"
@@ -184,14 +163,15 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#funding_goal"
-												aria-expanded="true" aria-controls="#funding_goal" id="priceGoalBtn">목표
-												금액</button>
+												aria-expanded="true" aria-controls="#funding_goal"
+												id="priceGoalBtn">목표 금액</button>
 										</h2>
 									</div>
 									<div id="funding_goal" class="collapse"
 										aria-labelledby="#fun_goal" data-parent="#funding">
 										<div class="card-body">
-											<input class="form-control" type="number" placeholder="목표 금액" name="price_goal" min="1000000" step="100000">
+											<input class="form-control" type="number" placeholder="목표 금액"
+												name="price_goal" min="1000000" step="100000">
 										</div>
 									</div>
 								</div>
@@ -201,8 +181,8 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#funding_open_date"
-												aria-expanded="true" aria-controls="#funding_open_date" id="startDateBtn">프로젝트
-												공개 일시</button>
+												aria-expanded="true" aria-controls="#funding_open_date"
+												id="startDateBtn">프로젝트 공개 일시</button>
 										</h2>
 									</div>
 									<div id="funding_open_date" class="collapse"
@@ -219,8 +199,8 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#funding_end_date"
-												aria-expanded="true" aria-controls="#funding_end_date" id="endDateBtn">프로젝트
-												마감 일시</button>
+												aria-expanded="true" aria-controls="#funding_end_date"
+												id="endDateBtn">프로젝트 마감 일시</button>
 										</h2>
 									</div>
 									<div id="funding_end_date" class="collapse"
@@ -236,22 +216,26 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#funding_reward"
-												aria-expanded="true" aria-controls="#funding_reward" id="rewardBtn">선물
-												구성</button>
+												aria-expanded="true" aria-controls="#funding_reward"
+												id="rewardBtn">선물 구성</button>
 										</h2>
 									</div>
 									<div id="funding_reward" class="collapse"
 										aria-labelledby="fun_reward" data-parent="#funding">
 										<div class="card-body">
-											<input type="number" id="rewardPrice" min="1000" step="1000" placeholder="천원 이상">원 이상 후원해주신 분들께 드리는 선물입니다.
-											<button type="button" class="btn btn-primary"
-												data-toggle="modal" data-target="#rewardItemModal" id="itemAddBtn">선물
-												추가</button>
+											<input type="number" id="rewardPrice" min="1000" step="1000"
+												placeholder="천원 이상">원 이상 후원해주신 분들께 드리는 선물입니다. <br>
+											<button type="button" class="btn btn-warning col-sm-12"
+												data-toggle="modal" data-target="#rewardItemModal"
+												id="itemAddBtn">선물 추가</button>
 											<div id="rewardItemList"></div>
-											<input type="number" id="rewardCount" min="5" step="5" placeholder="5개 이상등록">개 제한
-											<input id="rewardRegist" class="btn btn-dark" type="button" value="선물등록">
-											<div id="rewardList"></div>
-										</div>  
+											<input type="number" id="rewardCount" min="5" step="5"
+												placeholder="5개 이상등록">개 제한 <input id="rewardRegist"
+												class="btn btn-primary" type="button" value="선물등록"
+												style="float: right;">
+											<div id="rewardList">
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -274,8 +258,8 @@
 										<h2 class="mb-0">
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse" data-target="#story_tell"
-												aria-expanded="true" aria-controls="#story_tell" id="contentBtn">프로젝트
-												스토리</button>
+												aria-expanded="true" aria-controls="#story_tell"
+												id="contentBtn">프로젝트 스토리</button>
 										</h2>
 									</div>
 									<div id="story_tell" class="collapse"
@@ -295,14 +279,16 @@
 					aria-labelledby="nav-account-tab">계좌 설정</div>
 			</div>
 		</div>
-		<input name="writer" value="${loginUser.email}" type="hidden"> 
-		
-		<input type="button" value="등록" class="btn btn-danger" id="fundingRegistBtn">
+		<input name="writer" value="${loginUser.email}" type="hidden">
+
+		<input type="button" value="등록" class="btn btn-danger col-sm-12" style="height: 50px"
+			id="fundingRegistBtn">
+		</div>
 	</section>
 </form>
 
 
 <%@ include file="reward_js.jsp"%>
 <%@ include file="regist_js.jsp"%>
-<%@ include file="../common/summernote.jsp" %> 
+<%@ include file="../common/summernote.jsp"%>
 <%@ include file="../include/footer.jsp"%>

@@ -7,8 +7,11 @@
 	</configSuffixes>
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
+		<config>src/main/resources/kr/or/funding/context/scheduler-context.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>src/main/resources/kr/or/funding/context/servlet-context.xml</config>
+		<config>src/main/resources/kr/or/funding/context/root-context.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

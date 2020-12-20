@@ -33,25 +33,24 @@
 		var cnt = 0
 		$("#addItem").on("click", function () {
 			var code = "<div class='rewardItems'>";
-			code += "<div>아이템 이름"
-			code += "<input type='text' name='mrewardItem'></div>"
-			code += "<div>옵션"
-			code += "<input type='radio' name='"+cnt+"option' value='없음' class='noOp' onchange='direct(this)' checked>"
-			code += "없음"
-			code += "<input type='radio' name='"+cnt+"option' onchange='direct(this)'>"
-			code += "<input type='text' name='mitemOptions' value='없음' disabled>"
-			code += "<input type='button' onclick='deleteItem(this)' value='x'>"
+			code += "<div class='input-group mb-3'><div class='input-group-prepend'><span class='input-group-text'>아이템 이름</span></div>"
+			code += "<input type='text' name='mrewardItem' class='form-control'></div>"
+			code += "<div>"
+			code += "옵션 : 없음<input type='radio' name='"+cnt+"option' value='없음' class='noOp' onchange='direct(this)' checked>"
+			code += ""
+			code += "직접입력<input type='radio' name='"+cnt+"option' onchange='direct(this)'>"
+			code += "<input type='text' name='mitemOptions' value='없음' disabled class='mb-3'>"
+			code += "<input type='button' onclick='deleteItem(this)' value='삭제x'>"
 			code += "</div></div>"
 			$("#addItem").before(code)
 			cnt++;
-			
 		})
 		
 		$("#rewardItemRegist").on('click', function () {
 			$("#rewardItemList").empty()
 			var options = $("input[name='mitemOptions']")
 			var rewardItems = $("input[name='mrewardItem']")
-			var data = "<div class='card'><ul>";
+			var data = "<table border='1'><tr class='row'><th class='col-sm-4'>아이템 이름</th><th class='col-sm-8'>옵션</th>	</tr>";
 			var itemcnt = 0
 			var check = true
 			$.each(options, function(i) {
@@ -68,21 +67,21 @@
 					check = false
 					return false
 				}
-				data += "<li><span name='rewardItem'>" + rewardItems[i].value+ "</span><span name='itemOptions'>" + options[i].value + "</span></li>"
+				data += "<tr class='row'><td name='rewardItem'>" + rewardItems[i].value+ "</td><td name='itemOptions'>" + options[i].value + "</td></tr>"
 			})
 			if(!check){
 				return
 			}
 			data += "<input type='hidden' class='itemcnt' value='"+(itemcnt+1)+"'>"
-			data += "</ul></div><br>"
+			data += "</table><br>"
 			$("#rewardItemList").append(data)
 			$("#rewardItemRegistBtn").trigger("click")
 			$("#itemAddBtn").text("선물 수정")
 		})
 		
 		$("#rewardRegist").on("click", function() {
-			var options = $("span[name='itemOptions']")
-			var ritem = $("span[name='rewardItem']")
+			var options = $("td[name='itemOptions']")
+			var ritem = $("td[name='rewardItem']")
 			var rprice = $("#rewardPrice").val()
 			var rcount = $("#rewardCount").val()
 			var itemcnt = $(".itemcnt").val()
@@ -101,17 +100,18 @@
 				alert("선물개수를 입력해주세요.")
 				return
 			}
-			var code = "<div class='rewards'>"
-			code += "<input type='button' onclick='deleteReward(this)' value='X'>"
-			code += "<input type='button' onclick='modifyReward(this)' value='수정'>"
-			code += "<input type='number' name='rprice' value='"+rprice+"' readonly  min='1000' step='1000' placeholder='천원 이상'>"
-			code += "<input type='number' name='rcount' value='"+rcount+"' readonly  min='5' step='5' placeholder='5개 이상등록'>"
+			var code = "<div class='mt--20 selectReward' style='padding:20px; border-radius:10px; border:2px solid black'>"
+			code += "<input type='button' onclick='deleteReward(this)' class='btn btn-danger' value='X'>"
+			code += "<input type='button' onclick='modifyReward(this)' class='btn btn-warning' value='수정'><br>"
+			code += "설정금액<input type='number' name='rprice' value='"+rprice+"' readonly  min='1000' step='1000' placeholder='천원 이상'>"
+			code += "설정개수<input type='number' name='rcount' value='"+rcount+"' readonly  min='5' step='5' placeholder='5개 이상등록'>"
 			code += "<input type='hidden' name='itemcnt' value='"+itemcnt+"' readonly>"
 			$.each(options, function(i) {
-				code+="<input type='text' name='options' value='"+options.eq(i).text()+"' readonly>"
-				code+="<input type='text' name='ritem' value='"+ritem.eq(i).text()+"' readonly><br>"
+				code+="아이템이름<input type='text' name='ritem' value='"+ritem.eq(i).text()+"' readonly style='width:150px'>"
+				code+="옵션<input type='text' name='options' value='"+options.eq(i).text()+"' readonly style='width:150px'><br>"
 			})
-			code+="</div><br><br>"
+			code+="</div>"
+			
 			$("#rewardList").append(code)
 			
 			var options = $("span[name='itemOptions']")
@@ -151,10 +151,10 @@
 	}
 	function modifyReward(reward) {
 		var reward = $(reward)
-		reward.parents(".rewards").find("input[name='rprice']").prop("disabled",false)
-		reward.parents(".rewards").find("input[name='rcount']").prop("disabled",false)
-		reward.parents(".rewards").find("input[name='options']").prop("disabled",false)
-		reward.parents(".rewards").find("input[name='ritem']").prop("disabled",false)
+		reward.parents(".rewards").find("input[name='rprice']").prop("readonly",false)
+		reward.parents(".rewards").find("input[name='rcount']").prop("readonly",false)
+		reward.parents(".rewards").find("input[name='options']").prop("readonly",false)
+		reward.parents(".rewards").find("input[name='ritem']").prop("readonly",false)
 	}
 </script>
 

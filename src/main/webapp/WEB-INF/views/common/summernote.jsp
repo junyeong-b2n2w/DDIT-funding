@@ -8,7 +8,7 @@
 window.addEventListener('load', function() {
 	$("#content").summernote({
 		placeholder:"여기에 내용을 적으세요.",
-		height:250,
+		height:800,
 		disableResizeEditor:true,
 		callbacks:{
 			onImageUpload : function(files, editor, welEditable){

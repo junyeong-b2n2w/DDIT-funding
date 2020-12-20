@@ -71,7 +71,6 @@
 									<div id="summary_img" class="collapse"
 										aria-labelledby="headdingImage" data-parent="#projectSummary">
 										<div class="card-body">
-											<label for="inputFile" class="btn btn-primary">사진선택</label>
 											<div id="pictureView" 
 												style="width: 300px; height: 300px; background-color: black; display: inline-block;
 											
@@ -81,6 +80,7 @@
 					  background-repeat:no-repeat;
 												
 												"></div>
+											<label for="inputFile" class="btn btn-primary">사진선택</label>
 											<input type="hidden" name="project_img" value="${funding.project_img}">
 										</div>
 									</div>
@@ -117,29 +117,9 @@
 									</div>
 								</div>
 
-								<div class="card">
-									<div class="card-header" id="headding_page">
-										<h2 class="mb-0">
-											<button class="btn btn-link" type="button"
-												data-toggle="collapse" data-target="#summary_page"
-												aria-expanded="true" aria-controls="#summary_page" id="urlBtn">프로젝트
-												URL</button>
-										</h2>
-									</div>
-									<div id="summary_page" class="collapse"
-										aria-labelledby="headding_page" data-parent="#projectSummary">
-										<div class="card-body">
-											<div class="input-group mb-3">
-												<div class="input-group-prepend">
-													<span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
-												</div>
-												<input type="text" class="form-control" id="basic-url"
+												<input type="hidden" class="form-control" id="basic-url"
 													aria-describedby="basic-addon3" name="furl"
 													value="${funding.furl }">
-											</div>
-										</div>
-									</div>
-								</div>
 
 								<div class="card">
 									<div class="card-header" id="headding_tag">
@@ -257,30 +237,29 @@
 									<div id="funding_reward" class="collapse"
 										aria-labelledby="fun_reward" data-parent="#funding">
 										<div class="card-body">
-											<input type="text" id="rewardPrice"  min="1000" step="1000" placeholder="천원 이상">원 이상 후원해주신 분들께
+											<input type="number" id="rewardPrice"  min="1000" step="1000" placeholder="천원 이상">원 이상 후원해주신 분들께
 											드리는 선물입니다.
-											<button type="button" class="btn btn-primary"
+											<button type="button" class="btn btn-warning col-sm-12"
 												data-toggle="modal" data-target="#rewardItemModal"  id="itemAddBtn"
 												id="itemAddBtn">선물 추가</button>
 											<div id="rewardItemList"></div>
-											<input type="text" id="rewardCount" min="5" step="5" placeholder="5개 이상등록">개 제한 <input
-												id="rewardRegist" class="btn btn-dark" type="button"
+											<input type="number" id="rewardCount" min="5" step="5" placeholder="5개 이상등록">개 제한 <input
+												id="rewardRegist" class="btn btn-primary" type="button" style="float: right;"
 												value="선물등록">
 											<div id="rewardList">
 												<c:forEach items="${rewardList}" var="list">
-												<div class="rewards">
-													<input type='button' onclick='deleteReward(this)' value="X">
-													<input type='button' onclick='modifyReward(this)' value="수정">
-													<input type='number' min="1000" step="1000" placeholder="천원 이상" name='rprice' value='${list.rprice}' readonly>
-													<input type='number' min="5" step="5" placeholder="5개 이상등록" name='rcount' value='${list.rcount}' readonly>
+												<div class='rewards mt--20 selectReward' style='padding:20px; border-radius:10px; border:2px solid black'>
+													<input  class='btn btn-danger' type='button' onclick='deleteReward(this)' value="X">
+													<input class='btn btn-warning' type='button' onclick='modifyReward(this)' value="수정">
+													설정금액<input type='number' min="1000" step="1000" placeholder="천원 이상" name='rprice' value='${list.rprice}' readonly>
+													설정개수<input type='number' min="5" step="5" placeholder="5개 이상등록" name='rcount' value='${list.rcount}' readonly>
 													<input type='hidden' name='itemcnt' value='${list.itemcnt }' readonly>
 															<c:forEach items="${list.rItemList}" var="iList">
-																<input type='text' name='options' value='${iList.options}' readonly>
-																<input type='text' name='ritem' value='${iList.ritem }' readonly>
+																아이템이름<input style='width:150px' type='text' name='options' value='${iList.options}' readonly>
+																옵션<input style='width:150px' type='text' name='ritem' value='${iList.ritem }' readonly>
 																<br>
 															</c:forEach>
 												</div>
-												<br><br>
 												</c:forEach>
 											</div>
 										</div>
@@ -328,7 +307,7 @@
 			</div>
 		</div>
 		<input name="writer" value="${loginUser.email}" type="hidden"> 
-		<input type="button" value="등록" class="btn btn-danger" id='fundingRegistBtn'>
+		<input type="button" value="등록" class="btn btn-danger col-sm-12" id='fundingRegistBtn' style="height: 50px">
 	</section>
 </form>
 
