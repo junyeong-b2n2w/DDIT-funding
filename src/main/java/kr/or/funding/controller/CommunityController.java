@@ -1,15 +1,22 @@
 package kr.or.funding.controller;
 
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.funding.dto.CommunityVO;
+import kr.or.funding.dto.MemberVO;
+import kr.or.funding.dto.ReplyVO;
 import kr.or.funding.service.CommunityService;
 import kr.or.funding.service.ReplyService;
 
@@ -56,27 +63,26 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(value="/modify", method=RequestMethod.POST)
-	public ModelAndView modify(ModelAndView mnv, CommunityVO community) throws Exception{
-		String url="community/list";
+	@ResponseBody
+	public void modify(HttpServletResponse response, CommunityVO community) throws Exception{
 		
 		communityService.modify(community);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(community.getContent());
+				
 		
-		List<CommunityVO> community2 = communityService.getAllList(community.getFno());
-		mnv.setViewName(url);
-		mnv.addObject("communityList", community2); 
-		return mnv;
 	}
 	
 	@RequestMapping(value="/remove", method=RequestMethod.POST)
-	public ModelAndView modify(ModelAndView mnv, int cno, int fno) throws Exception{
-		String url="community/list";
+	@ResponseBody
+	public void modify( int cno,HttpServletResponse response,CommunityVO community) throws Exception{
+		
 		
 		communityService.remove(cno);
-		
-		List<CommunityVO> community2 = communityService.getAllList(fno);
-		mnv.setViewName(url);
-		mnv.addObject("communityList", community2); 
-		return mnv;
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(community.getContent());
 	}
 	
 	@RequestMapping(value="/registForm")
@@ -86,15 +92,11 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(value="/regist", method=RequestMethod.POST)
-	public ModelAndView regist (ModelAndView mnv, CommunityVO community, int fno) throws Exception {
-		String url="community/list";
-		
+	@ResponseBody
+	public String regist (HttpServletResponse response,CommunityVO community, int fno,HttpSession session) throws Exception {
+		String url = "funding/detail";
 		communityService.insert(community);
-		
-		List<CommunityVO> community2 = communityService.getAllList(fno);
-		mnv.setViewName(url);
-		mnv.addObject("communityList", community2); 
-		return mnv;
+		return url;
 	}
 	
 }

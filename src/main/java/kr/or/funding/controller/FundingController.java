@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -31,10 +30,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.funding.command.RewardCommand;
 import kr.or.funding.command.SearchCriteria;
+import kr.or.funding.dto.CommunityVO;
 import kr.or.funding.dto.FundingVO;
 import kr.or.funding.dto.RewardItemVO;
 import kr.or.funding.dto.RewardVO;
+import kr.or.funding.service.CommunityService;
 import kr.or.funding.service.FundingService;
+import kr.or.funding.service.ReplyService;
 import kr.or.funding.service.RewardService;
 
 @Controller
@@ -45,6 +47,12 @@ public class FundingController {
 	private FundingService fundingService;
 	@Autowired
 	private RewardService rewardService;
+	
+	@Autowired
+	private ReplyService replyService;
+	@Autowired
+	private CommunityService communityService;
+	
 	private RewardItemVO rItem;
 	private RewardVO reward;
 	
@@ -133,12 +141,19 @@ public class FundingController {
 	
 	
 	@RequestMapping("/detail")
-	public void detail(int fno, Model model) throws SQLException{
+	public String detail(int fno, Model model) throws SQLException{
+		String url = "funding/detail";
 		FundingVO funding = fundingService.getFunding(fno);
 		List<RewardVO> list = rewardService.getRewardList(fno);
 		funding.setRewardList(list);
+		
+		List<CommunityVO> communityList = communityService.getAllList(fno);
+		replyService.replyCount(communityList);
+		model.addAttribute("communityList", communityList);
 		model.addAttribute("funding",funding);
+		return url;
 	}
+	
 	
 	@RequestMapping("/registForm")
 	public void registForm(HttpSession session, Model model) throws SQLException {

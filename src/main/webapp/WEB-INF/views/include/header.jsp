@@ -79,7 +79,7 @@
                                 <li><a href="<%=request.getContextPath() %>/common/loginForm.do"><i class="fas fa-user"></i> 로그인 </a></li>
                                 </c:if>
                                 <c:if test="${not empty loginUser }">
-                                 <li><a href="<%=request.getContextPath()%>/member/menu.do"><span class="ti-user">:${loginUser.name }</span></a></li>
+                                  <li><a href="<%=request.getContextPath()%>/member/menu.do" data-toggle="modal" data-target="#mypageModal"><span class="ti-user" >:${loginUser.name }</span></a></li>
                             	 <li><a href="<%=request.getContextPath()%>/common/logout.do"><span class="">logOut</span></a></li>
                                 </c:if>
                             </ul>
@@ -92,7 +92,7 @@
         </header>
         <!-- End Header Style -->
 
-       
+        <%@ include file="modal.jsp" %>
         
         
         

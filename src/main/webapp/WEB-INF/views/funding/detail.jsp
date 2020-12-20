@@ -31,7 +31,7 @@
                             
                             <ul class="pro__dtl__prize">
                                 <li class="old__prize">모인금액</li>
-                                <li>${funding.price_pre} <span>원 <span class="percent">101</span>%</span></li>
+                                <li>${funding.price_pre} <span>원 <span class="percent">${funding.percent }</span>%</span></li>
                             </ul>
                             
                             <ul class="pro__dtl__prize">
@@ -103,68 +103,97 @@
 					                            
 					                            
 					                            
-					                            <!-- 커뮤니티 -->
-					                            <div role="tabpanel" id="community" class="fade">
+					                           <!-- 커뮤니티 -->
+					                            <div role="tabpanel" id="community" class="fade" >
 													<div class="review__address__inner">
 					                                    <!-- Start Single Review -->
-					                                    <div class="pro__review">
-					                                        <div class="review__thumb">
-					                                            <img src="images/review/1.jpg" alt="review images">
-					                                        </div>
-					                                        <div class="review__details">
-					                                            <div class="review__info">
-					                                                <h4><a href="#">Gerald Barnes</a></h4>
-					                                                <ul class="rating">
-					                                                    <li><i class="zmdi zmdi-star"></i></li>
-					                                                    <li><i class="zmdi zmdi-star"></i></li>
-					                                                    <li><i class="zmdi zmdi-star"></i></li>
-					                                                    <li><i class="zmdi zmdi-star-half"></i></li>
-					                                                    <li><i class="zmdi zmdi-star-half"></i></li>
-					                                                </ul>
-					                                                <div class="rating__send">
-					                                                    <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
-					                                                    <a href="#"><i class="zmdi zmdi-close"></i></a>
-					                                                </div>
-					                                            </div>
-					                                            <div class="review__date">
-					                                                <span>27 Jun, 2016 at 2:30pm</span>
-					                                            </div>
-					                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
-					                                        </div>
+					                                    <div class="pro__review" style="display: contents;"> 
+					                                    	
+					                                    	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+																	  글 등록
+															</button>
+																	
+																	<!-- 내용 작성 -->
+																	<div class="modal" id="myModal">
+																	  <div class="modal-dialog">
+																	    <div class="modal-content">
+																	
+																	      <!-- Modal Header -->
+																	      <div class="modal-header">
+																	        <h4 class="modal-title">Modal Heading</h4>
+																	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+																	      </div>
+																	
+																	      <!-- Modal body -->
+																	      <div class="modal-body">
+																	       <form action="<%=request.getContextPath() %>/community/regist.do" method="post">
+																				fno:<input type="hidden" name="fno" value="${param.fno }"/>
+																				title: <input type="text" name="title"	/>
+																				content: <input type="text" name="content"	/>
+																				<input type="hidden" name="email" value="${loginUser.email }">
+																				<input type="submit" value="등록"> 
+																			</form>
+																	      </div>
+																	
+																	      <!-- Modal footer -->
+																	      <div class="modal-footer">
+																	        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+																	      </div>
+																	
+																	    </div>
+																	  </div>
+																	</div>
+					                                    	
+															
+					                                        		
+					                                        		
+					                                        
+					                                        <c:forEach var="community" items="${communityList}" varStatus="status">
+					                                        <div class="accordion" id="aco_profile">
+																<div class="card">
+																	<div class="card-header" id="cre_name">
+																	<div class="communitys" data-toggle="collapse" data-target="#creater_name${community.cno }" 
+																	aria-expanded="true" onclick="showReply(${community.cno })" aria-controls="#creater_name">
+																		
+																		
+																		<span>작성자 : ${community.email }</span> 
+																		<span>댓글 :${community.replyCount }</span>	
+																		<span>작성일 :${community.regdate }  </span>
+																		<input type="hidden" value="${community.cno }" class="cno">
+																		<input type ="hidden" value="${community.fno }" class="fno">
+																		<span><textarea name="content" style="background: #ffffff; border: 1px solid #e8d9d8;  display: none;">${community.content }</textarea>
+																		<span class="textareaSpan">글 내용 :  ${community.content }</span> 
+																		<!-- <span  id="contentBtn" style="display: block;">글수정</span> -->
+																		</span>
+																		<input type="hidden" name="cno" value="${community.cno }"> 
+																	</div>
+																	<button type="button" class="contentBtn" onclick="contentBtn(this)"  style="display: block;">글수정</button>
+																	<button type="button" class="removeBtn" onclick="removeBtn(this)"  style="display: block;">글삭제</button>
+																	<button type="button" class="updateBtn"onclick="updateBtn(this)"  style="display: none;" >등록</button>
+																	<button type="button" class="backBtn" onclick="backBtn(this)"  style="display: none;" >취소</button>
+																	</div>
+																	<div id="creater_name${community.cno }" class="collapse" aria-labelledby="cre_name" data-parent="#aco_profile">
+																		<div class="card-body">
+																		<div class="reply${community.cno}" ></div>
+																		
+																			<input class="form-control" type="text" name="replyContent${community.cno }" placeholder="댓글 등록" >
+																			
+																			<button type="button" id="replyBtn" onclick="replyBtn(${community.cno })">등록</button>
+																			
+																		</div>
+																	</div>
+																</div>
+															</div>
+															</c:forEach>
 					                                    </div>
 					                                    <!-- End Single Review -->
 					                                    <!-- Start Single Review -->
-					                                    <div class="pro__review ans">
-					                                        <div class="review__thumb">
-					                                            <img src="images/review/2.jpg" alt="review images">
-					                                        </div>
-					                                        <div class="review__details">
-					                                            <div class="review__info">
-					                                                <h4><a href="#">Gerald Barnes</a></h4>
-					                                                <ul class="rating">
-					                                                    <li><i class="zmdi zmdi-star"></i></li>
-					                                                    <li><i class="zmdi zmdi-star"></i></li>
-					                                                    <li><i class="zmdi zmdi-star"></i></li>
-					                                                    <li><i class="zmdi zmdi-star-half"></i></li>
-					                                                    <li><i class="zmdi zmdi-star-half"></i></li>
-					                                                </ul>
-					                                                <div class="rating__send">
-					                                                    <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
-					                                                    <a href="#"><i class="zmdi zmdi-close"></i></a>
-					                                                </div>
-					                                            </div>
-					                                            <div class="review__date">
-					                                                <span>27 Jun, 2016 at 2:30pm</span>
-					                                            </div>
-					                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
-					                                        </div>
-					                                    </div>
+					                                   
 					                                    <!-- End Single Review -->
 					                                </div>
 					                                
 					                            </div>
 					                            <!-- End 커뮤니티 -->
-					                            
 					                            
 					                            
 					                            
@@ -205,7 +234,7 @@
                             <!-- 선물선택 기본 -->
                              	<div class="mt--20 selectReward" id="rewardFocus" onclick="select(this,1000);" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
 						         <strong style="font-size:1.5rem">1,000 + </strong>
-						         <p>선물을 선택하지 않고 밀어만 줍니다.</p>
+						          <p>선물을 선택하지 않고 밀어만 줍니다.</p>
 						        </div>
 						        <c:forEach items="${rewardList}" var="list">
 						        	<div class="mt--20 selectReward" onclick="select(this,${list.rprice},${list.rno});" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
@@ -329,6 +358,155 @@
 		form.submit();
 // 		console.log(form);
 	}
+</script>
+<script>
+			
+			
+			function replyremove(rpno){
+				$.ajax({
+					url : "<%=request.getContextPath()%>/reply/remove.do",
+					type: "get",
+					data : {
+							rpno : rpno
+					},
+					success:function(req){
+						alert('삭제성공');
+					}
+				})
+			}
+			
+			function replyModify(rpno){
+				$.ajax({
+					url : "<%=request.getContextPath()%>/reply/modify.do",
+					type : "get",
+					data : {
+						content : $('input[name="replyContents'+rpno+'"]').val(),
+						rpno : rpno
+					},
+					success:function(req){
+						alert('수정 성공');
+					}
+				})
+				
+				
+			}
+			
+			function replyBtn(cno){
+				$.ajax({
+					url : "<%=request.getContextPath()%>/reply/regist.do",
+					type : "get",
+					data :{ cno : cno,
+							content : $('input[name="replyContent'+cno+'"]').val(),
+							email : "${loginUser.email}"
+					},
+					success:function(req){
+						if(req){
+						alert('성공');
+						}
+					}
+				})
+				
+			}
+			
+			function removeBtn(cno){
+		         
+				cno2 = $(cno).closest('div').find('.cno').val()
+				$.ajax ({
+					url: "<%=request.getContextPath()%>/community/remove.do",
+					type: "post",
+					data : {cno : cno2,
+							content : $(cno).closest('div').find('textarea').val()
+						},
+					success:function(req){
+						if(req){
+							alert('삭제 성공');
+							$(cno).closest('div').find('.contentBtn').css("display", "block")
+							$(cno).closest('div').find('textarea').css("display", "none")
+						 	$(cno).closest('div').find('.updateBtn').css("display", "none")
+						 	$(cno).closest('div').find('.backBtn').css("display", "none")
+						 	$(cno).closest('div').find('.removeBtn').css("display", "block")
+						 	$(cno).closest('div').find('.textareaSpan').css("display", "block").text(req);
+						}
+					}
+				})
+			}
+
+
+
+		function updateBtn(cno){
+					cno2 = $(cno).closest('div').find('.cno').val()
+					$.ajax ({
+						url: "<%=request.getContextPath()%>/community/modify.do",
+						type: "post",
+						data : {content : $(cno).closest('div').find('textarea').val(),
+								cno : cno2
+								},
+						success:function(req){
+							if(req){
+								alert('수정 성공');
+								$(cno).closest('div').find('.contentBtn').css("display", "block")
+								$(cno).closest('div').find('textarea').css("display", "none")
+							 	$(cno).closest('div').find('.updateBtn').css("display", "none")
+							 	$(cno).closest('div').find('.backBtn').css("display", "none")
+							 	$(cno).closest('div').find('.removeBtn').css("display", "block")
+							 	$(cno).closest('div').find('.textareaSpan').css("display", "block").text(req);
+							}
+						}
+					})
+				}
+		
+	 function contentBtn(cno){
+		 
+		  $(cno).closest('div').find('.removeBtn').css("display", "none")
+		  $(cno).closest('div').find('textarea').css("display", "block")
+		  $(cno).closest('div').find('.updateBtn').css("display", "block")
+		  $(cno).closest('div').find('.contentBtn').css("display", "none")
+		  $(cno).closest('div').find('.backBtn').css("display", "block")
+		  $(cno).closest('div').find('.textareaSpan').css("display", "none")
+	} 
+	function backBtn(cno){
+		
+		$(cno).closest('div').find('.removeBtn').css("display", "block")
+		  $(cno).closest('div').find('textarea').css("display", "none")
+		  $(cno).closest('div').find('.updateBtn').css("display", "none")
+		  $(cno).closest('div').find('.contentBtn').css("display", "block")
+		  $(cno).closest('div').find('.backBtn').css("display", "none")
+		  $(cno).closest('div').find('.textareaSpan').css("display", "block")
+		
+	} 
+
+	
+	
+	  function showReply(cno){
+		  
+		  // 요청
+		  xhttp = new XMLHttpRequest();
+		  xhttp.open('get', '<%=request.getContextPath()%>/reply/list.do?cno='+cno, true)
+		  xhttp.send()
+		    
+		  //응답
+		  xhttp.onreadystatechange = function() {
+		      if(this.readyState == 4 && this.status == 200){
+		          res = this.responseText;
+		          jsondata = JSON.parse(res);
+		          console.log(jsondata);
+				  let code="";
+				  for(let i=0; i<jsondata.length; i++){
+					  code +="<form>"
+					  code +='<input type="hidden" class="rpno" name="rpno" value="'+jsondata[i].rpno+'">';
+					  code +='<input type="hidden" name="cno" class="cnos" value="'+jsondata[i].cno+'">';
+					  code +='작성자:<input type="text" name="email" value="'+jsondata[i].email+'">';
+					  code +='내용:<input type="text" name="replyContents'+jsondata[i].rpno+'" value="'+jsondata[i].content+'">';
+					  code +='<input type="text" name="regdate" value="'+jsondata[i].regdate+'">';
+					  code +='<input type="button" class="replyModify" value="수정" onclick="replyModify('+jsondata[i].rpno+')">';
+					  code +='<input type="button" value="삭제" onclick="replyremove('+jsondata[i].rpno+')">';
+					  code +="</form>"
+				  }
+		          document.querySelector('.reply'+cno).innerHTML=code;
+		      }
+		  }
+	  }
+		 
 </script>
 
 <%@ include file="../include/footer.jsp" %>
