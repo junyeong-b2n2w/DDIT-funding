@@ -31,12 +31,6 @@ public class MessageController {
 	public ModelAndView message(HttpSession session, ModelAndView mnv) throws Exception {
 		String url = "member/message";
 		
-		// ---이 부분부터 로그인 구현 안되있어서 임시로 세션에 심어준거
-		MemberVO member2 = new MemberVO();
-		member2.setEmail("test");
-		session.setAttribute("loginUser", member2);
-		// ------------------------------
-		
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		String id = member.getEmail();
 		
@@ -65,14 +59,14 @@ public class MessageController {
 		return mnv;
 	}
 	
-	@RequestMapping("/messageSend")
+	@RequestMapping(value = "/messageSend", method=RequestMethod.GET)
 	public String messageSendForm () throws Exception{
 		String url="member/messageSend";
 		
 		return url;
 	}
 	
-	@RequestMapping(value="/send", method=RequestMethod.POST)
+	@RequestMapping(value="/messageSend", method=RequestMethod.POST)
 	public void sendMessage(MessageVO message, HttpServletResponse response, HttpSession session) throws Exception {
 		
 		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
@@ -89,27 +83,24 @@ public class MessageController {
 		out.print("</script>");
 	}
 	
-	@RequestMapping(value="remove", method=RequestMethod.POST)
-	public void removeMesasge(int mno, int from,HttpServletResponse response) throws Exception {
-		MessageVO message = new MessageVO();
-		message.setMno(mno);
-		
-		if(from == 1) {
-			message.setDelete_dist("sender");
-		}else if(from == 2) {
-			message.setDelete_dist("receiver");
+	@RequestMapping(value="messageRemove", method=RequestMethod.POST)
+	public String removeMesasge(int[] mno, int from) throws Exception {
+		String url = "redirect:/member/message.do";
+		for(int i=0; i<mno.length; i++) {
+			
+			MessageVO message = new MessageVO();
+			message.setMno(mno[i]);
+			
+			if(from == 1) {
+				message.setDelete_dist("sender");
+			}else if(from == 2) {
+				message.setDelete_dist("receiver");
+			}
+			
+			messageService.removeMessage(message);
 		}
 		
-		messageService.removeMessage(message);
-		
-		response.setContentType("text/html;charset=utf-8");
-		
-		PrintWriter out = response.getWriter();
-		out.print("<script>");
-		out.print("alert('삭제완료');");
-		out.print("window.close();");
-		out.print("window.opener.location.reload();");
-		out.print("</script>");
+		return url;
 	}
 	
 	@RequestMapping("messageCount")

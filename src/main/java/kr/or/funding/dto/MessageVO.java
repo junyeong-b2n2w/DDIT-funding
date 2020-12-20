@@ -1,12 +1,14 @@
 package kr.or.funding.dto;
 
+import java.util.Date;
+
 public class MessageVO {
 	private int mno      ;
 	private String receiver ;
 	private String sender   ;
 	private String mcontent ;
 	private String status   ;
-	private String regdate;
+	private Date regdate;
 	private String delete_dist;
 	
 	
@@ -16,10 +18,10 @@ public class MessageVO {
 	public void setDelete_dist(String delete_dist) {
 		this.delete_dist = delete_dist;
 	}
-	public String getRegdate() {
+	public Date getRegdate() {
 		return regdate;
 	}
-	public void setRegdate(String regdate) {
+	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
 	public int getMno() {
