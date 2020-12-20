@@ -170,9 +170,7 @@
                                                    <!-- Start Single Review -->
                                                    <div class="pro__review" style="display: contents;"> 
                                                       
-                                                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                                                     글 등록
-                                             </button>
+                                                      <button type="button" class="btn btn-primary mb--20"  data-toggle="modal" data-target="#myModal">글 등록</button>
                                                    
                                                    <!-- 내용 작성 -->
                                                    <div class="modal" id="myModal">
@@ -188,74 +186,64 @@
                                                          <!-- Modal body -->
                                                          <div class="modal-body">
                                                           <form action="<%=request.getContextPath() %>/community/regist.do" method="post">
-                                                            fno:<input type="hidden" name="fno" value="${param.fno }"/>
-                                                            title: <input type="text" name="title"   />
-                                                            content: <input type="text" name="content"   />
+                                                            <input type="hidden" name="fno" value="${param.fno }"/>
+                                                            제목
+                                                            <input type="text" name="title" class="form-control"  />
+                                                           	내용
+                                                           	<input type="text" name="content"  class="form-control mb--20" />
                                                             <input type="hidden" name="email" value="${loginUser.email }">
                                                             <input type="submit" class="btn btn-primary" value="등록"> 
+                                                           <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
                                                          </form>
                                                          </div>
                                                    
-                                                         <!-- Modal footer -->
-                                                         <div class="modal-footer">
-                                                           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                         </div>
                                                    
                                                        </div>
                                                      </div>
                                                    </div>
-                                                      
-                                             
-                                                             
-                                                             
-                                                       
-                                                       <c:forEach var="community" items="${communityList}" varStatus="status">
-                                                       <div class="accordion" id="aco_profile">
-                                                <div class="card">
-                                                   <div class="card-header" id="cre_name">
-                                                   <div class="communitys" style="border: 1px solid black;" data-toggle="collapse" data-target="#creater_name${community.cno }" 
-                                                   aria-expanded="true" onclick="showReply(${community.cno })" aria-controls="#creater_name">
-                                                      
-                                                      <div>
-                                                      <span>작성자 : ${community.email }</span> 
-                                                      <br>
-                                                      <input type="hidden" value="${community.cno }" class="cno">
-                                                      <input type ="hidden" value="${community.fno }" class="fno">
-                                                      <span><textarea name="content" style="background: #ffffff; border: 1px solid #e8d9d8;  display: none;">${community.content }</textarea>
-                                                      <span class="textareaSpan"  style="display:block; 1px solid #e8d9d8; "> ${community.content }</span> 
-                                                      <br>
-                                                      <span>작성일 :${community.regdate }  </span>
-                                                      <!-- <span  id="contentBtn" style="display: block;">글수정</span> -->
-                                                      </span>
-                                                      <input type="hidden" name="cno" value="${community.cno }"> 
-                                                      </div>
-                                                      <hr>
-                                                   <div>
-                                                      <span style="position: relative; left: 10px; top:-10px;">
-                                                      <img alt="" src="https://cdn.icon-icons.com/icons2/906/PNG/512/commenting_icon-icons.com_70233.png" style="width: 15px; height: 15px; "> ${community.replyCount }</span>   
-                                                   
-                                                   </div>
-                                                   </div>
-                                                   
-                                                   <button type="button" class="contentBtn btn btn-warning" onclick="contentBtn(this)"  style="display: block;">글수정</button>
-                                                   <button type="button" class="removeBtn btn btn-danger " onclick="removeBtn(this)"  style="display: block;">글삭제</button>
-                                                   <button type="button" class="updateBtn btn btn-primary"onclick="updateBtn(this)"  style="display: none;" >등록</button>
-                                                   <button type="button" class="backBtn btn btn-danger" onclick="backBtn(this)"  style="display: none;" >취소</button>
-                                                   </div>
-                                                   <div id="creater_name${community.cno }" class="collapse" aria-labelledby="cre_name" data-parent="#aco_profile">
-                                                      <div class="card-body">
-                                                      <div class="reply${community.cno}" ></div>
-                                                      
-                                                         <input class="form-control" type="text" name="replyContent${community.cno }" placeholder="댓글 등록" >
-                                                         
-                                                         <button type="button" id="replyBtn" class="btn btn-primary" onclick="replyBtn(${community.cno })">등록</button>
-                                                         
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             </c:forEach>
-                                                   </div>
+
+
+
+
+
+											<c:forEach var="community" items="${communityList}" varStatus="status">
+												<div class="accordion" id="aco_profile">
+													<div class="card">
+														<div class="card-header" id="cre_name">
+															<div class="communitys" style="border: 1px solid #aaaaaa;padding:20px; margin-top:20px; margin-bottom:5px; border-radius:10px;" data-toggle="collapse" data-target="#creater_name${community.cno }" aria-expanded="true" onclick="showReply(${community.cno })" aria-controls="#creater_name">
+
+																<div>
+																	<span><i class="fas fa-user-edit"></i> ${community.email }</span> <span style="color:#aaaaaa"> ${community.regdate } </span>  <br> <input type="hidden" value="${community.cno }" class="cno"> <input type="hidden" value="${community.fno }" class="fno"> 
+																	
+																	<span><textarea name="content" style="background: #ffffff; border: 1px solid #e8d9d8; display: none;">${community.content }</textarea> <span class="textareaSpan" style="display: block; 1px solid #e8d9d8; "> ${community.content }</span> <!-- <span  id="contentBtn" style="display: block;">글수정</span> --> </span> <input type="hidden" name="cno" value="${community.cno }">
+																</div>
+																<hr>
+																<div>
+																	<span style="position: relative; left: 10px; top: -10px;"> <img alt="" src="https://cdn.icon-icons.com/icons2/906/PNG/512/commenting_icon-icons.com_70233.png" style="width: 15px; height: 15px;"> ${community.replyCount }
+																	</span>
+
+																</div>
+															</div>
+
+															<button type="button" class="contentBtn btn btn-warning" onclick="contentBtn(this)" >글수정</button>
+															<button type="button" class="removeBtn btn btn-danger " onclick="removeBtn(this)" >글삭제</button>
+															<button type="button" class="updateBtn btn btn-primary" onclick="updateBtn(this)" style="display: none;">등록</button>
+															<button type="button" class="backBtn btn btn-danger" onclick="backBtn(this)" style="display: none;">취소</button>
+														</div>
+														<div id="creater_name${community.cno }" class="collapse" aria-labelledby="cre_name" data-parent="#aco_profile">
+															<div class="card-body">
+																<div class="reply${community.cno}"></div>
+
+																<input class="form-control" type="text" name="replyContent${community.cno }" placeholder="댓글 등록">
+
+																<button type="button" id="replyBtn" class="btn btn-primary" onclick="replyBtn(${community.cno })">등록</button>
+
+															</div>
+														</div>
+													</div>
+												</div>
+											</c:forEach>
+										</div>
                                                    <!-- End Single Review -->
                                                    <!-- Start Single Review -->
                                                   
@@ -282,7 +270,7 @@
         
                         <div class="blod-details-right-sidebar">
                         <!-- 창작자 소개 -->
-                            <div class="" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
+                            <div class="" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath()%>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
 						          	<p><strong>창작자 소개</strong></p>
 						          	<i class="fas fa-portrait"></i> <strong>${funding.creater }</strong>
 						          	<hr>
@@ -294,14 +282,14 @@
 						        </div>
                             
                             <!-- 선물선택 기본 -->
-                             	<div class="mt--20 selectReward" id="rewardFocus" onclick="select(this,1000);" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
+                             	<div class="mt--20 selectReward" id="rewardFocus" onclick="select(this,1000);" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath()%>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
 						         <strong style="font-size:1.5rem">1,000 + </strong>
 						          <p>선물을 선택하지 않고 밀어만 줍니다.</p>
 						        </div>
 						        <c:forEach items="${rewardList}" var="list">
 						        	<div class="mt--20 selectReward" onclick="select(this,${list.rprice},${list.rno});" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
 						         <p style=" margin:0px 10px 10px 0px ;">${list.rcount-list.subcount } 개 남음</p> 
-						         <strong  style="font-size:1.5rem; margin-bottom:10px;">${list.rprice } + </strong>
+						         <strong  style="font-size:1.5rem; margin-bottom:10px;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${ list.rprice }" />+ </strong>
 						         <p>선물 내용 ~</p>
 						         <ul style="list-style:disc; list-style-position: inside; ">
 						         
@@ -388,6 +376,7 @@
 		const buy = document.createElement("input");
 		buy.setAttribute("type","submit");
 		buy.setAttribute("value","구매");
+		buy.setAttribute("class","btn btn-xs btn-primary");
 		buy.setAttribute("onclick","buy(" +pr+ "," + rno + ")");
 		
 		

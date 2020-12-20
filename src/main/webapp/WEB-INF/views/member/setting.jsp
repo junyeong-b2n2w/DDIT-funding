@@ -49,7 +49,8 @@
                         <div class="card-header" id="cre_img">
                            <h2 class="mb-0">
                               <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#creater_img" 
-                              aria-expanded="true" aria-controls="#creater_img">프로필 사진 :</button><img style="width: 100px; height: 100px;" src="getPicture.do?picture=${member.picture }">
+                              aria-expanded="true" aria-controls="#creater_img">프로필 사진</button><br>
+                              <img style="width: 100px; height: 100px;" src="getPicture.do?picture=${member.picture }">
                            </h2>
                         </div>
                         <div id="creater_img" class="collapse" aria-labelledby="cre_img" data-parent="#aco_profile">
@@ -107,7 +108,7 @@
                            </div>
                         </div>
                      </div>
-
+<!--  
                      <div class="card">
                         <div class="card-header" id="cre_site">
                            <h2 class="mb-0">
@@ -125,7 +126,7 @@
                         </div>
                         
                      </div>
-
+-->
                   </div>
                   <!-- 아코디언 -->
 
