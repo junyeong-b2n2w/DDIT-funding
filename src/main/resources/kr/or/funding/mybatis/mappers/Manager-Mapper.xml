@@ -1,0 +1,35 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Manager-Mapper">
+	<sql id="list">
+		<if test="fstatus != ''.toString()">
+			and fstatus like '%'||#{fstatus}||'%'
+		</if>
+	</sql>
+
+	<select id="selectFundingList" resultType="funding">
+		select *
+		from f_funding
+		where fstatus != 'reject' 
+		<include refid="list" />
+		order by regdate 
+	</select>
+	
+	<select id="selectFunding" resultType="funding">
+		select * 
+		from f_funding
+		where fno = ${fno}
+	</select>
+	
+	<update id="updateProjectOk">
+		update f_funding
+		set fstatus = 'soon'
+		where fno = ${fno}
+	</update>
+	
+	<update id="updateProjectNo">
+		update f_funding
+		set fstatus = 'reject'
+		where fno = ${fno}
+	</update>
+</mapper>

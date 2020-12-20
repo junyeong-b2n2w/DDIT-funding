@@ -3,6 +3,7 @@
 <%@ include file="../include/header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set value="${funding.rewardList}" var="rewardList"/>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <section class="htc__product__details pt--20 pb--50 bg__white">
             <div class="container">
                 <div class="row">
@@ -25,7 +26,7 @@
                             </div>
                             <!--판매자 정보 사진첨부하고 하셈~ -->
                             <div class="pro__details">
-                           		<p><i class="zmdi zmdi-circle"></i> ${funding.writer} </p>
+                           		<p><i class="zmdi zmdi-circle"></i> ${funding.creater} </p>
                             </div>
                             
                             
@@ -36,29 +37,91 @@
                             
                             <ul class="pro__dtl__prize">
                                 <li class="old__prize">남은시간</li>
-                                <li>13 <span>일</span></li>
+                                
+                                <c:if test="${funding.fstatus eq 'ing' }" >
+								<span> <jsp:useBean id="now" class="java.util.Date"/>
+								 <fmt:formatDate value="${now }" pattern="yyyy-MM-dd" var="now2"/>
+								<fmt:parseDate var="startDate" value="${now2 }" pattern="yyyy-MM-dd" />
+						       <fmt:parseNumber value="${startDate.time / (1000*60*60*24)}" integerOnly="true" var="start" scope="request" />
+						       <fmt:parseDate var="endDate" value="${funding.enddate}" pattern="yyyy-MM-dd" />
+						       <fmt:parseNumber value="${endDate.time / (1000*60*60*24)}" integerOnly="true" var="end" scope="request" />
+						      <i class="far fa-clock"></i> ${end - start} 일 남음</span>
+								</c:if>
+								
+								<c:if test="${funding.fstatus eq 'success' }" >
+								<i class="far fa-thumbs-up"></i>펀딩 성공</span>
+								</c:if>
+								
+								<c:if test="${funding.fstatus eq 'fail' }" >
+									<span><i class="far fa-times-circle"></i> 펀딩 실패 </span>
+								</c:if>
+								<c:if test="${funding.fstatus eq 'soon' }" >
+									<span> <jsp:useBean id="now3" class="java.util.Date"/>
+									<fmt:formatDate value="${now3 }" pattern="yyyy-MM-dd" var="now4"/>
+									<fmt:parseDate var="startDate" value="${now4 }" pattern="yyyy-MM-dd" />
+							       <fmt:parseNumber value="${startDate.time / (1000*60*60*24)}" integerOnly="true" var="start" scope="request" />
+							       <fmt:parseDate var="endDate" value="${funding.startdate}" pattern="yyyy-MM-dd" />
+							       <fmt:parseNumber value="${endDate.time / (1000*60*60*24)}" integerOnly="true" var="end" scope="request" />
+							      <i class="far fa-calendar-alt"></i> 공개까지 ${end - start} 일 남음</span>								
+
+								</c:if>
+								
+                                
+                                
                             </ul>
                             
                             
                             <blockquote>
 	                           	<p><strong>펀딩 진행중</strong></p>
 								<p>	목표 금액인 ${funding.price_goal }원이 모여야만 결제됩니다.<br>
-								결제는 2020년 12월 17일에 다함께 진행됩니다.</p>
+								결제는 ${funding.enddate }에 다함께 진행됩니다.</p>
 							</blockquote>
-                            
-                            
-                             <ul class="pro__dtl__prize">
+
+							
+
+
+							<ul class="pro__dtl__prize">
                                 <li class="old__prize">후원자</li>
                                 <li>${funding.fcount } <span>명</span></li>
                             </ul>
                             
                             
+                           
+								<c:if test="${loginUser.dist eq 'role_manager' and funding.fstatus eq 'no_accept'}">
+								<ul class="pro__dtl__btn">
+									<li class="buy__now__btn"><input type="button" class="btn" id="projectOk" value="프로젝트 승인"></li>
+									<li><input type="button" id="projectNo" class="btn" value="프로젝트 미승인"></li>
+								</ul>
+								</c:if>
+								 <c:if test="${funding.fstatus ne 'no_accept'}">
+								 	<c:if test="${funding.fstatus eq 'soon'}">
+										<ul class="pro__dtl__btn">
+			                                <li class="buy__now__btn"><a href="#rewardFocus">펀딩 대기중</a></li>
+			                                <li><a href="#"><span class="far fa-heart f${funding.fno}"></span></a></li>
+			                                <li><a href="#"><span class="ti-sharethis"></span></a></li>
+			                            </ul>
+	                        		</c:if>    
+									<c:if test="${funding.fstatus eq 'ing'}">
+										<ul class="pro__dtl__btn">
+			                                <li class="buy__now__btn"><a href="#rewardFocus">후원하기</a></li>
+			                                <li><a href="javascript:registWish(${funding.fno})"><span class="far fa-heart f${funding.fno}"></span></a></li>
+			                                <li><a href="#"><span class="ti-sharethis"></span></a></li>
+			                            </ul>
+	                        		</c:if>
+	                        		<c:if test="${funding.fstatus eq 'success'}">
+										<ul class="pro__dtl__btn">
+			                                <li class="buy__now__btn"><a href="#">펀딩 성공</a></li>
+			                            </ul>
+	                        		</c:if>    
+									<c:if test="${funding.fstatus eq 'fail'}">
+										<ul class="pro__dtl__btn">
+			                                <li class="buy__now__btn"><a href="#">펀딩 실패</a></li>
+			                            </ul>
+	                        		</c:if>    
+								
+								
+							</c:if>
                             
-                            <ul class="pro__dtl__btn">
-                                <li class="buy__now__btn"><a href="#rewardFocus">후원하기</a></li>
-                                <li><a href="javascript:registWish(${funding.fno})"><span class="far fa-heart f${funding.fno}"></span></a></li>
-                                <li><a href="#"><span class="ti-sharethis"></span></a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -84,9 +147,7 @@
 			                            <li role="presentation" class="">
 			                                <a href="#community" role="tab" data-toggle="tab" aria-expanded="false">커뮤니티</a>
 			                            </li>
-			                            <li role="presentation" class="">
-			                                <a href="#funding_info" role="tab" data-toggle="tab" aria-expanded="false">펀딩 안내</a>
-			                            </li>
+			                            
 			                        </ul>
 			                    </div>
 			                </div>
@@ -96,7 +157,7 @@
 					                    <div class="col-md-12">
 					                        <div class="product__details__tab__content">
 					                        	<!--스토리탭 --> 
-					                            <div role="tabpanel" id="story" class="fade active in">
+					                            <div role="tabpanel" id="story" class="product__tab__content fade active in">
 					                                  ${funding.content }
 					                            </div>
 					                            <!-- 스토리 끝 -->
@@ -104,7 +165,7 @@
 					                            
 					                            
 					                           <!-- 커뮤니티 -->
-					                            <div role="tabpanel" id="community" class="fade" >
+					                            <div role="tabpanel" id="community" class="product__tab__content fade" >
 													<div class="review__address__inner">
 					                                    <!-- Start Single Review -->
 					                                    <div class="pro__review" style="display: contents;"> 
@@ -197,13 +258,7 @@
 					                            
 					                            
 					                            
-					                            <!-- Start펀딩 인포  -->
-					                            <div role="tabpanel" id="funding_info" class=" fade">
-					                                
-					                                펀딩 ㅓㅇ보 
-					                                
-					                            </div>
-					                            <!-- End Single Content -->
+					                           
 					                        </div>
 					                    </div>
 					                </div>
@@ -507,6 +562,41 @@
 		  }
 	  }
 		 
+</script>
+<script type="text/javascript">
+window.onload = function(){
+	$('#projectOk').on('click', function() {
+		
+		$.ajax({
+		    url: "<%=request.getContextPath()%>/manager/projectOk",
+			data : {fno : ${funding.fno}},
+		    type: 'GET',
+		    success: function (data) {
+		        alert("승인");
+		    },
+		    error: function (error) {
+		    }
+		});
+		
+		alert("승인");
+        location.reload();
+	});
+	
+	$('#projectNo').on('click', function() {
+		$.ajax({
+		    url: "<%=request.getContextPath()%>/manager/projectNo",
+			data : {fno : ${funding.fno}},
+		    type: 'GET',
+		    success: function (data) {
+		        alert("미승인");
+		    },
+		    error: function (error) {
+		    }
+		});
+		
+        location.reload();
+	});
+}
 </script>
 
 <%@ include file="../include/footer.jsp" %>

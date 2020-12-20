@@ -9,7 +9,7 @@
 				<div class="col-md-12">
 					<select name="category" class="form-control col-2">
 						<option  ${cri.category eq '' ? 'selected':'' } value="">카테고리</option>
-						<option ${cri.category eq '베이킹/디저트' ? 'selected':'' } value="베이킹/디저트">베이킹/디저트</option>
+						<option ${cri.category eq '베이킹·디저트' ? 'selected':'' } value="베이킹·디저트">베이킹/디저트</option>
 						<option ${cri.category eq '음료' ? 'selected':'' } value="음료">음료</option>
 						<option ${cri.category eq '간편식' ? 'selected':'' } value="간편식">간편식</option>
 						<option ${cri.category eq '요리책' ? 'selected':'' } value="요리책">요리책</option>
@@ -38,7 +38,7 @@
 						<input type="submit" class="form-control" value="검색하기">
 					</div>
 					<div class="col-1">
-						<button type="reset" class="form-control" ><i class="fas fa-redo"></i></button>
+						<button type="reset" class="form-control" ><i class="fas fa-redo"></i> 검색 초기화</button>
 					</div>
 
 				</div>
@@ -71,20 +71,24 @@
 						</div>
 						<div class="product__details">
 							<p style="font-size: 0.8em; color: #DDDDDD;">
-								<a href="<%=request.getContextPath()%>/funding/list?category=${funding.category}">${funding.category }</a> | <a>${funding.writer }</a>
+								<a href="<%=request.getContextPath()%>/funding/list?category=${funding.category}">${funding.category }</a> | <a>${funding.creater }</a>
 							</p>
-							<h2>
-								<a href="<%=request.getContextPath()%>/funding/detail?fno=${funding.fno}">${funding.title }</a>
+							<h2 style="width: 90%;padding: 0 5px;overflow: hidden;text-overflow: ellipsis;	white-space: nowrap;">
+								<a href="<%=request.getContextPath()%>/funding/detail?fno=${funding.fno}" >${funding.title }</a>
 							</h2>
 							<div class="progress" style="height: 2px; margin-bottom: 3px; margin-top: 5px;">
-								<div class="progress-bar bg-danger" role="progressbar" style="width: ${funding.percent }%;" aria-valuenow="${funding.percent } " aria-valuemin="0" aria-valuemax="100"></div>
+								<div class="progress-bar bg-danger" role="progressbar" style="background-color: #ff4136; width: ${funding.percent }%;" aria-valuenow="${funding.percent } " aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
 							<ul class="product__price">
 								<li class="new__price" style="font-size: 0.8em"><span style="font-size: 0.9em; color: #333"> <fmt:formatNumber type="number" maxFractionDigits="3" value="${funding.price_pre }" />
 
 								</span> ${funding.percent }% 달성  
 								
-								<c:if test="${funding.fstatus eq 'ing' or funding.fstatus eq 'success' }" >
+									<c:if test="${ funding.fstatus eq 'success' }" >
+										<i class="far fa-thumbs-up"></i>펀딩 성공</span>
+									</c:if>
+								
+								<c:if test="${funding.fstatus eq 'ing'}" >
 								<span> <jsp:useBean id="now" class="java.util.Date"/>
 								 <fmt:formatDate value="${now }" pattern="yyyy-MM-dd" var="now2"/>
 								<fmt:parseDate var="startDate" value="${now2 }" pattern="yyyy-MM-dd" />
@@ -143,13 +147,13 @@
 					</div>
 					<div class="product__details">
 						<p style="font-size: 0.8em; color: #DDDDDD;">
-							<a href="<%=request.getContextPath()%>/funding/list?category={{category}}">{{category }}</a> | <a>{{writer }}</a>
+							<a href="<%=request.getContextPath()%>/funding/list?category={{category}}">{{category }}</a> | <a>{{creater }}</a>
 						</p>
-						<h2>
+						<h2 style="width: 90%;padding: 0 5px;overflow: hidden;text-overflow: ellipsis;	white-space: nowrap;">
 							<a href="<%=request.getContextPath()%>/funding/detail?fno={{fno}}">{{title }}</a>
 						</h2>
 						<div class="progress" style="height: 2px; margin-bottom: 3px; margin-top: 5px;">
-							<div class="progress-bar bg-danger" role="progressbar" style="width: {{percent }}%;" aria-valuenow="{{percent }} " aria-valuemin="0" aria-valuemax="100"></div>
+							<div class="progress-bar bg-danger" role="progressbar" style="background-color: #ff4136; width: {{percent }}%;" aria-valuenow="{{percent }} " aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
 						<ul class="product__price">
 							<li class="new__price" style="font-size: 0.8em"> <span style="font-size:0.9em ;color:#333">
@@ -192,7 +196,7 @@
 		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		},
 		"dateFunction":function dateFunction(date1, date2, status){
-			if(status == 'ing' || status == 'success'){
+			if(status == 'ing' ){
 				now = new Date();
 				remain = Math.floor( ( date2 - now.getTime() ) / 1000/ 60 / 60 / 24 );
 				return	 '<i class="far fa-clock"></i> '+remain+' 일 남음</span>'
@@ -203,6 +207,8 @@
 				
 			}else if(status == 'fail'){
 				return '<span><i class="far fa-times-circle"></i> 펀딩 실패 </span>';
+			}else if (status == 'success'){
+				return '<i class="far fa-thumbs-up"></i>펀딩 성공</span>';
 			}
 		}
 	})

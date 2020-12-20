@@ -21,6 +21,7 @@
                             <div id="register" role="tabpanel" class="single__tabs__panel tab-pane fade active in">
                                 <form class="login" role="form" method="post" action="<%=request.getContextPath() %>/common/regist.do">
                                     <input type="text" name="name" placeholder="Name">
+                                    <input type="hidden" name="picture" placeholder="Name">
                                     
                                     <input type="email" id="email" name="email" placeholder="EX)cypi123@naver.com" >
                                     <button type="button" id="check">중복 확인</button>

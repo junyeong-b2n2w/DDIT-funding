@@ -74,4 +74,11 @@
 		class="kr.or.funding.service.RewardServiceImpl" 
 		p:rewardDAO-ref="rewardDAO"/>
 		
+			<!-- manager -->
+	<bean id="managerDAO" class="kr.or.funding.dao.ManagerDAOImpl"
+	p:sqlSession-ref="sqlSession"/>
+	
+	<bean id="managerService" class="kr.or.funding.service.ManagerServiceImpl"
+	p:managerDAO-ref="managerDAO"/>
+		
 </beans>

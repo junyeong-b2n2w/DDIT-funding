@@ -60,7 +60,7 @@
 			<c:forEach var="success" items="${saleListSuccess }" varStatus="i">
 			<div class="row" style="border:1px solid #aaaaaa; padding:15px; margin:5px; border-radius:5px;">
 				<div class="col-2 text-center">
-					<img src="<%=request.getContextPath()%>/resources/images/product-details/small-img/1.jpg">
+					<img src="<%=request.getContextPath()%>/member/getPicture?picture=${fundingListSuccess.get(i.index).project_img}" style="width:270px;height:270px;" alt="product images">
 				</div>
 				<div class="col-8" style="padding-left:20px;">
 					<p><strong style="font-size:1.2em;"><a href="<%=request.getContextPath()%>/funding/detail.do?fno=${fundingListSuccess.get(i.index).fno }">${fundingListSuccess.get(i.index).title }</a> </strong></p>
@@ -82,7 +82,7 @@
 			<c:forEach var="ing" items="${saleListIng }" varStatus="i">
 			<div class="row" style="border:1px solid #aaaaaa; padding:15px; margin:5px; border-radius:5px;">
 				<div class="col-2 text-center">
-					<img src="<%=request.getContextPath()%>/resources/images/product-details/small-img/1.jpg">
+					<img src="<%=request.getContextPath()%>/member/getPicture?picture=${fundingListIng.get(i.index).project_img}" style="width:270px;height:270px;" alt="product images">
 				</div>
 				<div class="col-8" style="padding-left:20px;">
 					<p><strong style="font-size:1.2em;"><a href="<%=request.getContextPath()%>/funding/detail.do?fno=${fundingListIng.get(i.index).fno }">${fundingListIng.get(i.index).title }</a> </strong></p>
@@ -107,7 +107,7 @@
 			<c:forEach var="fail" items="${saleListFail }" varStatus="i">
 			<div class="row" style="border:1px solid #aaaaaa; padding:15px; margin:5px; border-radius:5px;">
 				<div class="col-2 text-center">
-					<img src="<%=request.getContextPath()%>/resources/images/product-details/small-img/1.jpg">
+					<img src="<%=request.getContextPath()%>/member/getPicture?picture=${fundingListFail.get(i.index).project_img}" style="width:270px;height:270px;" alt="product images">
 				</div>
 				<div class="col-8" style="padding-left:20px;">
 					<p><strong style="font-size:1.2em;"><a href="<%=request.getContextPath()%>/funding/detail.do?fno=${fundingListFail.get(i.index).fno }">${fundingListFail.get(i.index).title }</a> </strong></p>

@@ -65,13 +65,13 @@
 					</div>
 					<div class="product__details">
 						<p style="font-size: 0.8em; color: #DDDDDD;">
-							<a href="<%=request.getContextPath()%>/funding/list?category={{category}}">{{category }}</a> | <a>{{writer }}</a>
+							<a href="<%=request.getContextPath()%>/funding/list?category={{category}}">{{category }}</a> | <a>{{creater }}</a>
 						</p>
-						<h2>
+						<h2 style="width: 90%;padding: 0 5px;overflow: hidden;text-overflow: ellipsis;	white-space: nowrap;">
 							<a href="<%=request.getContextPath()%>/funding/detail?fno={{fno}}">{{title }}</a>
 						</h2>
 						<div class="progress" style="height: 2px; margin-bottom: 3px; margin-top: 5px;">
-							<div class="progress-bar bg-danger" role="progressbar" style="width: {{percent }}%;" aria-valuenow="{{percent }} " aria-valuemin="0" aria-valuemax="100"></div>
+							<div class="progress-bar bg-danger" role="progressbar" style="background-color: #ff4136; width: {{percent }}%;" aria-valuenow="{{percent }} " aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
 						<ul class="product__price">
 							<li class="new__price" style="font-size: 0.8em"> <span style="font-size:0.9em ;color:#333">

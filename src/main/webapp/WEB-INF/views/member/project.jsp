@@ -34,10 +34,9 @@
 			<table class="table">
 				<c:forEach var="funding" items="${fundingList}">
 				<tr>
-					<td style="width:30%"><img src="<%=request.getContextPath()%>/resources/images/product/sm-img/4.png" /></td>
+					<td style="width:30%"><img src="<%=request.getContextPath()%>/member/getPicture?picture=${funding.project_img}" style="width:270px;height:270px;" alt="product images"></td>
 					<td style="width:50%"><div class="col-8"><a href="<%=request.getContextPath()%>/funding/detail.do?fno=${funding.fno}">${funding.title }</a></div></td>
-					<td style="width:20%"><button>수정</button>
-						<button>삭제</button></td>
+					<td style="width:20%"><a href="<%=request.getContextPath()%>/funding/modifyForm.do?fno=${funding.fno}"><button class="btn btn-primary">수정</button></a>
 				</tr>
 				</c:forEach>
 			</table>

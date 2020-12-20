@@ -244,7 +244,7 @@ public class CommonController {
 		public void regist2(RegistCommand regist , HttpServletRequest request , HttpServletResponse response)throws SQLException,IOException {
 			
 			MemberVO member = regist.toMemberVO();
-			
+			member.setPicture("noimg.jpg");
 			memberService.regist(member);
 			
 			response.setContentType("text/html;charset=utf-8");
