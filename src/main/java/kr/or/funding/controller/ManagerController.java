@@ -89,7 +89,7 @@ public class ManagerController {
 	@RequestMapping(value="/projectNo", method=RequestMethod.GET)
 	public ResponseEntity<String> projectNo(int fno) throws SQLException{
 		
-		service.updateProjectOk(fno);
+		service.updateProjectNo(fno);
 		
 		ResponseEntity<String> entity = new ResponseEntity<>("success", HttpStatus.OK);
 		
