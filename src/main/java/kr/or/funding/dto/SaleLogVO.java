@@ -51,6 +51,12 @@ public class SaleLogVO {
 	public void setSstatus(String sstatus) {
 		this.sstatus = sstatus;
 	}
+	@Override
+	public String toString() {
+		return "SaleLogVO [sno=" + sno + ", email=" + email + ", rno=" + rno + ", fno=" + fno + ", sprice=" + sprice
+				+ ", sstatus=" + sstatus + "]";
+	}
+	
 	
 	
 }

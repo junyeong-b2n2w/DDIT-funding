@@ -153,7 +153,7 @@
 						</div>
 						<div class="product__hover__info">
 							<ul class="product__action">
-								<li><a title="Wishlist" href="javascript:registWish({{fno}})">{{{hasWish fno}}}</a></li>
+								<li><a title="Wishlist" href="javascript:registWish({{fno}})">{{{hasWish fno wishList}}}</a></li>
 							</ul>
 						</div>
 					</div>
@@ -202,6 +202,8 @@
 	
 	let page = 1;
 	
+	
+	
 	Handlebars.registerHelper({
 		"commas":function numberWithCommas(x) {
 		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -222,17 +224,17 @@
 				return '<i class="far fa-thumbs-up"></i>펀딩 성공</span>';
 			}
 		},
-		"hasWish":function wishFunction(fno){
-			if(${wishList}){
-				for(let i=0; i<${wishList}.length; i++){
-					if(fno == ${wishList}[i]){
-						return '<i class="fas fa-heart f{{fno}}	"></i>';
+		"hasWish":function wishFunction(fno, wishList ){
+			if(wishList){
+				for(let i=0; i<wishList.length; i++){
+					if(fno == wishList[i]){
+						return '<i class="fas fa-heart f'+fno+	'"></i>';
 					}
 				}
 			}
-			return '<i class="far fa-heart f{{fno}}	"></i>';
+			return '<i class="far fa-heart f'+fno+	'"></i>';
 		}
-	})
+	});
 	
 	function printData(fundingItemList,target,templateObject){
 		var template=Handlebars.compile(templateObject.html());

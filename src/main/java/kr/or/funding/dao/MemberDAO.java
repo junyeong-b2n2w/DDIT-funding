@@ -42,4 +42,6 @@ public interface MemberDAO {
 	
 	//취소하기
 	void cancelFunding(int sno) throws SQLException;
+	
+	List<SaleLogVO> selectSupporterList(int fno) throws SQLException;
 }

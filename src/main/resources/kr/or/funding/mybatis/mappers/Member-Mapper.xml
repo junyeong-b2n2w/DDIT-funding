@@ -94,5 +94,10 @@
 		from f_funding
 		where writer = #{writer}
 	</select>
+	<select id="selectSupporterList" parameterType="int" resultType="saleLog">
+		select *
+		from f_salelog
+		where fno = #{fno}
+	</select>
 	
 </mapper>

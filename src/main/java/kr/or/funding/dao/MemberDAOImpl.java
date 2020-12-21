@@ -94,6 +94,13 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 
+	@Override
+	public List<SaleLogVO> selectSupporterList(int fno) throws SQLException {
+		List<SaleLogVO> list = sqlSession.selectList("Member-Mapper.selectSupporterList", fno);
+		return list;
+	}
+
+
 
 
 

@@ -36,7 +36,8 @@
 				<tr>
 					<td style="width:30%"><img src="<%=request.getContextPath()%>/member/getPicture?picture=${funding.project_img}" style="width:270px;height:270px;" alt="product images"></td>
 					<td style="width:50%"><div class="col-8"><a href="<%=request.getContextPath()%>/funding/detail.do?fno=${funding.fno}">${funding.title }</a></div></td>
-					<td style="width:20%"><a href="<%=request.getContextPath()%>/funding/modifyForm.do?fno=${funding.fno}"><button class="btn btn-primary">수정</button></a>
+					<td style="width:10%"><a href="<%=request.getContextPath()%>/funding/modifyForm.do?fno=${funding.fno}"><button class="btn btn-primary">수정</button></a>
+					<td style="width:10%"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#supporterModal" onclick="supporterList(${funding.fno})">후원자 관리</button></td>
 				</tr>
 				</c:forEach>
 			</table>
@@ -45,9 +46,53 @@
 	</div>
 
 </section>
+<div class="modal" id="supporterModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">후원자 목록</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
 
+      <!-- Modal body -->
+      <div class="modal-body" id="supporterList">
+      </div>
 
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+		function supporterList(fno){
+			$.ajax({
+				url : "<%=request.getContextPath()%>/member/supporterList.do",
+				data : {fno : fno},
+				success : function(res){
+					$("#supporterList").empty();
+					code = "<table class='table table-bordered'>"
+					code += "<tr><th>아이디</th><th>후원금</th><th>리워드</th><th>주소</th>"
+					$.each(res, function(i){
+						code+="<tr><td>"+res[i].email+"</td>"
+						code+="<td>" + res[i].sprice + "</td><td>"
+						$.each(res[i].ritems, function(i, t){
+							code+=t.ritem
+							code+="&nbsp;&nbsp;&nbsp;&nbsp;"+t.options + "<br>"
+						})
+						code += "</td><td>"+res[i].address+"</td></tr>"
+					})
+					code += "</table>"
+					$("#supporterList").append(code)
+				}
+			})
+		}
+</script>
 
 
 

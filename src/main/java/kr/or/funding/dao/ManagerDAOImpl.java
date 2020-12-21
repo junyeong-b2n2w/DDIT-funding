@@ -7,7 +7,6 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.funding.command.SearchCriteria;
-import kr.or.funding.dto.CommunityVO;
 import kr.or.funding.dto.FundingVO;
 
 public class ManagerDAOImpl implements ManagerDAO {
@@ -38,7 +37,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 	public void updateProjectNo(int fno) throws SQLException{
 		sqlSession.update("Manager-Mapper.updateProjectNo", fno);
 	}
-
+ 
 	@Override
 	public FundingVO selectFunding(int fno) throws SQLException{
 		FundingVO funding = sqlSession.selectOne("Manager-Mapper.selectFunding", fno);
