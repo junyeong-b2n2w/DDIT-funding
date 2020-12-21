@@ -44,4 +44,11 @@ public class ManagerDAOImpl implements ManagerDAO {
 		FundingVO funding = sqlSession.selectOne("Manager-Mapper.selectFunding", fno);
 		return funding;
 	}
+
+	@Override
+	public int getFoundingCount(SearchCriteria cri) throws SQLException {
+		int count = sqlSession.selectOne("Manager-Mapper.selectFundingCount", cri);
+		
+		return count;
+	}
 }

@@ -47,8 +47,10 @@ public class ManagerController {
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(fundingService.getFundingCnt(cri));
+		pageMaker.setTotalCount(service.getFundingCount(cri));
 		
+		System.out.println(pageMaker.getTotalCount());
+		System.out.println(fList.size());
 		
 		mnv.addObject("fList", fList);
 		mnv.addObject("pageMaker", pageMaker);

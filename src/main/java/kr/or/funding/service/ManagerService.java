@@ -10,6 +10,8 @@ public interface ManagerService {
 	
 	public List<FundingVO> managerList(SearchCriteria cri) throws SQLException;
 	
+	public int getFundingCount(SearchCriteria cri) throws SQLException;
+	
 	public void updateProjectOk(int fno) throws SQLException;
 	
 	public void updateProjectNo(int fno) throws SQLException;

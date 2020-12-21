@@ -14,6 +14,9 @@ public interface ManagerDAO {
 	
 	public void updateProjectNo(int fno) throws SQLException;
 	
+	public int getFoundingCount(SearchCriteria cri) throws SQLException;
+	
 	public FundingVO selectFunding(int fno) throws SQLException;
+	
 	
 }

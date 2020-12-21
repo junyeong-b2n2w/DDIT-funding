@@ -29,4 +29,9 @@ public class ManagerServiceImpl implements ManagerService {
 	public void updateProjectNo(int fno) throws SQLException{
 		managerDAO.updateProjectNo(fno);
 	}
+
+	@Override
+	public int getFundingCount(SearchCriteria cri) throws SQLException {
+		return managerDAO.getFoundingCount(cri);
+	}
 }

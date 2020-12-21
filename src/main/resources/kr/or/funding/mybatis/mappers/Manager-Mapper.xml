@@ -1,19 +1,75 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Manager-Mapper">
-	<sql id="list">
-		<if test="fstatus != ''.toString()">
-			and fstatus like '%'||#{fstatus}||'%'
+	
+	<sql id="status">
+		<if test="fstatus != null ">
+			and fstatus like '%'||#{fstatus}||'%'		
+		</if>
+	</sql>
+	
+	<sql id="category">
+		<if test="category != null ">
+			and category like '%'||#{category}||'%'		
+		</if>
+	</sql>
+
+	<sql id="percent">
+		<if test="max_percent != null and min_percent != null ">
+			and percent between #{min_percent} and #{max_percent}
+		</if>
+	</sql> 
+	
+	<sql id="min_percent">
+		<if test="max_percent == null and min_percent != null ">
+			and percent <![CDATA[ >=]]>  #{min_percent} 
+		</if>
+	</sql> 
+	<sql id="max_percent">
+		<if test="max_percent != null and min_percent == null ">
+			and percent <![CDATA[ <= ]]>   #{max_percent}
+		</if>
+	</sql> 
+
+	
+	<sql id="search">
+		<if test="keyword != null ">
+			and alltext like '%'||#{keyword}||'%'			
 		</if>
 	</sql>
 
 	<select id="selectFundingList" resultType="funding">
-		select *
-		from f_funding
+		select * from 
+				(select F_FUNDING.*, ( PRICE_PRE/ PRICE_GOAL ) *100 percent, 
+					TAG || title || WRITER || CONTENT alltext from F_FUNDING)
 		where fstatus != 'reject' 
-		<include refid="list" />
+		<include refid="category" />
+		<include refid="status" />
+		<include refid="min_percent" />
+		<include refid="max_percent" />
+		<include refid="percent" />
+		<include refid="search" />
 		order by regdate 
 	</select>
+	
+	
+	<select id="selectFundingCount" resultType="int">
+		select count(*) from 
+				(select F_FUNDING.*, ( PRICE_PRE/ PRICE_GOAL ) *100 percent, 
+					TAG || title || WRITER || CONTENT alltext from F_FUNDING)
+		where fstatus != 'reject' 
+		<include refid="category" />
+		<include refid="status" />
+		<include refid="min_percent" />
+		<include refid="max_percent" />
+		<include refid="percent" />
+		<include refid="search" />
+
+		order by regdate 
+	</select>
+	
+	
+	
 	
 	<select id="selectFunding" resultType="funding">
 		select * 

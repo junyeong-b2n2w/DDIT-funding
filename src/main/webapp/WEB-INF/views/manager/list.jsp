@@ -91,7 +91,10 @@
 				</div>
 				<!-- End Single Product -->
 			</c:forEach>	
-<%@include file="../common/pagination.jsp" %>
+
+		</div>
+		<div class="text-center">
+		<%@include file="../common/pagination.jsp" %>
 		</div>
 	</div>
 </section>
