@@ -121,7 +121,7 @@
 												</c:forEach>
 											</c:if>
 			                                <li class="buy__now__btn"><a href="#rewardFocus">후원하기</a></li>
-			                                <li><a href="javascript:registWish(${funding.fno})"><span class="far fa-heart f${funding.fno}"></span></a></li>
+			                                <li><a href="javascript:registWish(${funding.fno})"><span class="${wstatus} fa-heart f${funding.fno}"></span></a></li>
 			                                <li><a href="#"><span class="ti-sharethis"></span></a></li>
 			                            </ul>
 	                        		</c:if>
