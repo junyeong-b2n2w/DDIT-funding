@@ -19,6 +19,7 @@ import kr.or.funding.dto.CommunityVO;
 import kr.or.funding.dto.MemberVO;
 import kr.or.funding.dto.ReplyVO;
 import kr.or.funding.service.CommunityService;
+import kr.or.funding.service.MemberService;
 import kr.or.funding.service.ReplyService;
 
 @Controller
@@ -27,6 +28,7 @@ public class CommunityController {
 	
 	@Autowired
 	private CommunityService communityService;
+	
 	
 	@Autowired
 	private ReplyService replyService;
@@ -93,7 +95,7 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(value="/regist", method=RequestMethod.POST)
-	public String regist (Model model,CommunityVO community, int fno) throws Exception {
+	public String regist (HttpServletResponse response,Model model,CommunityVO community, int fno) throws Exception {
 		String url = "redirect:/funding/detail";
 		communityService.insert(community);
 		model.addAttribute("fno",fno);
