@@ -29,12 +29,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.funding.command.MemberModifyCommand;
+import kr.or.funding.command.SupporterCommand;
 import kr.or.funding.dto.AddressVO;
 import kr.or.funding.dto.FundingVO;
 import kr.or.funding.dto.MemberVO;
 import kr.or.funding.dto.SaleLogVO;
 import kr.or.funding.dto.WishListVO;
 import kr.or.funding.service.AddressService;
+import kr.or.funding.service.FundingService;
 import kr.or.funding.service.MemberService;
 import kr.or.funding.service.WishListService;
 
@@ -50,6 +52,7 @@ public class MemberController {
 	
 	@Autowired
 	private WishListService wishService;
+	
 	
 	@RequestMapping("/settingupdate")
 	public void settingUpdate(MemberVO member)throws SQLException {
@@ -302,5 +305,15 @@ public class MemberController {
 	public void cancel(int sno, HttpServletResponse response) throws Exception {
 		memberService.cancelFunding(sno);
 		response.setContentType("text/html;charset=utf-8");
+	}
+	
+	@RequestMapping("/supporterList")
+	public ResponseEntity<List<SupporterCommand>> supporterList(int fno) throws SQLException{
+		ResponseEntity<List<SupporterCommand>> entity = null;
+		
+		List<SupporterCommand> supporterList = memberService.getSupporterList(fno);		
+		entity = new ResponseEntity<>(supporterList, HttpStatus.OK);		
+		
+		return entity;
 	}
 }

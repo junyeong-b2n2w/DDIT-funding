@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import kr.or.funding.command.SupporterCommand;
 import kr.or.funding.dto.FundingVO;
 import kr.or.funding.dto.MemberVO;
 import kr.or.funding.dto.SaleLogVO;
@@ -46,4 +47,6 @@ public interface MemberService {
 	
 	//내가 올린 펀딩
 	List<FundingVO> selectMyProject (String email) throws SQLException;
+	
+	List<SupporterCommand> getSupporterList(int fno) throws SQLException;
 }

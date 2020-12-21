@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import kr.or.funding.dto.CommunityVO;
 import kr.or.funding.dto.FundingVO;
 
 public class ManagerDAOImpl implements ManagerDAO {

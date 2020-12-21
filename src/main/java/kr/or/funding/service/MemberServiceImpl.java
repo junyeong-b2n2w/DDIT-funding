@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import kr.or.funding.command.SupporterCommand;
 import kr.or.funding.dao.FundingDAO;
 import kr.or.funding.dao.MemberDAO;
 import kr.or.funding.dao.RewardDAO;
@@ -175,6 +176,25 @@ public class MemberServiceImpl implements MemberService {
 	public List<FundingVO> selectMyProject(String email) throws SQLException {
 		List<FundingVO> fundingList = memberDAO.selectMyProject(email);
 		return fundingList;
+	}
+
+	@Override
+	public List<SupporterCommand> getSupporterList(int fno) throws SQLException {
+		List<SaleLogVO> list = memberDAO.selectSupporterList(fno);
+		List<SupporterCommand> sList = new ArrayList<>();
+		SupporterCommand sc = null;
+		System.out.println(list.get(0));
+		if(list != null && list.size()>0) {
+			for(SaleLogVO sale : list) {
+				sc = new SupporterCommand();
+				List<RewardItemVO> ritems = rewardDAO.selectRewardItemListByRno(sale.getRno());
+				sc.setSprice(sale.getSprice());
+				sc.setEmail(sale.getEmail());
+				sc.setRitems(ritems);
+				sList.add(sc);
+			}
+		}
+		return sList;
 	}
 	
 
