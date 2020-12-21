@@ -32,12 +32,16 @@ import kr.or.funding.command.RewardCommand;
 import kr.or.funding.command.SearchCriteria;
 import kr.or.funding.dto.CommunityVO;
 import kr.or.funding.dto.FundingVO;
+import kr.or.funding.dto.MemberVO;
 import kr.or.funding.dto.RewardItemVO;
 import kr.or.funding.dto.RewardVO;
+import kr.or.funding.dto.WishListVO;
 import kr.or.funding.service.CommunityService;
 import kr.or.funding.service.FundingService;
+import kr.or.funding.service.MemberService;
 import kr.or.funding.service.ReplyService;
 import kr.or.funding.service.RewardService;
+import kr.or.funding.service.WishListService;
 
 @Controller
 @RequestMapping(value="/funding")
@@ -52,6 +56,9 @@ public class FundingController {
 	private ReplyService replyService;
 	@Autowired
 	private CommunityService communityService;
+	
+	@Autowired
+	private WishListService wishService ;
 	
 	private RewardItemVO rItem;
 	private RewardVO reward;
@@ -108,12 +115,18 @@ public class FundingController {
 	
 	
 	@RequestMapping("/list")
-	public String list(Model model, SearchCriteria cri) throws SQLException {
+	public String list(Model model, SearchCriteria cri, HttpSession session) throws SQLException {
 		String url = "funding/list";
 		List<FundingVO> fundingList = fundingService.getFundingList(cri);
 		model.addAttribute("fundingList",fundingList);
 		model.addAttribute("cri",cri);
 		System.out.println(fundingList);
+		
+		MemberVO member = (MemberVO) session.getAttribute("loginUser");
+		if(member != null) {
+			Map<String, Object> wishMap = wishService.selectWishList(member.getEmail());
+			model.addAttribute("wishList",wishMap.get("wishList"));
+		}
 		
 		return url;
 	}
@@ -141,7 +154,7 @@ public class FundingController {
 	
 	
 	@RequestMapping("/detail")
-	public String detail(int fno, Model model) throws SQLException{
+	public String detail(int fno, Model model, HttpSession session) throws SQLException{
 		String url = "funding/detail";
 		FundingVO funding = fundingService.getFunding(fno);
 		List<RewardVO> list = rewardService.getRewardList(fno);
@@ -151,6 +164,12 @@ public class FundingController {
 		replyService.replyCount(communityList);
 		model.addAttribute("communityList", communityList);
 		model.addAttribute("funding",funding);
+		
+		MemberVO member = (MemberVO) session.getAttribute("loginUser");
+		if(member != null) {
+			Map<String, Object> wishMap = wishService.selectWishList(member.getEmail());
+			model.addAttribute("wishList",wishMap.get("wishList"));
+		}
 		return url;
 	}
 	

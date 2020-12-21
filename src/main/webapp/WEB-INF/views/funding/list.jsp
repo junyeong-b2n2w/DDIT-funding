@@ -65,7 +65,15 @@
 							</div>
 							<div class="product__hover__info">
 								<ul class="product__action">
-									<li><a title="Wishlist" href="javascript:registWish(${funding.fno})"><i class="far fa-heart f${funding.fno}"></i></a></li>
+								<c:set var="wstatus" value="far"></c:set>
+									<c:if test="${!empty wishList }">
+										<c:forEach var="wish" items="${wishList }">
+											<c:if test="${funding.fno == wish.fno}">
+												<c:set var="wstatus" value="fas"></c:set>
+											</c:if>
+										</c:forEach>
+									</c:if>
+									<li><a title="Wishlist" href="javascript:registWish(${funding.fno})"><i class="${wstatus} fa-heart f${funding.fno}"></i></a></li>
 								</ul>
 							</div>
 						</div>

@@ -96,8 +96,17 @@
 								 <c:if test="${funding.fstatus ne 'no_accept'}">
 								 	<c:if test="${funding.fstatus eq 'soon'}">
 										<ul class="pro__dtl__btn">
+											       <c:set var="wstatus" value="far"></c:set>
+											<c:if test="${!empty wishList }">
+												<c:forEach var="wish" items="${wishList }">
+													<c:if test="${funding.fno == wish.fno}">
+														<c:set var="wstatus" value="fas"></c:set>
+													</c:if>
+												</c:forEach>
+											</c:if>
+										
 			                                <li class="buy__now__btn"><a href="#rewardFocus">펀딩 대기중</a></li>
-			                                <li><a href="#"><span class="far fa-heart f${funding.fno}"></span></a></li>
+			                                <li><a href="#"><span class="${wstatus} fa-heart f${funding.fno}"></span></a></li>
 			                                <li><a href="#"><span class="ti-sharethis"></span></a></li>
 			                            </ul>
 	                        		</c:if>    
