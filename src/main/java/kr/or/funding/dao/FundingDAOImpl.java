@@ -27,7 +27,7 @@ public class FundingDAOImpl implements FundingDAO{
 		int offset=cri.getPageStartRowNum();
 		int limit=cri.getPerPageNum();	
 		RowBounds rowBounds=new RowBounds(offset,limit);	
-		return sqlSession.selectList("Funding-Mapper.selectFundingList2", cri,rowBounds);
+		return sqlSession.selectList("Funding-Mapper.selectFundingList", cri,rowBounds);
 	}
 
 	@Override
@@ -74,6 +74,16 @@ public class FundingDAOImpl implements FundingDAO{
 	@Override
 	public void failFunding(int fno) throws SQLException {
 		sqlSession.update("Funding-Mapper.failFunding", fno);
+	}
+
+	@Override
+	public void ingFunding(int fno) throws SQLException {
+		sqlSession.update("Funding-Mapper.ingFunding", fno);
+	}
+
+	@Override
+	public List<FundingVO> selectFundingList2() throws SQLException {
+		return sqlSession.selectList("Funding-Mapper.selectFundingList");
 	}
 
 }

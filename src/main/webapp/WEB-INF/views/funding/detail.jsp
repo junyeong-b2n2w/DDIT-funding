@@ -299,12 +299,29 @@
 						        </div>
                             
                             <!-- 선물선택 기본 -->
-                             	<div class="mt--20 selectReward" id="rewardFocus" onclick="select(this,1000);" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath()%>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
+                             	<div class="mt--20 selectReward" id="rewardFocus" onclick="move(this)" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath()%>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
 						         <strong style="font-size:1.5rem">1,000 + </strong>
 						          <p>선물을 선택하지 않고 밀어만 줍니다.</p>
+						          <div class="selectBuy" style="display: none;">
+						          <p>추가금액을 입력하세요</p>
+						          		<form role="form">
+						          			<input type="hidden" name="rno" value="0"/>
+						          			<input type="hidden" name="fno" value="${funding.fno}"/>
+						          			<input type="text" name="sprice" class="form-control" value="0">
+						          			<c:if test="${!empty addressList }">
+						          				<p>배송지를 선택하세요</p>
+						          				<select name="address">
+						          					<c:forEach var="address" items="${addressList }">
+							          					<option value="${address.addr2 } ${address.de_Addr}">${address.alias }</option>	
+							          				</c:forEach>
+						          				</select>
+						          			</c:if>
+						          			<input type="button" value="구매하기" class="buyItem btn btn-xs btn-primary" >
+						          		</form>
+						          </div>
 						        </div>
 						        <c:forEach items="${rewardList}" var="list">
-						        	<div class="mt--20 selectReward" onclick="select(this,${list.rprice},${list.rno});" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
+						        	<div class="mt--20 selectReward" onclick="move(this,${list.rprice},${list.rno})" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; ">
 						         <p style=" margin:0px 10px 10px 0px ;">${list.rcount-list.subcount } 개 남음</p> 
 						         <strong  style="font-size:1.5rem; margin-bottom:10px;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${ list.rprice }" />+ </strong>
 						         <p>선물 내용 ~</p>
@@ -318,11 +335,6 @@
 						        </div>
 						        </c:forEach>
 						        
-						        <!-- 구매를 위한 form -->
-						        <form role=form>
-						        		<input type="hidden" name="rno" value="0">
-						        		<input type="hidden" name="fno" value="${funding.fno }">
-					        	</form>
 						        
                             <!-- 리워드 반복 -->
 <%--                             	<div class="mt--20" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; "> --%>
@@ -365,67 +377,109 @@
         </section>
 
 <script>
-	function select(frame, pr, rno) {
-		const list = document.querySelectorAll('.selectReward');
-		const del = document.querySelector('input[name="price"]');
-		const sub = document.querySelector('input[value="구매"]');
-		const del2 = document.querySelector('.message');
-		
-		if(del != null){
-			del.parentNode.removeChild(del);
-			del2.parentNode.removeChild(del2);
-			sub.parentNode.removeChild(sub);
-		}
 
-		for(let i=0; i<list.length; i++){
-			list[i].style.border="";
+	function move(main, rprice, rno){
+		const list = document.querySelectorAll('.selectReward')
+		
+		for(let i = 0; i<list.length; i++){
+			list[i].style.border ="none";
+			list[i].onclick=function(){
+				move(list[i],rprice,rno);
+			}
+		}
+		document.querySelector('.selectBuy').style.display="inline-block";
+		main.style.border="5px solid #c78c8c";
+		const form = document.querySelector('.selectBuy')
+		document.querySelector('input[name=rno]').value = rno;
+		main.append(form);
+		
+		document.querySelector('.buyItem').onclick=function(){
+			const con = confirm("구매하시겠습니까?");
+			if(!con){
+				return false;
+			}
+			const pr = document.querySelector('input[name="sprice"]')
+			const pr_price = pr.value;
+			const lastPrice = parseInt(rprice) + parseInt(pr_price);
+			pr.value = lastPrice;
+			
+			const form = document.querySelector('form[role="form"]');
+			form.setAttribute("method","post");
+			form.setAttribute("action","<%=request.getContextPath() %>/member/buy.do");
+			form.submit();
 		}
 		
-		const price = document.createElement("input");
-		price.setAttribute("name","price");
-		price.setAttribute("type","text");
-		price.setAttribute("value","0");
+		main.onclick=null;
 		
-		const al = document.createElement("p");
-		al.innerText = "더 후원하기";
-		al.setAttribute("class","message");
-		
-		const buy = document.createElement("input");
-		buy.setAttribute("type","submit");
-		buy.setAttribute("value","구매");
-		buy.setAttribute("class","btn btn-xs btn-primary");
-		buy.setAttribute("onclick","buy(" +pr+ "," + rno + ")");
-		
-		
-		
-		frame.append(al);
-		frame.append(price);
-		frame.append(buy);
-		price.focus();
-		
-		frame.style.border="5px solid #c78c8c";
 	}
 	
-	function buy(pr, rno){
-		const pr2 = document.querySelector('input[name="price"]').value;
-		const lastPrice = parseInt(pr) + parseInt(pr2);
+
+// 	function select(frame, pr, rno) {
+// 		const list = document.querySelectorAll('.selectReward');
+// 		const del = document.querySelector('input[name="price"]');
+// 		const sub = document.querySelector('input[value="구매"]');
+// 		const del2 = document.querySelector('.message');
 		
-		const rprice = document.createElement("input");
-		rprice.setAttribute("type","hidden");
-		rprice.setAttribute("value",lastPrice);
-		rprice.setAttribute("name","sprice");
+// 		if(del != null){
+// 			del.parentNode.removeChild(del);
+// 			del2.parentNode.removeChild(del2);
+// 			sub.parentNode.removeChild(sub);
+// 		}
+
+// 		for(let i=0; i<list.length; i++){
+// 			list[i].style.border="";
+// 		}
 		
-		console.log(rno);
-		document.querySelector('input[name="rno"]').value = rno;
+// 		const price = document.createElement("input");
+// 		price.setAttribute("name","price");
+// 		price.setAttribute("type","text");
+// 		price.setAttribute("value","0");
+		
+// 		const al = document.createElement("p");
+// 		al.innerText = "더 후원하기";
+// 		al.setAttribute("class","message");
+		
+// 		const buy = document.createElement("input");
+// 		buy.setAttribute("type","submit");
+// 		buy.setAttribute("value","구매");
+// 		buy.setAttribute("class","btn btn-xs btn-primary");
+// 		buy.setAttribute("onclick","buy(" +pr+ "," + rno + ")");
 		
 		
-		const form = document.querySelector('form[role="form"]');
-		form.append(rprice);
-		form.setAttribute("method","post");
-		form.setAttribute("action","<%=request.getContextPath() %>/member/buy.do");
-		form.submit();
-// 		console.log(form);
-	}
+// 		const select = document.createElement("select");
+		
+		
+// 		frame.append(al);
+// 		frame.append(price);
+// 		frame.append(buy);
+// 		price.focus();
+		
+// 		frame.style.border="5px solid #c78c8c";
+// 	}
+	
+// 	function buy(pr, rno){
+// 		const pr2 = document.querySelector('input[name="price"]').value;
+// 		const lastPrice = parseInt(pr) + parseInt(pr2);
+		
+// 		const rprice = document.createElement("input");
+// 		rprice.setAttribute("type","hidden");
+// 		rprice.setAttribute("value",lastPrice);
+// 		rprice.setAttribute("name","sprice");
+		
+// 		console.log(rno);
+// 		document.querySelector('input[name="rno"]').value = rno;
+		
+// 		const con = confirm("구매하시겠습니까?");
+// 		if(!con){
+// 			return false;
+// 		}
+// 		const form = document.querySelector('form[role="form"]');
+// 		form.append(rprice);
+// 		form.setAttribute("method","post");
+<%-- 		form.setAttribute("action","<%=request.getContextPath() %>/member/buy.do"); --%>
+// 		form.submit();
+// // 		console.log(form);
+// 	}
 </script>
 <script>
 			

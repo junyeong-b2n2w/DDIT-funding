@@ -8,6 +8,10 @@ public class WishListVO {
 	public int getWno() {
 		return wno;
 	}
+	@Override
+	public String toString() {
+		return ""+fno;
+	}
 	public void setWno(int wno) {
 		this.wno = wno;
 	}

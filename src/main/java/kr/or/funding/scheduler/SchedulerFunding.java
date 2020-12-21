@@ -1,6 +1,7 @@
 package kr.or.funding.scheduler;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -20,17 +21,20 @@ public class SchedulerFunding {
 	}
 	private void clacFunding() {
 		try {
-			List<FundingVO> fundingList = fundingService.getFundingList(new SearchCriteria());
+			List<FundingVO> fundingList = fundingService.getFundingList();
 			for(int i = 0; i<fundingList.size(); i++) {
 				
 				long price_pre = fundingList.get(i).getPrice_pre();  //현재금액
 				long price_goal = fundingList.get(i).getPrice_goal(); //목표금액 
-				java.sql.Date endDate = fundingList.get(i).getEnddate(); // 종료날짜
+				Date endDate = fundingList.get(i).getEnddate(); // 종료날짜
+				String startDate = new SimpleDateFormat("yyyy-MM-dd").format(fundingList.get(i).getStartdate());
 				int fno = fundingList.get(i).getFno();
 				if(price_pre >= price_goal ) {
 					fundingService.successFunding(fno);
 				}else if(endDate.before(new Date()) && price_goal > price_pre) {
 					fundingService.failFunding(fno);
+				}else if(startDate.equals(new SimpleDateFormat("yyyy-MM-dd").format(new Date()))) {
+					fundingService.ingFunding(fno);
 				}
 			}
 			System.out.println("업데이트 완료 !");

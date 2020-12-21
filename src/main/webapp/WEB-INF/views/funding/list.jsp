@@ -149,7 +149,7 @@
 						</div>
 						<div class="product__hover__info">
 							<ul class="product__action">
-								<li><a title="Wishlist" href="javascript:registWish({{fno}})"><i class="far fa-heart f{{fno}}	"></i></a></li>
+								<li><a title="Wishlist" href="javascript:registWish({{fno}})">{{{hasWish fno}}}</a></li>
 							</ul>
 						</div>
 					</div>
@@ -185,7 +185,6 @@
 
 
 <script>
-
 	window.onload=function(){
 		form = $('form[role="form"]');
 		$('select, input[type="number"]').on("change",function(){
@@ -218,17 +217,24 @@
 			}else if (status == 'success'){
 				return '<i class="far fa-thumbs-up"></i>펀딩 성공</span>';
 			}
+		},
+		"hasWish":function wishFunction(fno){
+			if(${wishList}){
+				for(let i=0; i<${wishList}.length; i++){
+					if(fno == ${wishList}[i]){
+						return '<i class="fas fa-heart f{{fno}}	"></i>';
+					}
+				}
+			}
+			return '<i class="far fa-heart f{{fno}}	"></i>';
 		}
 	})
-
-
 	
 	function printData(fundingItemList,target,templateObject){
 		var template=Handlebars.compile(templateObject.html());
 		var html = template(fundingItemList);	
 		target.append(html);
 	}
-
 	function getItemList(page){
 		data = { 	page : page,
 				category : $('select[name="category"]').val(),
@@ -246,25 +252,20 @@
 							$('#funding-item-list-template'));
 				});
 	}
-
 	function getDocumentHeight() {
 		const body = document.body;
 		const html = document.documentElement;
-
 		return Math.max(body.scrollHeight, body.offsetHeight,
 				html.clientHeight, html.scrollHeight, html.offsetHeight);
 	};
-
 	function getScrollTop() {
 		return (window.pageYOffset !== undefined) ? window.pageYOffset
 				: (document.documentElement || document.body.parentNode || document.body).scrollTop;
 	}
-
 	window.onscroll = function() {
 		if (getScrollTop() < getDocumentHeight() - window.innerHeight)
 			return;
 		getItemList(++page);
-
 	};
 </script>
 

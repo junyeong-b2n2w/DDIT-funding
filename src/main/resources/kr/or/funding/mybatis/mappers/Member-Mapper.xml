@@ -69,7 +69,7 @@
 	
 	<!-- 범 -->
 	<update id="insertSaleLog" parameterType="saleLog">
-		insert into f_salelog values (#{sno},#{email},#{rno},#{fno},#{sprice},'후원 진행중')
+		insert into f_salelog values (#{sno},#{email},#{rno},#{fno},#{sprice},'ing',#{address})
 	</update>
 	
 	<select id="selectSaleLogSequenceNextValue" resultType="int">

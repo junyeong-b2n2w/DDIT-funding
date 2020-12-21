@@ -223,11 +223,13 @@
 					<div class="mx-auto" style="max-width:70%;">
 						<table class="table mt--20 ">
 							<tr>
+								<td>별칭</td>
 								<td>배송지</td>
 								<td>-</td>
 							</tr>
 							<c:forEach items="${addressList }" var="address">
 								<tr data-ano="${address.ano }">
+									<td>${address.alias}
 									<td>
 										<div>
 											<input type="hidden" name="email" value="${loginUser.email }">

@@ -30,12 +30,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.funding.command.RewardCommand;
 import kr.or.funding.command.SearchCriteria;
+import kr.or.funding.dto.AddressVO;
 import kr.or.funding.dto.CommunityVO;
 import kr.or.funding.dto.FundingVO;
 import kr.or.funding.dto.MemberVO;
 import kr.or.funding.dto.RewardItemVO;
 import kr.or.funding.dto.RewardVO;
 import kr.or.funding.dto.WishListVO;
+import kr.or.funding.service.AddressService;
 import kr.or.funding.service.CommunityService;
 import kr.or.funding.service.FundingService;
 import kr.or.funding.service.MemberService;
@@ -56,6 +58,8 @@ public class FundingController {
 	private ReplyService replyService;
 	@Autowired
 	private CommunityService communityService;
+	@Autowired
+	private AddressService addressService;
 	
 	@Autowired
 	private WishListService wishService ;
@@ -169,7 +173,11 @@ public class FundingController {
 		if(member != null) {
 			Map<String, Object> wishMap = wishService.selectWishList(member.getEmail());
 			model.addAttribute("wishList",wishMap.get("wishList"));
+			List<AddressVO> addressList = addressService.list(member.getEmail());
+			model.addAttribute("addressList",addressList);
 		}
+		
+		
 		return url;
 	}
 	

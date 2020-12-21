@@ -45,9 +45,9 @@
 		<form action="regist" method="post" name="addressForm">
 		<div class="container">
 		<h1 class="mtb--20">주소 입력</h1>
+			<input type="text" class="form-control" name="alias"  placeholder="이 주소지의 이름">
 		<div class="col-5">
-			<input type="hidden" class="form-control" name="email" value="test"><%-- ${loginUser.email } --%>
-		
+			<input type="hidden" class="form-control" name="email" value="${loginUser.email}">
 		
 			<input type="text" class="form-control" id="sample4_postcode" name="post" placeholder="우편번호">
 		</div>

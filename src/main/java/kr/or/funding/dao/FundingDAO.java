@@ -22,4 +22,6 @@ public interface FundingDAO {
 	void updatePrice(FundingVO funding) throws SQLException;
 	void successFunding(int fno) throws SQLException;
 	void failFunding(int fno) throws SQLException;
+	void ingFunding(int fno) throws SQLException;
+	List<FundingVO> selectFundingList2() throws SQLException;
 }

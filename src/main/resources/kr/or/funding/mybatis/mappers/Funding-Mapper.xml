@@ -145,5 +145,16 @@
 			where fno = #{fno};
 		END;
 	</update>
+	<update id="ingFunding" parameterType="int">
+		DECLARE BEGIN
+			update f_funding
+			set fstatus = 'ing'
+			where fno = #{fno};
+			
+			update f_salelog
+			set sstatus = 'ing'
+			where fno = #{fno};
+		END;
+	</update>
 
 </mapper>

@@ -18,4 +18,6 @@ public interface FundingService {
 //	--범
 	void successFunding(int fno) throws SQLException;
 	void failFunding(int fno) throws SQLException;
+	void ingFunding(int fno) throws SQLException;
+	List<FundingVO> getFundingList() throws SQLException;
 }

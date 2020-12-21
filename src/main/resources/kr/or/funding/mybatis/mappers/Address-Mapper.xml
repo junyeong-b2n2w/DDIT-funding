@@ -12,7 +12,7 @@
 	</select>
 	
 	<update id="insertAddress">
-		insert into f_address values (#{ano},#{post},#{addr1},#{addr2}, #{de_Addr}, #{re_Addr}, #{email})
+		insert into f_address values (#{ano},#{post},#{addr1},#{addr2}, #{de_Addr}, #{re_Addr}, #{email}, #{alias})
 	</update>
 	
 	<update id="deleteAddress">

@@ -8,7 +8,14 @@ public class AddressVO {
 	private String de_Addr;
 	private String re_Addr;
 	private String email;
+	private String alias;
 	
+	public String getAlias() {
+		return alias;
+	}
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
 	public int getAno() {
 		return ano;
 	}

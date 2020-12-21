@@ -60,6 +60,18 @@ public class FundingServiceImpl implements FundingService{
 	public void failFunding(int fno) throws SQLException {
 		fundingDAO.failFunding(fno);
 	}
+
+
+	@Override
+	public void ingFunding(int fno) throws SQLException {
+		fundingDAO.ingFunding(fno);
+	}
+
+
+	@Override
+	public List<FundingVO> getFundingList() throws SQLException {
+		return fundingDAO.selectFundingList2();
+	}
 	
 	
 	

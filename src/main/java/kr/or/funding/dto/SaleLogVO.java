@@ -7,6 +7,14 @@ public class SaleLogVO {
 	private int fno    ;
 	private int sprice ;
 	private String sstatus;
+	private String address;
+	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	public int getSno() {
 		return sno;
 	}
