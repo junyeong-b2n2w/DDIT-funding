@@ -153,7 +153,7 @@
 						</div>
 						<div class="product__hover__info">
 							<ul class="product__action">
-								<li><a title="Wishlist" href="javascript:registWish({{fno}})">{{{hasWish fno wishList}}}</a></li>
+								<li><a title="Wishlist" href="javascript:registWish({{fno}})">{{{hasWish fno}}}</a></li>
 							</ul>
 						</div>
 					</div>
@@ -224,10 +224,11 @@
 				return '<i class="far fa-thumbs-up"></i>펀딩 성공</span>';
 			}
 		},
-		"hasWish":function wishFunction(fno, wishList ){
-			if(wishList){
-				for(let i=0; i<wishList.length; i++){
-					if(fno == wishList[i]){
+		"hasWish":function wishFunction(fno){
+			if(${!empty wishList}){
+				const s = ${wishList};
+				for(let i=0; i<s.length; i++){
+					if(fno == s[i]){
 						return '<i class="fas fa-heart f'+fno+	'"></i>';
 					}
 				}
