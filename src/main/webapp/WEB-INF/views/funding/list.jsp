@@ -48,6 +48,10 @@
 </section>
 
 
+<section class="pt--10">
+	<div class="container">
+	<h3>총 <span style="color:#ff4136;">${totalCnt }</span> 건의 결과가 있습니다.</h3>
+	</div></section>
 
 
 <section class="ptb--20">

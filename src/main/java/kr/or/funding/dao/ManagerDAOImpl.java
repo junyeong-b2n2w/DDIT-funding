@@ -3,8 +3,10 @@ package kr.or.funding.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.funding.command.SearchCriteria;
 import kr.or.funding.dto.CommunityVO;
 import kr.or.funding.dto.FundingVO;
 
@@ -16,8 +18,13 @@ public class ManagerDAOImpl implements ManagerDAO {
 	}
 
 	@Override
-	public List<FundingVO> managerList(String fstatus) throws SQLException {
-		List<FundingVO> list = sqlSession.selectList("Manager-Mapper.selectFundingList", fstatus);
+	public List<FundingVO> managerList(SearchCriteria cri) throws SQLException {
+		
+		int offset=cri.getPageStartRowNum();
+		int limit=cri.getPerPageNum();		
+		RowBounds rowBounds=new RowBounds(offset,limit);	
+		
+		List<FundingVO> list = sqlSession.selectList("Manager-Mapper.selectFundingList", cri, rowBounds);
 		
 		return list;
 	}

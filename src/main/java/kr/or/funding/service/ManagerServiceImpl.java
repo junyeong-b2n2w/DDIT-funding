@@ -3,6 +3,7 @@ package kr.or.funding.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import kr.or.funding.command.SearchCriteria;
 import kr.or.funding.dao.ManagerDAO;
 import kr.or.funding.dto.FundingVO;
 
@@ -14,9 +15,9 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public List<FundingVO> managerList(String fstatus) throws SQLException {
+	public List<FundingVO> managerList(SearchCriteria cri) throws SQLException {
 
-		return managerDAO.managerList(fstatus);
+		return managerDAO.managerList(cri);
 	}
 
 	@Override

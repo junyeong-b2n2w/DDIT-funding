@@ -118,6 +118,8 @@ public class FundingController {
 	public String list(Model model, SearchCriteria cri, HttpSession session) throws SQLException {
 		String url = "funding/list";
 		List<FundingVO> fundingList = fundingService.getFundingList(cri);
+		int totalCnt = fundingService.getFundingCnt(cri);
+		model.addAttribute("totalCnt",totalCnt);
 		model.addAttribute("fundingList",fundingList);
 		model.addAttribute("cri",cri);
 		System.out.println(fundingList);
