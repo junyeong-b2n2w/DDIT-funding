@@ -165,8 +165,6 @@
           
         function submit_go() {
         	
-        
-        	
         	/* if($('input[name="email"]').val() != checkEmail ){
         		console.log("체크 이메일은 : "+checkEmail);
         		console.log("이메일 : "+ $('input[name="email"]').val());

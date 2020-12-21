@@ -75,9 +75,7 @@ public class MemberController {
 		String email = ((MemberVO) session.getAttribute("loginUser")).getEmail();
 		
 		MemberVO member = new MemberVO();
-		 member =  memberService.selectMemberById(email);
-		
-
+		member =  memberService.selectMemberById(email);
 		
 		List<AddressVO> addressList = addressService.list(email); 
 		System.out.println(addressList);

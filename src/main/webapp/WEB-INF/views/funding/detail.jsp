@@ -186,8 +186,9 @@
                                        <div class="review__address__inner">
                                                    <!-- Start Single Review -->
                                                    <div class="pro__review" style="display: contents;"> 
-                                                      
+                                                      <span style='display: flex; justify-content: flex-end;'>
                                                       <button type="button" class="btn btn-primary mb--20"  data-toggle="modal" data-target="#myModal">글 등록</button>
+                                                      </span>
                                                    
                                                    <!-- 내용 작성 -->
                                                    <div class="modal" id="myModal">
@@ -202,14 +203,14 @@
                                                    
                                                          <!-- Modal body -->
                                                          <div class="modal-body">
-                                                          <form action="<%=request.getContextPath() %>/community/regist.do" method="post">
+                                                          <form role="forms" action="<%=request.getContextPath() %>/community/regist.do" method="post">
                                                             <input type="hidden" name="fno" value="${param.fno }"/>
-                                                            제목
-                                                            <input type="text" name="title" class="form-control"  />
-                                                           	내용
-                                                           	<input type="text" name="content"  class="form-control mb--20" />
-                                                            <input type="hidden" name="email" value="${loginUser.email }">
-                                                            <input type="submit" class="btn btn-primary" value="등록"> 
+                                                           	 제목
+                                                            <input type="text" id="Title_regists" name="title" class="form-control"  />
+                                                           	 내용
+                                                           	<input type="text" id="Content_regists" name="content"  class="form-control mb--20" />
+                                                            <input type="hidden"  name="email" value="${loginUser.email }">
+                                                            <input type="button" onclick="registgo()" class="btn btn-primary" value="등록"> 
                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
                                                          </form>
                                                          </div>
@@ -227,10 +228,11 @@
 												<div class="accordion" id="aco_profile">
 													<div class="card">
 														<div class="card-header" id="cre_name">
-															<div class="communitys" style="border: 1px solid #aaaaaa;padding:20px; margin-top:20px; margin-bottom:5px; border-radius:10px;" data-toggle="collapse" data-target="#creater_name${community.cno }" aria-expanded="true" onclick="showReply(${community.cno })" aria-controls="#creater_name">
+															<div class="communitys" id="accodion${community.cno }" style="background:#e4e4db; border: 1px solid #aaaaaa;padding:20px; margin-top:20px; margin-bottom:5px; border-radius:10px;" data-toggle="collapse" data-target="#creater_name${community.cno }" aria-expanded="true" onclick="showReply(${community.cno })" aria-controls="#creater_name">
 
 																<div>
 																	<span><i class="fas fa-user-edit"></i> ${community.email }</span> <span style="color:#aaaaaa"> ${community.regdate } </span>  <br> <input type="hidden" value="${community.cno }" class="cno"> <input type="hidden" value="${community.fno }" class="fno"> 
+																	
 																	
 																	<span><textarea name="content" style="background: #ffffff; border: 1px solid #e8d9d8; display: none;">${community.content }</textarea> <span class="textareaSpan" style="display: block; 1px solid #e8d9d8; "> ${community.content }</span> <!-- <span  id="contentBtn" style="display: block;">글수정</span> --> </span> <input type="hidden" name="cno" value="${community.cno }">
 																</div>
@@ -241,11 +243,15 @@
 
 																</div>
 															</div>
-
+															<c:if test="${loginUser.email eq community.email }">
+															<span style="display: flex; justify-content: flex-end;">
 															<button type="button" class="contentBtn btn btn-warning" onclick="contentBtn(this)" >글수정</button>
 															<button type="button" class="removeBtn btn btn-danger " onclick="removeBtn(this)" >글삭제</button>
 															<button type="button" class="updateBtn btn btn-primary" onclick="updateBtn(this)" style="display: none;">등록</button>
 															<button type="button" class="backBtn btn btn-danger" onclick="backBtn(this)" style="display: none;">취소</button>
+															
+															</span>
+															</c:if>
 														</div>
 														<div id="creater_name${community.cno }" class="collapse" aria-labelledby="cre_name" data-parent="#aco_profile">
 															<div class="card-body">
@@ -335,6 +341,11 @@
 						        </div>
 						        </c:forEach>
 						        
+						        <!-- 구매를 위한  -->
+						        <form role=form>
+						        		<input type="hidden" name="rno" value="0">
+						        		<input type="hidden" name="fno" value="${funding.fno }">
+					        	</form>
 						        
                             <!-- 리워드 반복 -->
 <%--                             	<div class="mt--20" style="background: rgba(0, 0, 0, 0) url(<%=request.getContextPath() %>/resources/images/bg/2.jpg) ; padding:20px; border-radius:10px; "> --%>
@@ -483,8 +494,25 @@
 </script>
 <script>
 			
+			function registgo(){
+				
+				if($('#Title_regists').val() == ""){
+					alert("제목을 입력하세요");
+	        		return;
+				}
+				if($('#Content_regists').val() == ""){
+					alert("내용을 입력하세요");
+	        		return;
+				}
+				
+				
+				var form = $('form[role="forms"]');
+	        	form.submit();
+			}
 			
-			function replyremove(rpno){
+			function replyremove(rpno,cno){
+				
+				
 				$.ajax({
 					url : "<%=request.getContextPath()%>/reply/remove.do",
 					type: "get",
@@ -494,23 +522,40 @@
 					success:function(req){
 						if(req){
 							alert('삭제성공');
-							 $('.tip').closest('div').find('#ss').css("display", "none");
+							 if ($('.card .card-header > div').attr('aria-expanded') === "false") {
+									 $('#accodion'+cno).trigger('click'); 
+							    } else if($('.card .card-header > div').attr('aria-expanded') === "true") {
+									 $('#accodion'+cno).trigger('click'); 
+							    }
+							 
 						}
 					}
 				})
 			}
-			function change(){
-				 $('.tip').closest('div').find('#ss').css("display", "block");
-				 $('.tip').closest('div').find('#nn').css("display", "none");
-				 $('.tip').closest('div').find('.replyModify').css("display", "block");
-				 $('.tip').closest('div').find('.change').css("display", "none");
-				
-			}
+			function change(num,rpno){
+				 $(num).closest('div').find('#ss').css("display", "block");
+				 $(num).closest('div').find('#nn').css("display", "none");
+				 $(num).closest('div').find('.replyModify').css("display", "block");
+				 $(num).closest('div').find('.change').css("display", "none");
+				 $(num).closest('div').find('.backBtns').css("display", "block");
+				 $(num).closest('div').find('.tip').css("display", "none");
+					}
 			
-			function replyModify(rpno){
-				
-				
-				
+			function backBtns(num,rpno){
+				 $(num).closest('div').find('#ss').css("display", "none");
+				 $(num).closest('div').find('#nn').css("display", "block");
+				 $(num).closest('div').find('.replyModify').css("display", "none");
+				 $(num).closest('div').find('.change').css("display", "block");
+				 $(num).closest('div').find('.backBtns').css("display", "none");
+				 $(num).closest('div').find('.tip').css("display", "block");
+					}
+			
+			
+			function replyModify(num,rpno){
+				if($('#ss').val() == ""){
+					alert("내용을  입력해 주세요 ");
+	        		return;
+				}
 				$.ajax({
 					url : "<%=request.getContextPath()%>/reply/modify.do",
 					type : "get",
@@ -521,10 +566,10 @@
 					success:function(req){
 						if(req){
 							alert('수정 성공');
-						 $('.tip').closest('div').find('#ss').css("display", "none");
-						 $('.tip').closest('div').find('#nn').css("display", "block").text(req);
-						 $('.tip').closest('div').find('.replyModify').css("display", "none");
-						 $('.tip').closest('div').find('.change').css("display", "block");
+						 $(num).closest('div').find('#ss').css("display", "none");
+						 $(num).closest('div').find('#nn').css("display", "block").text(req);
+						 $(num).closest('div').find('.replyModify').css("display", "none");
+						 $(num).closest('div').find('.change').css("display", "block");
 						}
 					}
 				})
@@ -542,16 +587,13 @@
 					success:function(req){
 						if(req){
 						alert('성공');
-						 $('.tip').closest('div').find('#ss').css("display", "none");
-						 $('.tip').closest('div').find('#nn').css("display", "block").text(req);
-						 $('.tip').closest('div').find('.replyModify').css("display", "none");
-						 $('.tip').closest('div').find('.change').css("display", "block");
+						
+						 $('#accodion'+cno).trigger('click'); 
 						}
 					}
 				})
 				
 			}
-			
 			function removeBtn(cno){
 		         
 				cno2 = $(cno).closest('div').find('.cno').val()
@@ -637,17 +679,25 @@
 		          console.log(jsondata);
 				  let code="";
 				  for(let i=0; i<jsondata.length; i++){
-					  code +="<form>"
+					  
+					  code +="<div>"
+					  code +="<form style='border: 1px solid #b3adad; border-radius: 3%; margin: 2%; padding: 3%; background: #e4e4db;'>"
 					  code +='<input type="hidden" class="rpno" name="rpno" value="'+jsondata[i].rpno+'">';
 					  code +='<input type="hidden" name="cno" class="cnos" value="'+jsondata[i].cno+'">';
 					  code +='<span style="color: rgb(255, 255, 255); font-size: 10px; line-height: 16px; letter-spacing: -0.005em;font-weight: bold;background: rgb(61, 61, 61);border-radius: 2px;display: inline-flex;padding: 0px 4px; -webkit-box-align: center;align-items: center;-webkit-box-pack: center;justify-content: center;margin: 0px 0px 0px 6px;">작성자</span>><span name="email" >'+jsondata[i].email+'</span>';
+					  code +=' <span name="regdate" style="color:#aaaaaa;">'+jsondata[i].regdate+'</span>';
 					  code +='<input type="text" style="display:none;" id="ss" class="replyContents'+jsondata[i].rpno+'" value="'+jsondata[i].content+'">';
-					  code +='<span id="nn" style="display : block" class="replyContents'+jsondata[i].rpno+'">'+jsondata[i].content+'</span>';
-					  code +='<span name="regdate">'+jsondata[i].regdate+'</span>';
-					  code +='<input type="button" style="display : none;" class="replyModify btn btn-primary" value="등록" onclick="replyModify('+jsondata[i].rpno+')">';
-					  code +='<input type="button" class="change btn btn btn-warning" value="수정" onclick="change('+jsondata[i].rpno+')">';
-					  code +='<input type="button" class="tip btn btn-danger" value="삭제" onclick="replyremove('+jsondata[i].rpno+')">';
+					  code +='<span id="nn" style="display : block; margin: 4%;" class="replyContents'+jsondata[i].rpno+'">'+jsondata[i].content+'</span>';
+						if("${loginUser.email}" == jsondata[i].email ){
+						  code +="<span style='display: flex; justify-content: flex-end;'>"
+						  code +='<input type="button" style="display : none;" class="replyModify btn btn-primary" value="등록" onclick="replyModify(this,'+jsondata[i].rpno+')">';
+						  code +='<input type="button" class="change btn btn btn-warning" value="수정" onclick="change(this,'+jsondata[i].rpno+')">';
+						  code +='<input type="button" style="display:none;" class="backBtns btn btn-danger" value="취소" onclick="backBtns(this,'+jsondata[i].rpno+')">';
+						  code +='<input type="button" class="tip btn btn-danger" value="삭제" onclick="replyremove('+jsondata[i].rpno+','+jsondata[i].cno+')">';
+						  code +="</span>"
+						}
 					  code +="</form>"
+					  code +="</div>"
 				  }
 		          document.querySelector('.reply'+cno).innerHTML=code;
 		      }

@@ -27,7 +27,7 @@ public class FundingDAOImpl implements FundingDAO{
 		int offset=cri.getPageStartRowNum();
 		int limit=cri.getPerPageNum();	
 		RowBounds rowBounds=new RowBounds(offset,limit);	
-		return sqlSession.selectList("Funding-Mapper.selectFundingList", cri,rowBounds);
+		return sqlSession.selectList("Funding-Mapper.selectFundingList2", cri,rowBounds);
 	}
 
 	@Override
