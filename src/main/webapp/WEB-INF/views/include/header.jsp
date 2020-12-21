@@ -55,7 +55,7 @@
                         <div class="col-md-2 col-lg-2 col-sm-3 col-xs-3">
                             <div class="logo">
                                 <a href="<%=request.getContextPath() %>/index">
-                                    <h1 style="color:#dadce0; font-size:30px;">d(^_^)b</h1>
+                                    <h1 style="color:#dadce0; font-size:30px;">Funhading</h1>
                                 </a>
                             </div>
                         </div>

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.or.funding.command.PageMaker;
+import kr.or.funding.command.SearchCriteria;
 import kr.or.funding.dto.FundingVO;
 import kr.or.funding.dto.RewardVO;
 import kr.or.funding.service.FundingService;
@@ -32,16 +34,27 @@ public class ManagerController {
 	@Autowired
 	private RewardService rewardService;
 	
+	
+	
 	@Autowired
 	private FundingService fundingService;
 	
 	@RequestMapping(value="/fList", method=RequestMethod.GET)
-	public ModelAndView managerList(ModelAndView mnv, @RequestParam(defaultValue="") String fstatus) throws SQLException{
+	public ModelAndView managerList(ModelAndView mnv,SearchCriteria cri) throws SQLException{
 		String url = "manager/list";
-		List<FundingVO> fList = service.managerList(fstatus);
-
+		List<FundingVO> fList = service.managerList(cri);
+		
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.getFundingCount(cri));
+		
+		System.out.println(pageMaker.getTotalCount());
+		System.out.println(fList.size());
+		
 		mnv.addObject("fList", fList);
-		mnv.addObject("fstatus", fstatus);
+		mnv.addObject("pageMaker", pageMaker);
+		mnv.addObject("cri", cri);
 		mnv.setViewName(url);
 		
 		return mnv;

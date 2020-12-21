@@ -13,6 +13,7 @@
 		<div class="row recommList">
 		
 		</div>
+		
 	</div>
 </section>
 
@@ -23,6 +24,9 @@
 		<div class="row ingList">
 		
 		</div>
+		<div class="text-center mtb--20">
+		<a class="btn btn-info " href="<%=request.getContextPath() %>/funding/list?fstatus=ing"> 진행중인 프로젝트 더보기 + </a>
+		</div>
 	</div>
 </section>
 
@@ -32,6 +36,9 @@
 		<div class="row soonList">
 		
 		</div>
+		<div class="text-center mtb--20">
+		<a class="btn btn-info " href="<%=request.getContextPath() %>/funding/list?fstatus=soon"> 공개예정 프로젝트 더보기 + </a>
+		</div>
 	</div>
 </section>
 
@@ -39,7 +46,9 @@
 	<div class="container">
 		<h1>응원이 필요한 프로젝트</h1>
 		<div class="row cheerupList">
-		
+		</div>
+		<div class="text-center mtb--20">
+		<a class="btn btn-info " href="<%=request.getContextPath() %>/funding/list?fstatus=ing&min_percent=80&max_percent=100"> 응원이 필요한 프로젝트 더보기 + </a>
 		</div>
 	</div>
 </section>
@@ -143,6 +152,8 @@ Handlebars.registerHelper({
 		}else if(status == 'fail'){
 			return '<span><i class="far fa-times-circle"></i> 펀딩 실패 </span>';
 		}
+		
+	
 	}
 })
 
